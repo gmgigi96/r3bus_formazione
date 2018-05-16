@@ -1,6 +1,5 @@
 package org.bitbucket.r3bus.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -10,8 +9,7 @@ import lombok.Data;
 public class Attivita {
 	
 	private String nome;
-	private LocalDate date;
-	private LocalDateTime ora;
+	private LocalDateTime data;
 	
 	private Collection<Allievo> allieviPrenotati;
 	
@@ -22,4 +20,5 @@ public class Attivita {
 	public void annullaPrenotazione(Allievo allievo) {
 		allieviPrenotati.remove(allievo);
 	}
+	
 }
