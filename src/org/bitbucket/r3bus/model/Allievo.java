@@ -3,6 +3,9 @@ package org.bitbucket.r3bus.model;
 import java.time.LocalDate;
 import java.util.Collection;
 
+import lombok.Data;
+
+@Data
 public class Allievo {
 
 	private String nome;

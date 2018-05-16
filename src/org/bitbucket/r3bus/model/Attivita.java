@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import lombok.Data;
+
+@Data
 public class Attivita {
 	
 	private String nome;

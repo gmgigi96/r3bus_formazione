@@ -1,5 +1,8 @@
 package org.bitbucket.r3bus.model;
 
+import lombok.Data;
+
+@Data
 public class Rebus {
 	
 	private Allievo allievoCorrente;
