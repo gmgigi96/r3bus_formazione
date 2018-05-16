@@ -2,6 +2,7 @@ package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -11,6 +12,10 @@ import lombok.Data;
 public class Centro {
 
 	private Map<Integer, Attivita> attivita;
+
+	public Centro() {
+		attivita = new HashMap<>();
+	}
 
 	public Attivita getAttivita(int codiceAttivita) {
 		return null;

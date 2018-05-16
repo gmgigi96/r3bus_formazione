@@ -2,6 +2,7 @@ package org.bitbucket.r3bus.model;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import lombok.Data;
 
@@ -18,6 +19,11 @@ public class Allievo {
 
 	private Collection<Attivita> attivitaPrenotate;
 
+	
+	public Allievo() {
+		attivitaPrenotate = new LinkedList<>();
+	}
+	
 	public void prenotaAttivita(Attivita attivita) {
 		this.attivitaPrenotate.add(attivita);
 		attivita.prenota(this);
