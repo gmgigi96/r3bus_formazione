@@ -18,7 +18,7 @@ public class Centro {
 	}
 
 	public Attivita getAttivita(int codiceAttivita) {
-		return null;
+		return attivita.get(codiceAttivita);
 	}
 
 	public Collection<Attivita> getAttivitaDisponibili() {
