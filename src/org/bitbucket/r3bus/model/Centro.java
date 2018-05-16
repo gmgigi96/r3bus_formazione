@@ -34,4 +34,11 @@ public class Centro {
 		return res;
 	}
 
+
+	// test
+
+	void addAttivita(Attivita a) {
+		attivita.put(a.getCodice(), a);
+	}
+
 }
