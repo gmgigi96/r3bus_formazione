@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class Attivita {
+	
 	private String nome;
 	private LocalDate date;
 	private LocalDateTime ora;
