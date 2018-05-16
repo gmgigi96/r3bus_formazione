@@ -9,10 +9,11 @@ import lombok.Data;
 @Data
 public class Attivita {
 	
+	private int codice;
 	private String nome;
 	private LocalDateTime data;
 	
-	private Collection<Allievo> allieviPrenotati;
+	private final Collection<Allievo> allieviPrenotati;
 	
 	
 	public Attivita() {

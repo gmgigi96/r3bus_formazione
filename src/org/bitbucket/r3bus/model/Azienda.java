@@ -10,7 +10,7 @@ public class Azienda {
 
 	private String nome;
 
-	private Map<String, Allievo> allievi;
+	private final Map<String, Allievo> allievi;
 
 	public Azienda() {
 		allievi = new HashMap<>();

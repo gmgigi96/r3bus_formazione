@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Centro {
 
-	private Map<Integer, Attivita> attivita;
+	private final Map<Integer, Attivita> attivita;
 
 	public Centro() {
 		attivita = new HashMap<>();

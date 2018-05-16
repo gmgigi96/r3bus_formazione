@@ -17,7 +17,7 @@ public class Allievo {
 	private String luogoDiNascita;
 	private String CodiceFiscale;
 
-	private Collection<Attivita> attivitaPrenotate;
+	private final Collection<Attivita> attivitaPrenotate;
 
 	
 	public Allievo() {
