@@ -6,10 +6,11 @@ import lombok.Data;
 
 @Data
 public class Azienda {
+
 	private String nome;
-	
+
 	private Map<String, Allievo> allievi;
-	
+
 	public Allievo getAllievo(String codiceFiscale) {
 		return allievi.get(codiceFiscale);
 	}
