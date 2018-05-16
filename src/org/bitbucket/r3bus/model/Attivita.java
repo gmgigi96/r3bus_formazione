@@ -13,7 +13,7 @@ public class Attivita {
 	private Collection<Allievo> allieviPrenotati;
 	
 	public void prenota(Allievo allievo) {
-		
+		allieviPrenotati.add(allievo);
 	}
 	
 	public void annullaPrenotazione(Allievo allievo) {
