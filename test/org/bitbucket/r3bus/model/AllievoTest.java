@@ -1,13 +1,13 @@
 package org.bitbucket.r3bus.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.fail;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 class AllievoTest {
 
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 	}
 
