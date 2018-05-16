@@ -20,7 +20,8 @@ public class Rebus {
 	}
 	
 	public void annullaPrenotazione(int codiceAttivita) {
-		
+		Attivita attivita = centroGestito.getAttivita(codiceAttivita);
+		allievoCorrente.annullaPrenotazione(attivita);
 	}	
 	
 }

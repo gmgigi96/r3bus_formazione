@@ -17,6 +17,6 @@ public class Attivita {
 	}
 	
 	public void annullaPrenotazione(Allievo allievo) {
-		
+		allieviPrenotati.remove(allievo);
 	}
 }

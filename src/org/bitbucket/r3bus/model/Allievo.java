@@ -21,6 +21,7 @@ public class Allievo {
 	}
 
 	public void annullaPrenotazione(Attivita attivita) {
-
+		attivitaPrenotate.remove(attivita);
+		attivita.annullaPrenotazione(this);
 	}
 }
