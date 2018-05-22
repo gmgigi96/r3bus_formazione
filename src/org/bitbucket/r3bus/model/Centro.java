@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import lombok.Data;
 
@@ -33,16 +35,24 @@ public class Centro {
 		});
 		return res;
 	}
-
+	
+	public Set<Attivita> getAttivitaInIntervallo(LocalDateTime intervalloTemporaleDa,
+			LocalDateTime intervalloTemporaleA) {
+		Set<Attivita> attivita = new TreeSet<>();
+		
+		this.attivita.forEach((codiceAttivita, att) -> {
+			if(att.getDataOra().isAfter(intervalloTemporaleDa) && att.getDataOra().isBefore(intervalloTemporaleA)) {
+				attivita.add(att);
+			}
+		});
+		
+		return attivita;
+	}
 
 	// test
 
 	void addAttivita(Attivita a) {
 		attivita.put(a.getCodice(), a);
-	}
-
-	public void addAttivita(String nome, LocalDateTime dataOra, int durata) {
-		Attivita a = new Attivita();
 	}
 
 }
