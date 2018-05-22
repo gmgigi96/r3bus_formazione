@@ -1,8 +1,11 @@
-package org.bitbucket.r3bus.model;
+package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.Centro;
 
 public class StatisticheController {
 	

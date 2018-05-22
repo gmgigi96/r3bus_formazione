@@ -1,6 +1,9 @@
-package org.bitbucket.r3bus.model;
+package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDateTime;
+
+import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.Centro;
 
 public class AttivitaController {
 	
