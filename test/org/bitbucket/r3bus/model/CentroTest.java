@@ -27,14 +27,14 @@ public class CentroTest {
 	
 	@Test
 	public void getAttivitaDisponibili_none() {
-		a.setData(LocalDateTime.now().minusDays(1));
+		a.setDataOra(LocalDateTime.now().minusDays(1));
 		centro.addAttivita(a);
 		assertEquals(centro.getAttivitaDisponibili().size(), 0);
 	}
 	
 	@Test
 	public void getAttivitaDisponibili_singleton() {
-		a.setData(LocalDateTime.now().plusDays(1));
+		a.setDataOra(LocalDateTime.now().plusDays(1));
 		centro.addAttivita(a);
 		assertEquals(centro.getAttivitaDisponibili().size(), 1);
 	}

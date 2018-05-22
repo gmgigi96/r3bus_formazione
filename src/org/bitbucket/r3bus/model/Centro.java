@@ -27,7 +27,7 @@ public class Centro {
 
 		LocalDateTime now = LocalDateTime.now();
 		attivita.forEach((codAttivita, attivita) -> {
-			if (attivita.getData().compareTo(now) > 0) {
+			if (attivita.getDataOra().compareTo(now) > 0) {
 				res.add(attivita);
 			}
 		});
@@ -39,6 +39,10 @@ public class Centro {
 
 	void addAttivita(Attivita a) {
 		attivita.put(a.getCodice(), a);
+	}
+
+	public void addAttivita(String nome, LocalDateTime dataOra, int durata) {
+		Attivita a = new Attivita();
 	}
 
 }
