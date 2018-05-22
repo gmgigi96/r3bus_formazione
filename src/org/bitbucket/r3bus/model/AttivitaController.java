@@ -3,6 +3,7 @@ package org.bitbucket.r3bus.model;
 import java.time.LocalDateTime;
 
 public class AttivitaController {
+	
 	private Attivita attivitaCorrente;
 		
 	public void creaNuovaAttivita(String nome, LocalDateTime dataOra, int durata, Centro c) {

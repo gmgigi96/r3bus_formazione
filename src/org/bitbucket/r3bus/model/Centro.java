@@ -55,4 +55,9 @@ public class Centro {
 		attivita.put(a.getCodice(), a);
 	}
 
+	public void addAttivita(String nome, LocalDateTime dataOra, int durata) {
+		Attivita a = new Attivita(nome, dataOra, durata);
+		//TODO: attivita.put(key, a); inserire codice attivita
+	}
+
 }
