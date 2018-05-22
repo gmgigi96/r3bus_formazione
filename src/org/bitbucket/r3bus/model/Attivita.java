@@ -1,8 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Set;
+import java.util.TreeSet;
 
 import lombok.Data;
 
@@ -14,11 +14,11 @@ public class Attivita {
 	private LocalDateTime dataOra;
 	private int durata;
 	
-	private final Collection<Allievo> allieviPrenotati;
+	private final Set<Allievo> allieviPrenotati;
 	
 	
 	public Attivita() {
-		allieviPrenotati = new LinkedList<>();
+		allieviPrenotati = new TreeSet<>();
 	}
 	
 	public Attivita(String nome, LocalDateTime data, int durata) {
