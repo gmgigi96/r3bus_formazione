@@ -1,4 +1,9 @@
-package org.bitbucket.r3bus.model;
+package org.bitbucket.r3bus.model.controller;
+
+import org.bitbucket.r3bus.model.Allievo;
+import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.Azienda;
+import org.bitbucket.r3bus.model.Centro;
 
 import lombok.Data;
 
