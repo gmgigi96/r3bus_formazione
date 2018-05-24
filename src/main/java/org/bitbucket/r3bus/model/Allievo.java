@@ -19,11 +19,10 @@ public class Allievo {
 
 	private final Collection<Attivita> attivitaPrenotate;
 
-	
 	public Allievo() {
 		attivitaPrenotate = new LinkedList<>();
 	}
-	
+
 	public void prenotaAttivita(Attivita attivita) {
 		this.attivitaPrenotate.add(attivita);
 		attivita.prenota(this);

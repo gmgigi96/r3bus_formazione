@@ -29,5 +29,4 @@ public class Azienda {
 	public Centro getCentro(int codiceCentro) {
 		return this.centri.get(codiceCentro);
 	}
-	
 }

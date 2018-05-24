@@ -12,7 +12,7 @@ public class CentroTest {
 
 	private Centro centro;
 	private Attivita a;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		centro = new Centro();
@@ -24,19 +24,18 @@ public class CentroTest {
 	public void getAttivitaDisponibili_empty() {
 		assertEquals(centro.getAttivitaDisponibili().size(), 0);
 	}
-	
+
 	@Test
 	public void getAttivitaDisponibili_none() {
 		a.setDataOra(LocalDateTime.now().minusDays(1));
 		centro.addAttivita(a);
 		assertEquals(centro.getAttivitaDisponibili().size(), 0);
 	}
-	
+
 	@Test
 	public void getAttivitaDisponibili_singleton() {
 		a.setDataOra(LocalDateTime.now().plusDays(1));
 		centro.addAttivita(a);
 		assertEquals(centro.getAttivitaDisponibili().size(), 1);
 	}
-
 }
