@@ -35,5 +35,11 @@ public class Attivita {
 	public void annullaPrenotazione(Allievo allievo) {
 		allieviPrenotati.remove(allievo);
 	}
+
+	public void aggiornaParametri(String nome2, LocalDateTime dataOra2, int durata2) {
+		this.nome = nome2;
+		this.dataOra = dataOra2;
+		this.durata = durata2;
+	}
 	
 }

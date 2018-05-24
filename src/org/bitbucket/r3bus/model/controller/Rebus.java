@@ -1,9 +1,13 @@
-package org.bitbucket.r3bus.model;
+package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.Set;
 
-import org.bitbucket.r3bus.model.controller.AttivitaController;
-import org.bitbucket.r3bus.model.controller.StatisticheController;
+import org.bitbucket.r3bus.model.Allievo;
+import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.Azienda;
+import org.bitbucket.r3bus.model.Centro;
 
 import lombok.Data;
 
@@ -13,7 +17,7 @@ public class Rebus {
 	private Allievo allievoCorrente;
 	private Azienda azienda;
 	private Centro centroGestito;
-	private AttivitaController attivitaController;
+	private StatisticheController statisticheController;
 
 	public void gestisciAllievo(String codiceFiscale) {
 		this.allievoCorrente = azienda.getAllievo(codiceFiscale);
@@ -52,16 +56,12 @@ public class Rebus {
 	}
 
 	public void creaNuovaAttivita(String nome, LocalDateTime dataOra, int durata) {
-		attivitaController.creaNuovaAttivita(nome,dataOra,durata, centroGestito);
+		centroGestito.addAttivita(nome, dataOra, durata);
 	}
 	
-	public void gestisciAttivita(int codiceAttivita) {
-		Attivita attivita = centroGestito.getAttivita(codiceAttivita);
-		attivitaController.gestisciAttivita(attivita);
-	}
-	
-	public void salvaAttivita(String nome, LocalDateTime dataOra, int durata) {
-		attivitaController.salvaAttivita(nome, dataOra, durata);
+	public void modificaAttivita(int codiceAttivita, String nome, LocalDateTime dataOra, int durata) {
+		Attivita a = centroGestito.getAttivita(codiceAttivita);
+		a.aggiornaParametri(nome, dataOra, durata);
 	}
 	
 	
