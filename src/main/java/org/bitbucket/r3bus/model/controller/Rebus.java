@@ -19,12 +19,14 @@ public class Rebus {
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
 
+	// gestione allievo
+
 	public void gestisciAllievo(String codiceFiscale) {
 		this.allievoCorrente = azienda.getAllievo(codiceFiscale);
 	}
 
-	public void terminaGestione() {
-
+	public void terminaGestioneAllievo() {
+		this.allievoCorrente = null;
 	}
 
 	public void prenotaAttivita(int codiceAttivita) {
@@ -36,33 +38,36 @@ public class Rebus {
 		Attivita attivita = centroGestito.getAttivita(codiceAttivita);
 		allievoCorrente.annullaPrenotazione(attivita);
 	}
-	
+
 	public void eliminaAllievo() {
 		azienda.eliminaAllievo(this.allievoCorrente);
 		this.allievoCorrente = null;
 	}
-	
+
+	// gestione attività
+
+	// TOFIX: il "centroGestito" non ha nulla a che vedere con questo caso d'uso
+	public void creaNuovaAttivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
+		centroGestito.addAttivita(nome, inizio, fine);
+	}
+
+	public void modificaAttivita(int codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
+		Attivita a = centroGestito.getAttivita(codiceAttivita);
+		a.aggiornaParametri(nome, inizio, fine);
+	}
+
+	// statistiche
+
 	public void addCentro(int codiceCentro) {
 		Centro c = this.azienda.getCentro(codiceCentro);
 		StatisticheController.getInstance().addCentro(c);
 	}
-	
+
 	public void setIntervalloTemporale(LocalDateTime da, LocalDateTime a) {
 		StatisticheController.getInstance().setIntervalloTemporale(da, a);
 	}
-	
+
 	public Map<Centro, Set<Attivita>> getStatistiche() {
 		return StatisticheController.getInstance().getStatistiche();
 	}
-
-	public void creaNuovaAttivita(String nome, LocalDateTime dataOra, int durata) {
-		centroGestito.addAttivita(nome, dataOra, durata);
-	}
-	
-	public void modificaAttivita(int codiceAttivita, String nome, LocalDateTime dataOra, int durata) {
-		Attivita a = centroGestito.getAttivita(codiceAttivita);
-		a.aggiornaParametri(nome, dataOra, durata);
-	}
-	
-	
 }

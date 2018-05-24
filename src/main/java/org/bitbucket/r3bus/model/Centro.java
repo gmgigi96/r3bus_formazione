@@ -22,8 +22,8 @@ public class Centro {
 		return attivita.get(codiceAttivita);
 	}
 
-	public void addAttivita(String nome, LocalDateTime dataOra, int durata) {
-		Attivita a = new Attivita(nome, dataOra, durata);
+	public void addAttivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
+		Attivita a = new Attivita(nome, inizio, fine);
 		//TODO: attivita.put(key, a); inserire codice attivita
 	}
 
@@ -32,7 +32,7 @@ public class Centro {
 
 		LocalDateTime now = LocalDateTime.now();
 		attivita.forEach((codAttivita, attivita) -> {
-			if (attivita.getDataOra().compareTo(now) > 0) {
+			if (attivita.getOrarioInizio().compareTo(now) > 0) {
 				res.add(attivita);
 			}
 		});
@@ -44,7 +44,7 @@ public class Centro {
 		Set<Attivita> attivita = new TreeSet<>();
 
 		this.attivita.forEach((codiceAttivita, att) -> {
-			if(att.getDataOra().isAfter(intervalloTemporaleDa) && att.getDataOra().isBefore(intervalloTemporaleA)) {
+			if(att.getOrarioInizio().isAfter(intervalloTemporaleDa) && att.getOrarioInizio().isBefore(intervalloTemporaleA)) {
 				attivita.add(att);
 			}
 		});

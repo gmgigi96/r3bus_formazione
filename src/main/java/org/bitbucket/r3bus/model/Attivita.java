@@ -11,8 +11,8 @@ public class Attivita {
 
 	private int codice;
 	private String nome;
-	private LocalDateTime dataOra;
-	private int durata;
+	private LocalDateTime orarioInizio;
+	private LocalDateTime orarioFine;
 
 	private final Set<Allievo> allieviPrenotati;
 
@@ -20,11 +20,11 @@ public class Attivita {
 		allieviPrenotati = new TreeSet<>();
 	}
 
-	public Attivita(String nome, LocalDateTime data, int durata) {
+	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
 		this();
-		this.nome = nome;
-		this.dataOra = data;
-		this.durata = durata;
+		this.nome         = nome;
+		this.orarioInizio = inizio;
+		this.orarioFine   = fine;
 	}
 
 	public void prenota(Allievo allievo) {
@@ -35,9 +35,9 @@ public class Attivita {
 		allieviPrenotati.remove(allievo);
 	}
 
-	public void aggiornaParametri(String nome2, LocalDateTime dataOra2, int durata2) {
-		this.nome = nome2;
-		this.dataOra = dataOra2;
-		this.durata = durata2;
+	public void aggiornaParametri(String nuovoNome, LocalDateTime nuovoInizio, LocalDateTime nuovaFine) {
+		this.nome         = nuovoNome;
+		this.orarioInizio = nuovoInizio;
+		this.orarioFine   = nuovaFine;
 	}
 }
