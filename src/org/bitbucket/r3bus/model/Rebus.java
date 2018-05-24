@@ -1,11 +1,9 @@
-package org.bitbucket.r3bus.model.controller;
+package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
 
-import org.bitbucket.r3bus.model.Allievo;
-import org.bitbucket.r3bus.model.Attivita;
-import org.bitbucket.r3bus.model.Azienda;
-import org.bitbucket.r3bus.model.Centro;
+import org.bitbucket.r3bus.model.controller.AttivitaController;
+import org.bitbucket.r3bus.model.controller.StatisticheController;
 
 import lombok.Data;
 
@@ -15,7 +13,6 @@ public class Rebus {
 	private Allievo allievoCorrente;
 	private Azienda azienda;
 	private Centro centroGestito;
-	private StatisticheController statisticheController;
 	private AttivitaController attivitaController;
 
 	public void gestisciAllievo(String codiceFiscale) {
@@ -43,7 +40,15 @@ public class Rebus {
 	
 	public void addCentro(int codiceCentro) {
 		Centro c = this.azienda.getCentro(codiceCentro);
-		this.statisticheController.addCentro(c);
+		StatisticheController.getInstance().addCentro(c);
+	}
+	
+	public void setIntervalloTemporale(LocalDateTime da, LocalDateTime a) {
+		StatisticheController.getInstance().setIntervalloTemporale(da, a);
+	}
+	
+	public Map<Centro, Set<Attivita>> getStatistiche() {
+		return StatisticheController.getInstance().getStatistiche();
 	}
 
 	public void creaNuovaAttivita(String nome, LocalDateTime dataOra, int durata) {
@@ -58,5 +63,6 @@ public class Rebus {
 	public void salvaAttivita(String nome, LocalDateTime dataOra, int durata) {
 		attivitaController.salvaAttivita(nome, dataOra, durata);
 	}
+	
 	
 }
