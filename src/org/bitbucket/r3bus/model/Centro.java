@@ -1,9 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -23,9 +22,8 @@ public class Centro {
 		return attivita.get(codiceAttivita);
 	}
 
-	public Collection<Attivita> getAttivitaDisponibili() {
-		// TODO: Scegliere struttura dati per res
-		Collection<Attivita> res = new LinkedList<>();
+	public Set<Attivita> getAttivitaDisponibili() {
+		Set<Attivita> res = new HashSet<>();
 
 		LocalDateTime now = LocalDateTime.now();
 		attivita.forEach((codAttivita, attivita) -> {
