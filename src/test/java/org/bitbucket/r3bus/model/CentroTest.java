@@ -19,7 +19,6 @@ public class CentroTest {
 		now = LocalDateTime.now();
 		centro = new Centro();
 		a = new Attivita("sample", now, now.plusHours(1));
-		a.setCodice(new Random().nextInt(1000));
 	}
 
 	@Test
