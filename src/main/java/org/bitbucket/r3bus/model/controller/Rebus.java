@@ -46,11 +46,12 @@ public class Rebus {
 
 	// gestione attività
 
-	// TOFIX: il "centroGestito" non ha nulla a che vedere con questo caso d'uso
-	public void creaNuovaAttivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
-		centroGestito.addAttivita(nome, inizio, fine);
+	public void creaNuovaAttivita(int codiceCentro, String nome, LocalDateTime inizio, LocalDateTime fine) {
+		Centro c = azienda.getCentro(codiceCentro);
+		c.addAttivita(nome, inizio, fine);
 	}
 
+	// TOFIX: il "centroGestito" non ha nulla a che vedere con questo caso d'uso
 	public void modificaAttivita(int codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
 		Attivita a = centroGestito.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);

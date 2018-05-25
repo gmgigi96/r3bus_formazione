@@ -24,7 +24,7 @@ public class Centro {
 
 	public void addAttivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
 		Attivita a = new Attivita(nome, inizio, fine);
-		//TODO: attivita.put(key, a); inserire codice attivita
+		attivita.put(a.getCodice(), a);
 	}
 
 	public Set<Attivita> getAttivitaDisponibili() {

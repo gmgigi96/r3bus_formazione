@@ -9,13 +9,13 @@ import lombok.Data;
 @Data
 public class Allievo {
 
-	private String nome;
-	private String cognome;
-	private String email;
-	private String telefono;
-	private LocalDate data;
-	private String luogoDiNascita;
-	private String CodiceFiscale;
+	private String    nome;
+	private String    cognome;
+	private String    email;
+	private String    telefono;
+	private LocalDate dataNascita;
+	private String    luogoNascita;
+	private String    codiceFiscale;
 
 	private final Collection<Attivita> attivitaPrenotate;
 

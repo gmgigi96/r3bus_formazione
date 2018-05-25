@@ -17,6 +17,7 @@ public class Attivita {
 	private final Set<Allievo> allieviPrenotati;
 
 	public Attivita() {
+		// TODO: inizializzare il codice
 		allieviPrenotati = new TreeSet<>();
 	}
 
