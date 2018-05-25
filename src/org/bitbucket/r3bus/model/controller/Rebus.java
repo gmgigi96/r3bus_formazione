@@ -44,15 +44,15 @@ public class Rebus {
 	
 	public void addCentro(int codiceCentro) {
 		Centro c = this.azienda.getCentro(codiceCentro);
-		StatisticheController.getInstance().addCentro(c);
+		statisticheController.addCentro(c);
 	}
 	
 	public void setIntervalloTemporale(LocalDateTime da, LocalDateTime a) {
-		StatisticheController.getInstance().setIntervalloTemporale(da, a);
+		statisticheController.setIntervalloTemporale(da, a);
 	}
 	
 	public Map<Centro, Set<Attivita>> getStatistiche() {
-		return StatisticheController.getInstance().getStatistiche();
+		return statisticheController.getStatistiche();
 	}
 
 	public void creaNuovaAttivita(String nome, LocalDateTime dataOra, int durata) {
