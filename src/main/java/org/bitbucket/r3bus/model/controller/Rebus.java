@@ -70,15 +70,5 @@ public class Rebus {
 	public Map<Centro, Set<Attivita>> getStatistiche() {
 		return statisticheController.getStatistiche();
 	}
-
-	public void creaNuovaAttivita(String nome, LocalDateTime dataOra, int durata) {
-		centroGestito.addAttivita(nome, dataOra, durata);
-	}
-	
-	public void modificaAttivita(int codiceAttivita, String nome, LocalDateTime dataOra, int durata) {
-		Attivita a = centroGestito.getAttivita(codiceAttivita);
-		a.aggiornaParametri(nome, dataOra, durata);
-	}
-	
 	
 }

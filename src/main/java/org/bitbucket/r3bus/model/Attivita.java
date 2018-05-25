@@ -22,9 +22,7 @@ public class Attivita {
 
 	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
 		this();
-		this.nome         = nome;
-		this.orarioInizio = inizio;
-		this.orarioFine   = fine;
+		this.aggiornaParametri(nome, inizio, fine);
 	}
 
 	public void prenota(Allievo allievo) {
