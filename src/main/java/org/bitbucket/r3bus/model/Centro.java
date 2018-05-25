@@ -57,4 +57,8 @@ public class Centro {
 	void addAttivita(Attivita a) {
 		attivita.put(a.getCodice(), a);
 	}
+	
+	int contaAttivita() {
+		return attivita.size();
+	}
 }
