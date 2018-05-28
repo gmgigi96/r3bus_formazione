@@ -27,7 +27,7 @@ public class Attivita {
 	@Column(nullable=false)
 	private LocalDateTime orarioFine;
 	
-	@ManyToMany(mappedBy="attivitaPrenotate")
+	@ManyToMany
 	private final Set<Allievo> allieviPrenotati;
 
 	public Attivita() {

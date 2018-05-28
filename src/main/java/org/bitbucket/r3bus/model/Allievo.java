@@ -1,8 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +33,8 @@ public class Allievo {
 	@Column(unique=true, nullable=false)
 	private String    codiceFiscale;
 
-	@ManyToMany
-	private final Collection<Attivita> attivitaPrenotate;
+	@ManyToMany(mappedBy="allieviPrenotati")
+	private final List<Attivita> attivitaPrenotate;
 
 	public Allievo() {
 		attivitaPrenotate = new LinkedList<>();
