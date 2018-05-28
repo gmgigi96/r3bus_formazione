@@ -3,25 +3,35 @@ package org.bitbucket.r3bus.model;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.Data;
 
 @Data
+@Entity
 public class Attivita {
-
-	private static final AtomicInteger counter = new AtomicInteger(1);
 	
-	private int codice;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	@Column(nullable=false)
 	private String nome;
+	@Column(nullable=false)
 	private LocalDateTime orarioInizio;
+	@Column(nullable=false)
 	private LocalDateTime orarioFine;
-
+	
+	@ManyToMany(mappedBy="attivitaPrenotate")
 	private final Set<Allievo> allieviPrenotati;
 
 	public Attivita() {
 		allieviPrenotati = new TreeSet<>();
-		this.codice = counter.incrementAndGet();  // TODO: change this when using a db
 	}
 
 	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
