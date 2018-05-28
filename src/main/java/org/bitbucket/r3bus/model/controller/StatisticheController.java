@@ -51,11 +51,16 @@ public class StatisticheController {
 		List<Float> res = new LinkedList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			Set<Attivita> attivita = centro.getAttivitaInIntervallo(data, data);
-			float mediaPrenotatiGiornaliera = attivita.stream().mapToInt(Attivita::getNumeroAllieviPrenotati).sum()
-					/ (float) attivita.size();
+			float mediaPrenotatiGiornaliera = mediaAllieviPrenotati(attivita);
 			res.add(mediaPrenotatiGiornaliera / centro.getCapienza());
 		}
 		return res;
+	}
+
+	private float mediaAllieviPrenotati(Set<Attivita> attivita) {
+		float mediaPrenotatiGiornaliera = attivita.stream().mapToInt(Attivita::getNumeroAllieviPrenotati).sum()
+				/ (float) attivita.size();
+		return mediaPrenotatiGiornaliera;
 	}
 
 }
