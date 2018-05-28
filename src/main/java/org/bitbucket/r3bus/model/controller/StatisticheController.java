@@ -10,7 +10,7 @@ import java.util.TreeMap;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
-import org.bitbucket.r3bus.model.LocalDateRange;
+import org.bitbucket.r3bus.utils.LocalDateRange;
 
 /**
  * La classe StatisticheController genera le statistiche

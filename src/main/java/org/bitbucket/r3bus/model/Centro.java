@@ -10,7 +10,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 public class Centro {
@@ -48,7 +47,8 @@ public class Centro {
 		SortedSet<Attivita> attivita = new TreeSet<>();
 
 		this.attivita.forEach((codiceAttivita, att) -> {
-			if (att.getOrarioInizio().toLocalDate().compareTo(inizio) >= 0 && att.getOrarioFine().toLocalDate().compareTo(fine) <= 0) {
+			if (att.getOrarioInizio().toLocalDate().compareTo(inizio) >= 0
+					&& att.getOrarioFine().toLocalDate().compareTo(fine) <= 0) {
 				attivita.add(att);
 			}
 		});

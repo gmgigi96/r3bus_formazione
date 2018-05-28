@@ -11,7 +11,7 @@ import lombok.Data;
 public class Attivita {
 
 	private static final AtomicInteger counter = new AtomicInteger(1);
-	
+
 	private int codice;
 	private String nome;
 	private LocalDateTime orarioInizio;
@@ -21,7 +21,7 @@ public class Attivita {
 
 	public Attivita() {
 		allieviPrenotati = new TreeSet<>();
-		this.codice = counter.incrementAndGet();  // TODO: change this when using a db
+		this.codice = counter.incrementAndGet(); // TODO: change this when using a db
 	}
 
 	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
@@ -38,11 +38,11 @@ public class Attivita {
 	}
 
 	public void aggiornaParametri(String nuovoNome, LocalDateTime nuovoInizio, LocalDateTime nuovaFine) {
-		this.nome         = nuovoNome;
+		this.nome = nuovoNome;
 		this.orarioInizio = nuovoInizio;
-		this.orarioFine   = nuovaFine;
+		this.orarioFine = nuovaFine;
 	}
-	
+
 	public int getNumeroAllieviPrenotati() {
 		return this.allieviPrenotati.size();
 	}

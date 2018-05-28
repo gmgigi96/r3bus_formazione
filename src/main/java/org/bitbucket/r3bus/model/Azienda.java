@@ -23,7 +23,7 @@ public class Azienda {
 	}
 
 	public void eliminaAllievo(Allievo allievo) {
-		this.allievi.remove(allievo.getCodiceFiscale());	
+		this.allievi.remove(allievo.getCodiceFiscale());
 	}
 
 	public Centro getCentro(int codiceCentro) {
