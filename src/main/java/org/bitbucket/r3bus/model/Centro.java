@@ -1,18 +1,22 @@
 package org.bitbucket.r3bus.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class Centro {
 
 	private final Map<Integer, Attivita> attivita;
+	private int capienza;
 
 	public Centro() {
 		attivita = new HashMap<>();
@@ -40,11 +44,11 @@ public class Centro {
 		return res;
 	}
 
-	public Set<Attivita> getAttivitaInIntervallo(LocalDateTime intervalloTemporaleDa, LocalDateTime intervalloTemporaleA) {
-		Set<Attivita> attivita = new TreeSet<>();
+	public SortedSet<Attivita> getAttivitaInIntervallo(LocalDate inizio, LocalDate fine) {
+		SortedSet<Attivita> attivita = new TreeSet<>();
 
 		this.attivita.forEach((codiceAttivita, att) -> {
-			if(att.getOrarioInizio().isAfter(intervalloTemporaleDa) && att.getOrarioInizio().isBefore(intervalloTemporaleA)) {
+			if (att.getOrarioInizio().toLocalDate().compareTo(inizio) >= 0 && att.getOrarioFine().toLocalDate().compareTo(fine) <= 0) {
 				attivita.add(att);
 			}
 		});
@@ -52,12 +56,17 @@ public class Centro {
 		return attivita;
 	}
 
+	public long getNumeroAttivita(LocalDate giorno) {
+		return attivita.values().stream()
+				.filter((Attivita attivita) -> (attivita.getOrarioInizio().toLocalDate().equals(giorno))).count();
+	}
+
 	// metodi ausiliari per test
 
 	void addAttivita(Attivita a) {
 		attivita.put(a.getCodice(), a);
 	}
-	
+
 	int contaAttivita() {
 		return attivita.size();
 	}

@@ -42,4 +42,8 @@ public class Attivita {
 		this.orarioInizio = nuovoInizio;
 		this.orarioFine   = nuovaFine;
 	}
+	
+	public int getNumeroAllieviPrenotati() {
+		return this.allieviPrenotati.size();
+	}
 }
