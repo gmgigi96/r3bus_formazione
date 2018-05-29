@@ -10,14 +10,14 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: {{ checksum "pom.xml" }}
+          key: '{{ checksum "pom.xml" }}'
 
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: {{ checksum "pom.xml" }}
+          key: '{{ checksum "pom.xml" }}'
 
       - run:
           name: Waiting for Postgres to be ready
