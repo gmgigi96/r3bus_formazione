@@ -1,63 +1,66 @@
 package org.bitbucket.r3bus.model.controller;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
+import org.bitbucket.r3bus.utils.LocalDateRange;
 
 /**
  * La classe StatisticheController genera le statistiche
  */
 public class StatisticheController {
 
-	private LocalDateTime intervalloTemporaleDa;
-	private LocalDateTime intervalloTemporaleA;
+	private LocalDate inizio;
+	private LocalDate fine;
+	private Centro centro;
+	private Azienda azienda;
 
-	private final Set<Centro> centri;
-
-	private StatisticheController() {
-		centri = new TreeSet<>();
+	public void setCentro(int codiceCentro) {
+		this.centro = this.azienda.getCentro(codiceCentro);
 	}
 
-	public static StatisticheController statisticheController;
+	public void setIntervallo(LocalDate inizio, LocalDate fine) {
+		this.inizio = inizio;
+		this.fine = fine;
+	}
 
-	public static StatisticheController getInstance() {
-		if (statisticheController == null) {
-			statisticheController = new StatisticheController();
+	public List<Long> getNumeroAttivitaGiornaliere() {
+		List<Long> res = new LinkedList<>();
+		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
+			res.add(centro.getNumeroAttivita(data));
 		}
-		return statisticheController;
+		return res;
 	}
 
-	public void setIntervalloTemporale(LocalDateTime da, LocalDateTime a) {
-		this.intervalloTemporaleDa = da;
-		this.intervalloTemporaleA = a;
-	}
-
-	public void addCentro(Centro centro) {
-		this.centri.add(centro);
-	}
-
-	public Map<Centro,Set<Attivita>> getStatistiche() {
-		Map<Centro, Set<Attivita>> centro2Attivita = new HashMap<>();
-
-		for (Centro c : centri) {
-			Set<Attivita> attivita = new HashSet<>();
-			attivita.addAll(c.getAttivitaInIntervallo(intervalloTemporaleDa, intervalloTemporaleA));
-			centro2Attivita.put(c, attivita);
+	public Map<String, Integer> getElencoAttivita() {
+		Map<String, Integer> attivita2prenotati = new TreeMap<>();
+		for (Attivita a : centro.getAttivitaInIntervallo(inizio, fine)) {
+			attivita2prenotati.put(a.toString(), a.getNumeroAllieviPrenotati());
 		}
-
-		return centro2Attivita;
+		return attivita2prenotati;
 	}
 
-	public void reset() {
-		this.intervalloTemporaleA = null;
-		this.intervalloTemporaleA = null;
-		this.centri.clear();
+	public List<Float> getMediaPrenotati() {
+		List<Float> res = new LinkedList<>();
+		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
+			Set<Attivita> attivita = centro.getAttivitaInIntervallo(data, data);
+			float mediaPrenotatiGiornaliera = mediaAllieviPrenotati(attivita);
+			res.add(mediaPrenotatiGiornaliera / centro.getCapienza());
+		}
+		return res;
+	}
+
+	private float mediaAllieviPrenotati(Set<Attivita> attivita) {
+		float mediaPrenotatiGiornaliera = attivita.stream().mapToInt(Attivita::getNumeroAllieviPrenotati).sum()
+				/ (float) attivita.size();
+		return mediaPrenotatiGiornaliera;
 	}
 
 }

@@ -48,8 +48,12 @@ public class Attivita {
 	}
 
 	public void aggiornaParametri(String nuovoNome, LocalDateTime nuovoInizio, LocalDateTime nuovaFine) {
-		this.nome         = nuovoNome;
+		this.nome = nuovoNome;
 		this.orarioInizio = nuovoInizio;
-		this.orarioFine   = nuovaFine;
+		this.orarioFine = nuovaFine;
+	}
+
+	public int getNumeroAllieviPrenotati() {
+		return this.allieviPrenotati.size();
 	}
 }

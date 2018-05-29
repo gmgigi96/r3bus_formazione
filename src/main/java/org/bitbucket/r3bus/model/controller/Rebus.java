@@ -56,20 +56,5 @@ public class Rebus {
 		Attivita a = centroGestito.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);
 	}
-
-	// statistiche
-
-	public void addCentro(int codiceCentro) {
-		Centro c = this.azienda.getCentro(codiceCentro);
-		statisticheController.addCentro(c);
-	}
-	
-	public void setIntervalloTemporale(LocalDateTime da, LocalDateTime a) {
-		statisticheController.setIntervalloTemporale(da, a);
-	}
-	
-	public Map<Centro, Set<Attivita>> getStatistiche() {
-		return statisticheController.getStatistiche();
-	}
 	
 }
