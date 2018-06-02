@@ -1,10 +1,18 @@
-<nav class="menu">
-	<ul>
-		<!-- TODO: add .active dynamically to current page -->
-		<li><a href="/">Home</a></li>
-		<li><a href="#">Services</a></li>
-		<li><a href="/portfolio">Portfolio</a></li>
-		<li><a href="/about">About Us</a></li>
-		<li><a href="/contact">Contact Us</a></li>
-	</ul>
-</nav>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head></head>
+<body th:fragment="sidebar">
+	<nav class="menu">
+		<ul>
+			<!-- TODO: add .active dynamically to current page -->
+			<li><a href="/">Home</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="/portfolio">Portfolio</a></li>
+			<li><a href="/about">About Us</a></li>
+			<li><a href="/contact">Contact Us</a></li>
+		</ul>
+	</nav>
+</body>
+</html>
