@@ -10,6 +10,8 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+
 @Configuration
 public class FormazioneConfiguration {
 
@@ -37,5 +39,10 @@ public class FormazioneConfiguration {
 		}
 
 		return bds.build();
+	}
+	
+	@Bean
+	public LayoutDialect layoutDialect() {
+	    return new LayoutDialect();
 	}
 }
