@@ -1,12 +1,133 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<title>Hello World</title>
+<title>ClearMinimalist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#slideshow').cycle({
+        fx:     'fade',
+        speed:  'slow',
+        timeout: 3000,
+        pager:  '#slider_nav',
+        pagerAnchorBuilder: function(idx, slide) {
+            // return sel string for existing anchor
+            return '#slider_nav li:eq(' + (idx) + ') a';
+        }
+    });
+});
+</script>
 </head>
 <body>
-
-<h1>It works!</h1>
-
+<div class="main">
+  <div class="main_resize">
+    <div class="main_left">
+      <div class="logo"><a href="#"><img src="images/logo.gif" width="223" height="72" border="0" alt="" /></a></div>
+      <div class="clr"></div>
+      <div class="menu">
+        <ul>
+          <li><a href="index.html" class="active"><span>Home</span></a></li>
+          <li><a href="#"><span>Services</span></a></li>
+          <li><a href="portfolio.html"><span>Portfolio</span></a></li>
+          <li><a href="about.html"><span> About Us </span></a></li>
+          <li><a href="contact.html"><span> Contact Us</span></a></li>
+        </ul>
+      </div>
+      <div class="clr"></div>
+      <h2>&nbsp;</h2>
+      <h2>Our News</h2>
+      <p><span>12 Dec 2015 | 0 comments</span><br />
+        <strong>Duis nec porttitor lorem</strong><br />
+        Mauris et nisi urna nonfaucibus magna. Integer lacus ante then ullamcorper ut vulputate..</p>
+      <p><span>14 Dec 2015 | 0 comments</span><br />
+        <strong>Duis nec porttitor lorem</strong><br />
+        Mauris et nisi urna nonfaucibus magna. Integer lacus ante then ullamcorper ut vulputate..</p>
+      <h2>&nbsp;</h2>
+      <h2>What They Say</h2>
+      <p>&quot;Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse voluptas nulla pariatur?&quot;</p>
+      <p><em><strong>by: John S., webdesigner</strong></em></p>
+    </div>
+    <div class="main_right">
+      <div class="search">
+        <form id="form1" name="form1" method="post" action="#">
+          <p>Search Site:</p>
+          <label><span>
+            <input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="Search..." />
+            </span>
+            <input name="b" type="image" src="images/search.gif" class="button" />
+          </label>
+          <div class="clr"></div>
+        </form>
+      </div>
+      <div class="clr"></div>
+      <div id="slider">
+        <!-- start slideshow -->
+        <div id="slideshow">
+          <div class="slider-item"><a href="#"><img src="images/simple_img_1.jpg" alt="" width="653" height="346" border="0" /></a></div>
+          <div class="slider-item"><a href="#"><img src="images/simple_img_2.jpg" alt="" width="653" height="346" border="0" /></a></div>
+          <div class="slider-item"><a href="#"><img src="images/simple_img_3.jpg" alt="" width="653" height="346" border="0" /></a></div>
+          <div class="slider-item"><a href="#"><img src="images/simple_img_4.jpg" alt="" width="653" height="346" border="0" /></a></div>
+        </div>
+        <!-- end #slideshow -->
+        <div class="controls-center">
+          <h2>Your company's welcome message or slogan. </h2>
+          <p>Lorem ipsum dolor sit amet, consectur el.</p>
+          <div id="slider_controls">
+            <ul id="slider_nav">
+              <li><a href="#"></a></li>
+              <!-- Slide 1 -->
+              <li><a href="#"></a></li>
+              <!-- Slide 2 -->
+              <li><a href="#"></a></li>
+              <!-- Slide 3 -->
+              <li><a href="#"></a></li>
+              <!-- Slide 4 -->
+            </ul>
+          </div>
+        </div>
+        <div class="clr"></div>
+      </div>
+      <div class="clr"></div>
+      <h2 style="padding:30px 0 5px 5px;">Welcome to Company.<br />
+        <span> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span> </h2>
+      <p class="grey">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="main_right_bg">
+        <div class="blog"> <img src="images/img_1.jpg" class="floated" border="0" alt="" />
+          <p><strong>Fusce vehicula dignissim <br />
+            ligula.</strong> Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. <a href="#">Continue Reading »</a></p>
+        </div>
+        <div class="blog"> <img src="images/img_2.jpg" class="floated" border="0" alt="" />
+          <p><strong>Fusce vehicula dignissim <br />
+            ligula.</strong> Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. <a href="#">Continue Reading »</a></p>
+        </div>
+        <div class="blog"> <img src="images/img_3.jpg" class="floated" border="0" alt="" />
+          <p><strong>Fusce vehicula dignissim <br />
+            ligula.</strong> Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. <a href="#">Continue Reading »</a></p>
+        </div>
+        <div class="blog"> <img src="images/img_4.jpg" class="floated" border="0" alt="" />
+          <p><strong>Fusce vehicula dignissim <br />
+            ligula.</strong> Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. <a href="#">Continue Reading »</a></p>
+        </div>
+        <div class="clr"></div>
+      </div>
+      <p class="grey"><em>Vestibulum vehicula purus nec dui accumsan fermentum. Suspendisse potenti. Ut dapibus est id odio pretium blandit in eget leo. Aliquam erat volutpat. </em></p>
+      <h2>What we offer</h2>
+      <p class="grey">Nunc urna eros, viverra sit amet tempor non, aliquam sit amet felis. Suspendisse potenti. Mauris sed lectus at sem hendrerit condimentum. Donec pellentesque ligula pharetra dui lacinia nec tempor leo feugiat. Mauris vitae sapien tellus, vel consequat libero. Vivamus posuere</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <div class="clr"></div>
+  </div>
+  <div class="footer">
+    <div class="footer_resize">
+      <p>© Copyright websitename . All Rights Reserved. Home | Contact | RSS <br />
+        (Blue) <a href="http://www.bluewebtemplates.com">Website Templates</a></p>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
