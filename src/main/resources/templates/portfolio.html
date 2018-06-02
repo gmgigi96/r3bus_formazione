@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<title>Portfolio</title>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$('div.blog2').hover(function() {
+			$(this).stop().animate({
+				backgroundColor : "#FFFFFF"
+			}, 300);
+		}, function() {
+			$(this).stop().animate({
+				backgroundColor : "#f6f6f6"
+			}, 300);
+		});
+	});
+</script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="search">
+			<form id="form1" name="form1" method="post" action="#">
+				<p>Search Site:</p>
+				<label><span> <input name="q" type="text"
+						class="keywords" id="textfield" maxlength="50" value="Search..." />
+				</span> <input name="b" type="image" src="images/search.gif" class="button" />
+				</label>
+				<div class="clr"></div>
+			</form>
+		</div>
+		<div class="clr"></div>
+		<div id="slider2">
+			<div class="controls-center">
+				<h3>Portfolio</h3>
+				<div class="clr"></div>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="clr"></div>
+		<h2>&nbsp;</h2>
+		<div class="blog2">
+			<img src="images/port_1.jpg" alt="" width="203" height="166"
+				border="0" />
+			<p>
+				<strong>Project Item</strong><br /> Vestibulum sit amet neque eu
+				neque suscipit consequat quis vel risus. <br /> <a href="#">visit
+					site</a>
+			</p>
+		</div>
+		<div class="blog2">
+			<img src="images/port_2.jpg" border="0" alt="" />
+			<p>
+				<strong>Project Item</strong><br /> Vestibulum sit amet neque eu
+				neque suscipit consequat quis vel risus. <br /> <a href="#">visit
+					site</a>
+			</p>
+		</div>
+		<div class="blog2">
+			<img src="images/port_3.jpg" border="0" alt="" />
+			<p>
+				<strong>Project Item</strong><br /> Vestibulum sit amet neque eu
+				neque suscipit consequat quis vel risus. <br /> <a href="#">visit
+					site</a>
+			</p>
+		</div>
+		<div class="blog2">
+			<img src="images/port_4.jpg" border="0" alt="" />
+			<p>
+				<strong>Project Item</strong><br /> Vestibulum sit amet neque eu
+				neque suscipit consequat quis vel risus. <br /> <a href="#">visit
+					site</a>
+			</p>
+		</div>
+		<div class="blog2">
+			<img src="images/port_5.jpg" border="0" alt="" />
+			<p>
+				<strong>Project Item</strong><br /> Vestibulum sit amet neque eu
+				neque suscipit consequat quis vel risus. <br /> <a href="#">visit
+					site</a>
+			</p>
+		</div>
+		<div class="blog2">
+			<img src="images/port_6.jpg" border="0" alt="" />
+			<p>
+				<strong>Project Item</strong><br /> Vestibulum sit amet neque eu
+				neque suscipit consequat quis vel risus. <br /> <a href="#">visit
+					site</a>
+			</p>
+		</div>
+		<div class="clr"></div>
+		<h2>&nbsp;</h2>
+	</div>
+</body>
+</html>
