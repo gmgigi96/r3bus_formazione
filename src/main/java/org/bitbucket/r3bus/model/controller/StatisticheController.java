@@ -66,5 +66,11 @@ public class StatisticheController {
 				/ (float) attivita.size();
 		return mediaPrenotatiGiornaliera;
 	}
+	
+	//per test
+	
+	public void setCentro(Centro c) {
+		this.centro = c;
+	}
 
 }
