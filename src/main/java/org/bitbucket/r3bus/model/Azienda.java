@@ -29,4 +29,14 @@ public class Azienda {
 	public Centro getCentro(int codiceCentro) {
 		return this.centri.get(codiceCentro);
 	}
+	
+	// per test
+	void addAllievo(Allievo allievo) {
+		this.allievi.put(allievo.getCodiceFiscale(), allievo);
+	}
+	
+	void addCentro(Centro centro) {
+		this.centri.put(centro.getId(), centro);
+	}
+	
 }
