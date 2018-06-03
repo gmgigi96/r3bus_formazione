@@ -11,7 +11,7 @@ public class Azienda {
 	private String nome;
 
 	private final Map<String, Allievo> allievi;
-	private final Map<Integer, Centro> centri;
+	private final Map<Long, Centro> centri;
 
 	public Azienda() {
 		allievi = new HashMap<>();
@@ -26,7 +26,7 @@ public class Azienda {
 		this.allievi.remove(allievo.getCodiceFiscale());
 	}
 
-	public Centro getCentro(int codiceCentro) {
+	public Centro getCentro(long codiceCentro) {
 		return this.centri.get(codiceCentro);
 	}
 	
