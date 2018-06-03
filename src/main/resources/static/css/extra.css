@@ -93,7 +93,7 @@
 #slider_controls ul li a {
 	width: 10px;
 	height: 10px;
-	background: url('images/tabs_2.gif') no-repeat center center;
+	background: url('../images/tabs_2.gif') no-repeat center center;
 	display: block;
 	float: left;
 	padding: 2px;
@@ -107,5 +107,5 @@
 }
 
 #slider_controls ul li a:hover, #slider_controls ul li a.activeSlide {
-	background: url('images/tabs_1.gif') no-repeat center center;
+	background: url('../images/tabs_1.gif') no-repeat center center;
 }

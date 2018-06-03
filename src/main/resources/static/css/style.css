@@ -65,7 +65,7 @@ html {
 .search span {
 	display: block;
 	float: left;
-	background: url(images/search_bg.gif) left top no-repeat;
+	background: url(../images/search_bg.gif) left top no-repeat;
 	width: 180px;
 	padding: 0 5px;
 	height: 31px;
@@ -154,7 +154,7 @@ html {
 }
 
 .main_resize li {
-	background: url(images/ul_li.gif) left no-repeat;
+	background: url(../images/ul_li.gif) left no-repeat;
 	padding: 5px 0 3px 20px;
 	margin: 0;
 	font: normal 12px Arial, Helvetica, sans-serif;
@@ -243,12 +243,12 @@ html {
 
 .menu ul a:hover {
 	color: #fff;
-	background: url(images/hover.gif) no-repeat top;
+	background: url(../images/hover.gif) no-repeat top;
 }
 
 .menu ul a.active {
 	color: #fff;
-	background: url(images/hover.gif) no-repeat top;
+	background: url(../images/hover.gif) no-repeat top;
 }
 
 /*************footer**********/
