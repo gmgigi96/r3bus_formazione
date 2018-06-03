@@ -31,11 +31,11 @@ public class Azienda {
 	}
 	
 	// per test
-	void addAllievo(Allievo allievo) {
+	public void addAllievo(Allievo allievo) {
 		this.allievi.put(allievo.getCodiceFiscale(), allievo);
 	}
 	
-	void addCentro(Centro centro) {
+	public void addCentro(Centro centro) {
 		this.centri.put(centro.getId(), centro);
 	}
 	
