@@ -1,21 +1,21 @@
 @charset "utf-8";
 
-#contactform {
+.user-form {
 	margin: 0;
 	padding: 5px 5px;
 }
 
-#contactform * {
+.user-form * {
 	color: #F00;
 }
 
-#contactform ol {
+.user-form ol, .user-form ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-#contactform li {
+.user-form li {
 	margin: 0;
 	padding: 0;
 	background: none;
@@ -24,12 +24,20 @@
 	clear: both;
 }
 
-#contactform li.buttons {
-	margin: 5px 0 5px 0;
+.user-form li:after {
+	content: " ";
+	display: block;
+	clear: both;
+	height: 0;
+	width: 0;
+}
+
+.user-form li.buttons {
+	margin: 5px 0;
 	clear: both;
 }
 
-#contactform label {
+.user-form label {
 	margin: 0;
 	width: 150px;
 	display: block;
@@ -40,11 +48,7 @@
 	float: left;
 }
 
-#contactform label span {
-	color: #F00;
-}
-
-#contactform input.text {
+.user-form input.text {
 	width: 530px;
 	border: 1px solid #e9e9e9;
 	margin: 2px 0;
@@ -54,7 +58,7 @@
 	float: left;
 }
 
-#contactform textarea {
+.user-form textarea {
 	width: 530px;
 	border: 1px solid #e9e9e9;
 	margin: 2px 0;
@@ -63,10 +67,16 @@
 	float: left;
 }
 
-#contactform li.buttons input {
-	padding: 3px 0 3px 420px;
+.user-form .buttons button {
+	padding: 10px 300px 10px 30px;
 	margin: 10px 0 0 0;
 	border: 0;
-	color: #FFF;
+	color: #fff;
 	float: left;
+	background: #777;
+	cursor: pointer;
+}
+
+.user-form .buttons button:hover {
+	background: #444;
 }

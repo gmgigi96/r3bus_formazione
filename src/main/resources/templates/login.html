@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title th:text="#{login_page.login}">Login</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+</head>
+<body>
+	<div layout:fragment="content">
+		<div id="slider2">
+			<div class="controls-center">
+				<h3 th:text="#{login_page.login}">Login</h3>
+			</div>
+		</div>
+		<form th:action="@{/login}" method="post" class="user-form">
+			<ul>
+				<li>
+					<label for="username">ID</label>
+					<input name="username" class="text" type="text" required />
+				</li>
+				<li>
+					<label for="password">Password</label>
+					<input name="password" class="text" type="password" required />
+				</li>
+				<li class="buttons">
+					<button type="submit" th:text="#{login_page.login}">Login</button>
+				</li>
+				
+			</ul>
+			<div th:if="${param.error}" th:text="#{login_page.invalid_credentials}">Invalid credentials</div>
+			<div th:if="${param.logout}" th:text="#{login_page.logged_out}">Logged out</div>
+		</form>
+	</div>
+</body>
+</html>
