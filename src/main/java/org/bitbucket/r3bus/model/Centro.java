@@ -82,7 +82,7 @@ public class Centro {
 
 	// metodi ausiliari per test
 
-	void addAttivita(Attivita a) {
+	public void addAttivita(Attivita a) {
 		attivita.put(a.getId(), a);
 	}
 

@@ -41,11 +41,14 @@ public class MainController {
 		allievo.setTelefono("000000");
 		//creazione attivita	
 		Attivita attivita = new Attivita("prima attivita", LocalDateTime.now(), LocalDateTime.now().plusHours(10));
-		attivita.prenota(allievo);
+		allievo.prenotaAttivita(attivita);
+		//attivita.prenota(allievo);
 		//creazione centro
 		Centro centro = new Centro();
 		centro.setCapienza(100);
 		centro.setNome("primo Centro");
+		//allievo.prenotaAttivita(attivita);
+		centro.addAttivita(attivita);
 
 		allievoService.add(allievo);
 		attivitaService.add(attivita);
