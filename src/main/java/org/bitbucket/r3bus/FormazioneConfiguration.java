@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 
 import javax.sql.DataSource;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 @Configuration
 public class FormazioneConfiguration {
 
-	@ConfigurationProperties(prefix = "datasource.postgres")
 	@Bean
 	public DataSource dataSource() throws URISyntaxException {
 		DataSourceBuilder bds = DataSourceBuilder.create();
