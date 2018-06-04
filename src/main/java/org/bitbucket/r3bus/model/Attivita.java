@@ -1,8 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class Attivita {
 	private final Set<Allievo> allieviPrenotati;
 
 	public Attivita() {
-		allieviPrenotati = new TreeSet<>();
+		allieviPrenotati = new HashSet<>();
 	}
 
 	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
