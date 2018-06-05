@@ -20,7 +20,7 @@
 		<logout logout-success-url="/login?logout" />
 	</http>
 
-	
+	<!-- TODO: migrate to database -->
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
