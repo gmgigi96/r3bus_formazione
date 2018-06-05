@@ -27,7 +27,6 @@
 				<li class="buttons">
 					<button type="submit" th:text="#{pages.login.login}">Login</button>
 				</li>
-				
 			</ul>
 			<div th:if="${param.error}" th:text="#{pages.login.invalid_credentials}">Invalid credentials</div>
 			<div th:if="${param.logout}" th:text="#{pages.login.logged_out}">Logged out</div>
