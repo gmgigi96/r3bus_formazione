@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <b:beans xmlns="http://www.springframework.org/schema/security"
-		 xmlns:b="http://www.springframework.org/schema/beans"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:b="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http use-expressions="true">
 		<intercept-url pattern="/login*" access="isAnonymous()" />
+		<intercept-url pattern="/error" access="isAnonymous()" />
+		<intercept-url pattern="/js/*" access="isAnonymous()" />
+		<intercept-url pattern="/css/*" access="isAnonymous()" />
+		<intercept-url pattern="/images/*" access="isAnonymous()" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 
-		<form-login login-page='/login.html'
-			default-target-url="/homepage.html"
-			authentication-failure-url="/login.html?error=true" />
+		<form-login login-page='/login' default-target-url="/"
+			authentication-failure-url="/login?error" />
 
-		<logout logout-success-url="/login.html" />
-
+		<logout logout-success-url="/login?logout" />
 	</http>
+
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="responsabile" password="responsabile"
-					authorities="RESPONSABILE" />
-				<user name="direttore" password="direttore"
-					authorities="DIRETTORE" />
+				<user name="responsabile" password="responsabile" authorities="RESPONSABILE" />
+				<user name="direttore" password="direttore" authorities="DIRETTORE" />
 				<user name="organizzatore" password="organizzatore"
 					authorities="ORGANIZZATORE" />
 			</user-service>
