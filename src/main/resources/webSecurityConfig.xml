@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <b:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:b="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
@@ -13,17 +14,23 @@
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 
 		<form-login login-page='/login' default-target-url="/"
+			authentication-success-handler-ref="myAuthenticationSuccessHandler"
 			authentication-failure-url="/login?error" />
 
 		<logout logout-success-url="/login?logout" />
 	</http>
 
+	<b:bean id="myAuthenticationSuccessHandler"
+		class="org.bitbucket.r3bus.security.UrlAuthenticationSuccessHandler" />
+
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="responsabile" password="responsabile" authorities="RESPONSABILE" />
-				<user name="direttore" password="direttore" authorities="DIRETTORE" />
-				<user name="organizzatore" password="organizzatore"
+				<user name="responsabile" password="{noop}responsabile"
+					authorities="RESPONSABILE" />
+				<user name="direttore" password="{noop}direttore"
+					authorities="DIRETTORE" />
+				<user name="organizzatore" password="{noop}organizzatore"
 					authorities="ORGANIZZATORE" />
 			</user-service>
 		</authentication-provider>
