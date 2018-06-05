@@ -10,6 +10,8 @@ import org.bitbucket.r3bus.service.AllievoService;
 import org.bitbucket.r3bus.service.AttivitaService;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,13 @@ public class MainController {
 
 	@GetMapping("/")
 	public String indexPage() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = auth.getAuthorities().toString();
+		
+		System.out.println(role);
+		
+		
 		return "index";
 	}
 

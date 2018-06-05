@@ -13,16 +13,14 @@
 		<intercept-url pattern="/images/*" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 
-		<form-login login-page='/login' default-target-url="/"
-			authentication-success-handler-ref="myAuthenticationSuccessHandler"
-			authentication-failure-url="/login?error" />
+		<form-login login-page='/login'
+					default-target-url="/"
+					authentication-failure-url="/login?error" />
 
 		<logout logout-success-url="/login?logout" />
 	</http>
 
-	<b:bean id="myAuthenticationSuccessHandler"
-		class="org.bitbucket.r3bus.security.UrlAuthenticationSuccessHandler" />
-
+	
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
