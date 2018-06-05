@@ -16,7 +16,7 @@
 		</div>
 		<form th:action="@{''}" method="post" th:object="${learner}" class="user-form">
 			<ul th:if="${#fields.hasAnyErrors()}" class="error-list">
-				<li th:each="err : ${#fields.allErrors()}" th:text="err">Field Error</li>
+				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">Field Error</li>
 			</ul>
 			<ul>
 				<li>
