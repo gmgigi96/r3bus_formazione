@@ -14,40 +14,42 @@
 				<h3 th:text="#{pages.new_learner.headline}">Sign-up new learner</h3>
 			</div>
 		</div>
-		<form th:action="@{/not_implemented}" method="post" class="user-form">
+		<form th:action="@{/allievo/nuovo}" method="post" th:object="${learner}" class="user-form">
+			<ul th:if="${#fields.hasAnyErrors()}" class="error-list">
+				<li th:each="err : ${#fields.allErrors()}" th:text="err">Field Error</li>
+			</ul>
 			<ul>
 				<li>
-					<label for="taxid" th:text="#{learner.taxid}">Fiscal Code</label>
-					<input name="taxid" class="text" type="text" required />
+					<label for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
+					<input th:field="*{codiceFiscale}" class="text" th:errorclass="invalid" type="text" required />
 				</li>
 				<li>
-					<label for="name" th:text="#{learner.name}">First Name</label>
-					<input name="name" class="text" type="text" required />
+					<label for="nome" th:text="#{learner.name}">First Name</label>
+					<input th:field="*{nome}" class="text" th:errorclass="invalid" type="text" required />
 				</li>
 				<li>
-					<label for="surname" th:text="#{learner.surname}">Last Name</label>
-					<input name="surname" class="text" type="text" required />
+					<label for="cognome" th:text="#{learner.surname}">Last Name</label>
+					<input th:field="*{cognome}" class="text" th:errorclass="invalid" type="text" required />
 				</li>
 				<li>
 					<label for="email" th:text="#{learner.email}">E-mail</label>
-					<input name="email" class="text" type="email" />
+					<input th:field="*{email}" class="text" th:errorclass="invalid" type="email" />
 				</li>
 				<li>
-					<label for="phone" th:text="#{learner.phone}">Phone</label>
-					<input name="phone" class="text" type="tel" />
+					<label for="telefono" th:text="#{learner.phone}">Phone</label>
+					<input th:field="*{telefono}" class="text" th:errorclass="invalid" type="tel" />
 				</li>
 				<li>
-					<label for="birthdate" th:text="#{learner.birth_date}">Birth Date</label>
-					<input name="birthdate" class="text" type="date" />
+					<label for="dataNascita" th:text="#{learner.birth_date}">Birth Date</label>
+					<input th:field="*{dataNascita}" class="text" th:errorclass="invalid" type="date" />
 				</li>
 				<li>
-					<label for="birthplace" th:text="#{learner.birth_place}">Birth City</label>
-					<input name="birthplace" class="text" type="text" />
+					<label for="luogoNascita" th:text="#{learner.birth_place}">Birth Place</label>
+					<input th:field="*{luogoNascita}" class="text" th:errorclass="invalid" type="text" />
 				</li>
 				<li class="buttons">
 					<button type="submit" th:text="#{pages.new_learner.signup}">Login</button>
 				</li>
-				
 			</ul>
 		</form>
 	</div>
