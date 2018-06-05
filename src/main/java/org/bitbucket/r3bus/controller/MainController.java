@@ -29,14 +29,21 @@ public class MainController {
 		return "index";
 	}
 
-	@GetMapping("/about")
-	public String aboutPage() {
-		return "about";
-	}
-
 	@RequestMapping("/login")
 	public String contactPage() {
 		return "login";
+	}
+
+	@RequestMapping("/allievo/nuovo")
+	public String newLearnerPage() {
+		return "new_learner";
+	}
+
+	/* ↓↓ mapping di prova (da eliminare) */
+
+	@GetMapping("/about")
+	public String aboutPage() {
+		return "about";
 	}
 
 	@GetMapping("/portfolio")
@@ -46,7 +53,7 @@ public class MainController {
 
 	@GetMapping("/aggiungi")
 	public String aggiungiPage() {
-		//crezione allievo
+		// crezione allievo
 		Allievo allievo = new Allievo();
 		allievo.setCodiceFiscale("codiceFiscale");
 		allievo.setCognome("Elsayed");
@@ -55,10 +62,10 @@ public class MainController {
 		allievo.setLuogoNascita("Anzio");
 		allievo.setNome("Omar");
 		allievo.setTelefono("000000");
-		//creazione attivita	
+		// creazione attivita
 		Attivita attivita = new Attivita("prima attivita", LocalDateTime.now(), LocalDateTime.now().plusHours(10));
 		attivita.prenota(allievo);
-		//creazione centro
+		// creazione centro
 		Centro centro = new Centro();
 		centro.setCapienza(100);
 		centro.setNome("primo Centro");

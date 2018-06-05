@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title th:text="#{pages.new_learner.title}">New Learner</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
+</head>
+<body>
+	<div layout:fragment="content">
+		<div id="slider2">
+			<div class="controls-center">
+				<h3 th:text="#{pages.new_learner.headline}">Sign-up new learner</h3>
+			</div>
+		</div>
+		<form th:action="@{/not_implemented}" method="post" class="user-form">
+			<ul>
+				<li>
+					<label for="taxid" th:text="#{learner.taxid}">Fiscal Code</label>
+					<input name="taxid" class="text" type="text" required />
+				</li>
+				<li>
+					<label for="name" th:text="#{learner.name}">First Name</label>
+					<input name="name" class="text" type="text" required />
+				</li>
+				<li>
+					<label for="surname" th:text="#{learner.surname}">Last Name</label>
+					<input name="surname" class="text" type="text" required />
+				</li>
+				<li>
+					<label for="email" th:text="#{learner.email}">E-mail</label>
+					<input name="email" class="text" type="email" />
+				</li>
+				<li>
+					<label for="phone" th:text="#{learner.phone}">Phone</label>
+					<input name="phone" class="text" type="tel" />
+				</li>
+				<li>
+					<label for="birthdate" th:text="#{learner.birth_date}">Birth Date</label>
+					<input name="birthdate" class="text" type="date" />
+				</li>
+				<li>
+					<label for="birthplace" th:text="#{learner.birth_place}">Birth City</label>
+					<input name="birthplace" class="text" type="text" />
+				</li>
+				<li class="buttons">
+					<button type="submit" th:text="#{pages.new_learner.signup}">Login</button>
+				</li>
+				
+			</ul>
+		</form>
+	</div>
+</body>
+</html>
