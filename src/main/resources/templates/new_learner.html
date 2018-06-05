@@ -14,7 +14,7 @@
 				<h3 th:text="#{pages.new_learner.headline}">Sign-up new learner</h3>
 			</div>
 		</div>
-		<form th:action="@{/allievo/nuovo}" method="post" th:object="${learner}" class="user-form">
+		<form th:action="@{''}" method="post" th:object="${learner}" class="user-form">
 			<ul th:if="${#fields.hasAnyErrors()}" class="error-list">
 				<li th:each="err : ${#fields.allErrors()}" th:text="err">Field Error</li>
 			</ul>

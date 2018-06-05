@@ -56,6 +56,22 @@ public class MainController {
 		return "redirect:/";
 	}
 
+	@GetMapping("/attivita/nuova")
+	public String activityForm(ModelMap model) {
+		model.addAttribute("activity", new Attivita()); // TOFIX
+		return "activity_form";
+	}
+
+	@PostMapping("/attivita/nuova")
+	public String activityFormSave(@Valid @ModelAttribute("activity") Attivita activity, BindingResult bindingResult,
+			ModelMap model) {
+		if (bindingResult.hasErrors())
+			return "activity_form";
+		// controller stuff
+		model.clear();
+		return "redirect:/";
+	}
+
 	/* ↓↓ mapping di prova (da eliminare) */
 
 	@GetMapping("/about")
