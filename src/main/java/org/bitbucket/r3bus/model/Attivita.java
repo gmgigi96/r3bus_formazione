@@ -17,17 +17,17 @@ import lombok.Data;
 @Data
 @Entity
 public class Attivita {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nome;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private LocalDateTime orarioInizio;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private LocalDateTime orarioFine;
-	
+
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private final List<Allievo> allieviPrenotati;
 
@@ -57,7 +57,7 @@ public class Attivita {
 	public int getNumeroAllieviPrenotati() {
 		return this.allieviPrenotati.size();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +82,13 @@ public class Attivita {
 			return false;
 		return true;
 	}
-	
-	
+
+	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
+		return (isBetween(this.getOrarioInizio(), inizio, fine) || isBetween(this.getOrarioFine(), inizio, fine))
+				&& !this.getOrarioInizio().equals(fine) && !this.getOrarioFine().equals(inizio);
+	}
+
+	private static boolean isBetween(LocalDateTime t, LocalDateTime inizio, LocalDateTime fine) {
+		return t.compareTo(inizio) >= 0 && t.compareTo(fine) <= 0;
+	}
 }

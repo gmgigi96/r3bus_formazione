@@ -58,15 +58,11 @@ public class Centro {
 
 	private boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
 		for (Attivita a : this.attivita) {
-			if (isBetween(a.getOrarioInizio(), inizio, fine) || isBetween(a.getOrarioFine(), inizio, fine)) {
+			if(a.overlap(inizio, fine)) {
 				return true;
 			}
 		}
 		return false;
-	}
-
-	private boolean isBetween(LocalDateTime t, LocalDateTime inizio, LocalDateTime fine) {
-		return t.isAfter(inizio) && t.isBefore(fine);
 	}
 
 	public Set<Attivita> getAttivitaDisponibili() {
