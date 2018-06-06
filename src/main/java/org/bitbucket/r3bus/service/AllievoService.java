@@ -19,7 +19,7 @@ public class AllievoService{
     }
 
     
-    public void add(final Allievo allievo) {
+    public void save(final Allievo allievo) {
         this.allievoRepository.save(allievo);
     }
 
@@ -31,5 +31,9 @@ public class AllievoService{
 			
 		}
 		return null;
+	}
+	
+	public void flush() {
+		this.allievoRepository.flush();
 	}
 }
