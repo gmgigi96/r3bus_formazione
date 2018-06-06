@@ -37,7 +37,14 @@ public class Allievo {
 	@ManyToMany(mappedBy="allieviPrenotati", cascade=CascadeType.PERSIST)
 	private final List<Attivita> attivitaPrenotate;
 
-	public Allievo() {
+	public Allievo(String nome, String cognome, String email, String telefono, LocalDate dataNascita, String luogoNascita, String codiceFiscale) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.telefono = telefono;
+		this.dataNascita = dataNascita;
+		this.luogoNascita = luogoNascita;
+		this.codiceFiscale = codiceFiscale;		
 		attivitaPrenotate = new LinkedList<>();
 	}
 
