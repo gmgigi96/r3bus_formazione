@@ -13,11 +13,11 @@
 		<intercept-url pattern="/images/*" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 
-		<form-login login-page='/login'
+		<form-login login-page="/login"
 					default-target-url="/"
 					authentication-failure-url="/login?error" />
 
-		<logout logout-success-url="/login?logout" />
+		<logout logout-url="/logout" logout-success-url="/login?logout" />
 	</http>
 
 	<!-- TODO: migrate to database -->
