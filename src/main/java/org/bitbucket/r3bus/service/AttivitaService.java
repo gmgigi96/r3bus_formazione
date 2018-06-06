@@ -20,7 +20,7 @@ public class AttivitaService {
     }
 
     
-    public void add(final Attivita attivita) {
+    public void save(final Attivita attivita) {
         this.attivitaRepository.save(attivita);
     }
 
@@ -32,5 +32,9 @@ public class AttivitaService {
 			
 		}
 		return null;
+	}
+	
+	public void flush() {
+		this.attivitaRepository.flush();
 	}
 }

@@ -19,8 +19,8 @@ public class CentroService {
     }
 
     
-    public void add(final Centro centro) {
-        this.centroRepository.save(centro);
+    public Centro save(final Centro centro) {
+        return this.centroRepository.save(centro);
     }
 
 	public Centro findbyId(Long id) {
@@ -32,4 +32,10 @@ public class CentroService {
 		}
 		return null;
 	}
+
+
+	public void flush() {
+		this.centroRepository.flush();
+	}
+
 }
