@@ -50,9 +50,23 @@ public class Centro {
 	}
 
 	public void addAttivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
-		Attivita a = new Attivita(nome, inizio, fine);
-		// attivitaService.save(a);
-		attivita.add(a);
+		if (!overlap(inizio, fine)) {
+			Attivita a = new Attivita(nome, inizio, fine);
+			attivita.add(a);
+		}
+	}
+
+	private boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
+		for (Attivita a : this.attivita) {
+			if (isBetween(a.getOrarioInizio(), inizio, fine) || isBetween(a.getOrarioFine(), inizio, fine)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isBetween(LocalDateTime t, LocalDateTime inizio, LocalDateTime fine) {
+		return t.isAfter(inizio) && t.isBefore(fine);
 	}
 
 	public Set<Attivita> getAttivitaDisponibili() {
