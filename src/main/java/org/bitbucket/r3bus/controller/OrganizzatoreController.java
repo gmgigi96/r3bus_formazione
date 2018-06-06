@@ -1,5 +1,9 @@
 package org.bitbucket.r3bus.controller;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Attivita;
@@ -33,8 +37,17 @@ public class OrganizzatoreController {
 	// lista attivita
 
 	@GetMapping("/organizzatore/{centroID}/attivita")
-	public String listaAttivita(@PathVariable("centroID") Long centroID) {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+	public String listaAttivita(@PathVariable("centroID") Long centroID, ModelMap model) {
+		List<Attivita> ls = new ArrayList<>(3);
+		LocalDateTime n = LocalDateTime.now();
+		int h = 0;
+		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
+		model.addAttribute("activityList", ls);
+		// model.addAttribute("multiSelect", true);
+		model.addAttribute("editActivity", true);
+		return "activity_list";
 	}
 
 	// inserisci attivita
@@ -58,8 +71,11 @@ public class OrganizzatoreController {
 	// modifica attivita
 
 	@GetMapping("/organizzatore/{centroID}/attivita/{id}/modifica")
-	public String modificaAttivitaForm(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id) {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+	public String modificaAttivitaForm(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
+			ModelMap model) {
+		// find activity and bind to model
+		model.addAttribute("activity", new Attivita()); // TODEL
+		return "activity_form";
 	}
 
 	@PostMapping("/organizzatore/{centroID}/attivita/{id}/modifica")
