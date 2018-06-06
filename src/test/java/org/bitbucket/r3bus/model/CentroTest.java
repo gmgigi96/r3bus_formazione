@@ -2,6 +2,7 @@ package org.bitbucket.r3bus.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
@@ -12,6 +13,8 @@ public class CentroTest {
 	private Centro centro;
 	private Attivita a;
 	private LocalDateTime now;
+	
+	private Centro centroConZeroAttivita;
 
 	@Before
 	public void setUp() throws Exception {
@@ -19,6 +22,8 @@ public class CentroTest {
 		centro = new Centro();
 
 		a = new Attivita("sample", now, now.plusHours(1));
+		
+		centroConZeroAttivita = new Centro();
 	}
 
 	@Test
@@ -63,6 +68,51 @@ public class CentroTest {
 		a.setOrarioInizio(now.plusDays(1));
 		centro.addAttivita(a);
 		assertEquals(1, centro.getAttivitaDisponibili().size());
+	}
+	
+	@Test
+	public void getNumeroAttivita_zeroAttivita() {
+		assertEquals(0, centroConZeroAttivita.getNumeroAttivita(LocalDate.now()));
+	}
+	
+	@Test
+	public void getNumeroAttivita_zeroAttivitaNelGiorno_unaAttivitaUnAltroGiorno() {
+		centroConZeroAttivita.addAttivita("attivita1", now.plusDays(1), now.plusDays(1).plusHours(3));
+		assertEquals(0, centroConZeroAttivita.getNumeroAttivita(now.toLocalDate()));
+	}
+	
+	@Test
+	public void getNumeroAttivita_unaAttivitaNelGiorno_zeroNegliAltriGiorni() {
+		LocalDateTime time = LocalDateTime.of(2018, 6, 6, 10, 0);		
+		
+		centroConZeroAttivita.addAttivita("attivitaNelGiorno", time.plusHours(1), time.plusHours(3));
+		assertEquals(1, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate()));
+		assertEquals(0, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate().plusDays(1)));
+		assertEquals(0, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate().minusDays(1)));
+	}
+	
+	@Test
+	public void getNumeroAttivita_unaAttivitaNelGiorno_unaIlGiornoPrima_zeroIlGiornoDopo() {
+		LocalDateTime time = LocalDateTime.of(2018, 6, 6, 10, 0);		
+		
+		centroConZeroAttivita.addAttivita("attivitaNelGiorno", time.plusHours(1), time.plusHours(3));
+		centroConZeroAttivita.addAttivita("attivitaNelGiornoPrima", time.minusDays(1), time.minusDays(1).plusHours(3));
+		assertEquals(1, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate()));
+		assertEquals(0, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate().plusDays(1)));
+		assertEquals(1, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate().minusDays(1)));
+	}
+	
+	
+	@Test
+	public void getNumeroAttivita_unaAttivitaNelGiorno_unaIlGiornoPrima_unaIlGiornoDopo() {
+		LocalDateTime time = LocalDateTime.of(2018, 6, 6, 10, 0);		
+		
+		centroConZeroAttivita.addAttivita("attivitaNelGiorno", time.plusHours(1), time.plusHours(3));
+		centroConZeroAttivita.addAttivita("attivitaNelGiornoPrima", time.minusDays(1), time.minusDays(1).plusHours(3));
+		centroConZeroAttivita.addAttivita("attivitaNelGiornoDopo", time.plusDays(1), time.plusDays(1).plusHours(3));
+		assertEquals(1, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate()));
+		assertEquals(1, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate().plusDays(1)));
+		assertEquals(1, centroConZeroAttivita.getNumeroAttivita(time.toLocalDate().minusDays(1)));
 	}
 	
 	
