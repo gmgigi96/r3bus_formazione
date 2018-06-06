@@ -6,7 +6,7 @@
 <head></head>
 <body th:fragment="header">
 	<div class="logo">
-		<span class="logo-name">R3busFormazione</span>
+		<a th:href="@{/}" class="logo-name">R3busFormazione</a>
 	</div>
 	
 	<div class="session-menu" th:if="${#authorization.expr('isAuthenticated()')}">

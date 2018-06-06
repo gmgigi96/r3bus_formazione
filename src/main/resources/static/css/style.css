@@ -53,6 +53,12 @@ html {
 	float: left;
 	font-size: 20px;
 	font-family: monospace;
+	font-weight: bold;
+}
+
+.header .logo-name {
+	text-decoration: none;
+	color: #eee;
 }
 
 .header .session-menu {
