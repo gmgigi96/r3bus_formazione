@@ -3,8 +3,6 @@ package org.bitbucket.r3bus.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.validation.Valid;
-
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Centro;
@@ -15,11 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -34,51 +28,15 @@ public class MainController {
 
 	@GetMapping("/")
 	public String indexPage() {
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String role = auth.getAuthorities().toString();
+		String role = auth.getAuthorities().toArray()[0].toString();
 		
-		System.out.println(role);
-		
-		
-		return "index";
+		return "redirect:/" + role.toLowerCase();
 	}
 
 	@RequestMapping("/login")
 	public String contactPage() {
 		return "login";
-	}
-
-	@GetMapping("/allievo/nuovo")
-	public String newLearnerForm(ModelMap model) {
-		model.addAttribute("learner", new Allievo()); // TOFIX
-		return "new_learner";
-	}
-
-	@PostMapping("/allievo/nuovo")
-	public String saveNewLearner(@Valid @ModelAttribute("learner") Allievo learner, BindingResult bindingResult,
-			ModelMap model) {
-		if (bindingResult.hasErrors())
-			return "new_learner";
-		// add to db / call grasp controller
-		model.clear();
-		return "redirect:/";
-	}
-
-	@GetMapping("/attivita/nuova")
-	public String activityForm(ModelMap model) {
-		model.addAttribute("activity", new Attivita()); // TOFIX
-		return "activity_form";
-	}
-
-	@PostMapping("/attivita/nuova")
-	public String activityFormSave(@Valid @ModelAttribute("activity") Attivita activity, BindingResult bindingResult,
-			ModelMap model) {
-		if (bindingResult.hasErrors())
-			return "activity_form";
-		// controller stuff
-		model.clear();
-		return "redirect:/";
 	}
 
 	/* ↓↓ mapping di prova (da eliminare) */
