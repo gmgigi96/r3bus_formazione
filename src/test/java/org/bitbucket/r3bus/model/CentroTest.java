@@ -49,6 +49,13 @@ public class CentroTest {
 	}
 
 	@Test
+	public void addAttivita_stessiOrari() {
+		centro.addAttivita("attivita1", now, now.plusHours(3));
+		centro.addAttivita("attivitaCheNonDovrebbeSvolgersi", now, now.plusHours(3));
+		assertEquals(1, centro.getAttivita().size());
+	}
+
+	@Test
 	public void addAttivita_sameName() {
 		String nomeAttivita = "attivitaConLoStessoNome";
 		centro.addAttivita(nomeAttivita, now, now.plusHours(3));
