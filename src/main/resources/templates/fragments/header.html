@@ -9,8 +9,17 @@
 		<span class="logo-name">R3busFormazione</span>
 	</div>
 	
-	<div class="session-menu">
-		
+	<div class="session-menu" th:if="${#authorization.expr('isAuthenticated()')}">
+		<span th:text="${#authentication.name}" class="role-name">username</span>
+		<form th:action="@{/logout}" method="post">
+			<button type="submit">Logout</button>
+		</form>
+	</div>
+	
+	<div class="session-menu" th:if="!${#authorization.expr('isAuthenticated()')}">
+		<form th:action="@{/login}" method="get">
+			<button type="submit">Login</button>
+		</form>
 	</div>
 </body>
 </html>

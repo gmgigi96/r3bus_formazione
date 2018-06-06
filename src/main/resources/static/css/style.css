@@ -49,55 +49,31 @@ html {
 	padding: 10px 0;
 }
 
-/* search */
-.search {
-	padding: 0;
-	margin: 0;
+.header .logo {
+	float: left;
+	font-size: 20px;
+	font-family: monospace;
+}
+
+.header .session-menu {
 	float: right;
-	width: 320px;
 }
 
-.search p {
-	font: bold 11px Arial, Helvetica, sans-serif;
-	color: #959595;
-	padding: 7px;
-	margin: 0;
-	float: left;
+.header .role-name {
+	font-style: italic;
 }
 
-.search form {
-	display: block;
-	padding: 15px 0;
-	margin: 0;
+.header form {
+	display: inline;
 }
 
-.search span {
-	display: block;
-	float: left;
-	background: url(../images/search_bg.gif) left top no-repeat;
-	width: 180px;
-	padding: 0 5px;
-	height: 31px;
-	margin: 0;
-}
-
-.search form .keywords {
-	float: left;
-	border: 0;
-	width: 180px;
-	padding: 7px 0;
-	height: 17px;
+.header button {
+	border: none;
 	background: none;
-	margin: 0;
-	font: normal 14px Arial, Helvetica, sans-serif;
-	color: #9c9c9c;
-	line-height: 17px;
-}
-
-.search form .button {
-	float: left;
-	margin: 0;
-	padding: 0;
+	color: white;
+	text-decoration: underline;
+	cursor: pointer;
+	
 }
 
 /*************main**********/
