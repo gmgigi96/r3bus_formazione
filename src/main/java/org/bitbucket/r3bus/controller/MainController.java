@@ -9,7 +9,6 @@ import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Centro;
 import org.bitbucket.r3bus.service.AllievoService;
-import org.bitbucket.r3bus.service.AttivitaService;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,8 +26,6 @@ public class MainController {
 
 	@Autowired
 	private AllievoService allievoService;
-	@Autowired
-	private AttivitaService attivitaService;
 	@Autowired
 	private CentroService centroService;
 
@@ -106,18 +103,21 @@ public class MainController {
 		allievo.setTelefono("000000");
 		// creazione attivita
 		Attivita attivita = new Attivita("prima attivita", LocalDateTime.now(), LocalDateTime.now().plusHours(10));
-		allievo.prenotaAttivita(attivita);
-		//attivita.prenota(allievo);
+		Attivita attivita2 = new Attivita("seconda attivita", LocalDateTime.now().plusHours(10), LocalDateTime.now().plusHours(11));
+		
 		//creazione centro
 		Centro centro = new Centro();
 		centro.setCapienza(100);
 		centro.setNome("primo Centro");
-		//allievo.prenotaAttivita(attivita);
+		
+		centro = centroService.save(centro);
+		
+		allievoService.save(allievo);
+		allievo.prenotaAttivita(attivita);
 		centro.addAttivita(attivita);
-
-//		allievoService.add(allievo);
-//		attivitaService.add(attivita);
-		centroService.add(centro);
+		centro.addAttivita(attivita2);
+		centroService.flush();
+		
 		return "index";
 	}
 }
