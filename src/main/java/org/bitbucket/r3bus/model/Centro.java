@@ -24,34 +24,34 @@ import lombok.Data;
 @Entity
 public class Centro {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nome;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private int capienza;
-	
-	@OneToMany(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="centro_id")
+
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "centro_id")
 	private final List<Attivita> attivita;
-	
-//	@Autowired
-//	private AttivitaService attivitaService;
+
+	// @Autowired
+	// private AttivitaService attivitaService;
 
 	public Centro() {
 		attivita = new ArrayList<>();
 	}
 
 	public Attivita getAttivita(long codiceAttivita) {
-//		return attivita.get(codiceAttivita);
+		// return attivita.get(codiceAttivita);
 		return null;
 	}
 
 	public void addAttivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
 		Attivita a = new Attivita(nome, inizio, fine);
-//		attivitaService.save(a);
+		// attivitaService.save(a);
 		attivita.add(a);
 	}
 
@@ -71,7 +71,7 @@ public class Centro {
 	public SortedSet<Attivita> getAttivitaInIntervallo(LocalDate inizio, LocalDate fine) {
 		SortedSet<Attivita> attivita = new TreeSet<>();
 
-		this.attivita.forEach(( att) -> {
+		this.attivita.forEach((att) -> {
 			if (att.getOrarioInizio().toLocalDate().compareTo(inizio) >= 0
 					&& att.getOrarioFine().toLocalDate().compareTo(fine) <= 0) {
 				attivita.add(att);
@@ -82,16 +82,15 @@ public class Centro {
 	}
 
 	public long getNumeroAttivita(LocalDate giorno) {
-//		return attivita.values().stream()
-//				.filter((Attivita attivita) -> (attivita.getOrarioInizio().toLocalDate().equals(giorno))).count();
-		return 1;
+		return attivita.stream()
+				.filter((Attivita attivita) -> (attivita.getOrarioInizio().toLocalDate().equals(giorno))).count();
 	}
 
 	// metodi ausiliari per test
 
 	public void addAttivita(Attivita a) {
-//		attivitaService.save(a);
-//		attivita.put(a.getId(), a);
+		// attivitaService.save(a);
+		// attivita.put(a.getId(), a);
 		attivita.add(a);
 	}
 
@@ -123,6 +122,5 @@ public class Centro {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
-	
+
 }
