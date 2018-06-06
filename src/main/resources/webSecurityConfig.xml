@@ -13,7 +13,7 @@
 		<intercept-url pattern="/images/**" access="permitAll" />
 		<intercept-url pattern="/responsabile/**" access="hasAuthority('RESPONSABILE')" />
 		<intercept-url pattern="/direttore/**" access="hasAuthority('DIRETTORE')" />
-		<intercept-url pattern="/orgnizzatore/**" access="hasAuthority('ORGANIZZATORE')" />
+		<intercept-url pattern="/organizzatore/**" access="hasAuthority('ORGANIZZATORE')" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 
 		<form-login login-page="/login"
