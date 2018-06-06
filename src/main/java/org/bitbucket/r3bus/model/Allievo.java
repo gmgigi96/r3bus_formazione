@@ -21,7 +21,7 @@ public class Allievo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long	  id;
-	
+
 	@Column(nullable=false)
 	private String    nome;
 	@Column(nullable=false)
@@ -37,15 +37,19 @@ public class Allievo {
 	@ManyToMany(mappedBy="allieviPrenotati", cascade=CascadeType.PERSIST)
 	private final List<Attivita> attivitaPrenotate;
 
+	public Allievo() {
+		attivitaPrenotate = new LinkedList<>();
+	}
+
 	public Allievo(String nome, String cognome, String email, String telefono, LocalDate dataNascita, String luogoNascita, String codiceFiscale) {
+		this();
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
 		this.telefono = telefono;
 		this.dataNascita = dataNascita;
 		this.luogoNascita = luogoNascita;
-		this.codiceFiscale = codiceFiscale;		
-		attivitaPrenotate = new LinkedList<>();
+		this.codiceFiscale = codiceFiscale;
 	}
 
 	public void prenotaAttivita(Attivita attivita) {
@@ -82,6 +86,4 @@ public class Allievo {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
-	
 }
