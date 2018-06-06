@@ -9,11 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CentroTest {
-	
+
 	private Centro centro;
 	private Attivita a;
 	private LocalDateTime now;
-	
+
 	private Centro centroConZeroAttivita;
 
 	@Before
@@ -22,7 +22,7 @@ public class CentroTest {
 		centro = new Centro();
 
 		a = new Attivita("sample", now, now.plusHours(1));
-		
+
 		centroConZeroAttivita = new Centro();
 	}
 
@@ -35,9 +35,9 @@ public class CentroTest {
 	@Test
 	public void addAttivita_sequence() {
 		centro.addAttivita("sample1", now, now.plusHours(1));
-				
+
 		centro.addAttivita("sample2", now.plusHours(1), now.plusHours(2));
-		
+
 		assertEquals(2, centro.contaAttivita());
 	}
 
