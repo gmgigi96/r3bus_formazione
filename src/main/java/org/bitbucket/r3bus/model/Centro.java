@@ -37,15 +37,11 @@ public class Centro {
 	@JoinColumn(name = "centro_id")
 	private final List<Attivita> attivita;
 
-	// @Autowired
-	// private AttivitaService attivitaService;
-
 	public Centro() {
 		attivita = new ArrayList<>();
 	}
 
 	public Attivita getAttivita(long codiceAttivita) {
-		// return attivita.get(codiceAttivita);
 		return null;
 	}
 
@@ -58,7 +54,7 @@ public class Centro {
 
 	private boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
 		for (Attivita a : this.attivita) {
-			if(a.overlap(inizio, fine)) {
+			if (a.overlap(inizio, fine)) {
 				return true;
 			}
 		}
@@ -99,8 +95,6 @@ public class Centro {
 	// metodi ausiliari per test
 
 	public void addAttivita(Attivita a) {
-		// attivitaService.save(a);
-		// attivita.put(a.getId(), a);
 		attivita.add(a);
 	}
 
