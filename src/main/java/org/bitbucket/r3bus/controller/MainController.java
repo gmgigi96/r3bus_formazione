@@ -115,8 +115,8 @@ public class MainController {
 		//allievo.prenotaAttivita(attivita);
 		centro.addAttivita(attivita);
 
-		allievoService.add(allievo);
-		attivitaService.add(attivita);
+//		allievoService.add(allievo);
+//		attivitaService.add(attivita);
 		centroService.add(centro);
 		return "index";
 	}
