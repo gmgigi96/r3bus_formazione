@@ -34,10 +34,19 @@ html {
 
 /*************header**********/
 
+.header {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 10px;
+	background: #1d1d1d;
+	border-top: 1px solid #111;
+	color: #fff;
+}
+
 .header_resize {
 	width: 945px;
 	margin: 0 auto;
-	padding: 0;
+	padding: 10px 0;
 }
 
 /* search */

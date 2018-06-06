@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head></head>
 <body th:fragment="header">
-	<div class="search">
-		<form id="form1" name="form1" method="post" action="#">
-			<p>Search Site:</p>
-			<label><span> <input name="q" type="text"
-					class="keywords" id="textfield" maxlength="50" value="Search..." />
-			</span> <input name="b" type="image" src="/images/search.gif" class="button" />
-			</label>
-			<div class="clr"></div>
-		</form>
+	<div class="logo">
+		<span class="logo-name">R3busFormazione</span>
+	</div>
+	
+	<div class="session-menu">
+		
 	</div>
 </body>
 </html>
