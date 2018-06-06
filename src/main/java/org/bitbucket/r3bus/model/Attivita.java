@@ -1,8 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,10 +29,10 @@ public class Attivita {
 	private LocalDateTime orarioFine;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	private final Set<Allievo> allieviPrenotati;
+	private final List<Allievo> allieviPrenotati;
 
 	public Attivita() {
-		allieviPrenotati = new HashSet<>();
+		allieviPrenotati = new ArrayList<>();
 	}
 
 	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
