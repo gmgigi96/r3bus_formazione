@@ -1,9 +1,8 @@
 package org.bitbucket.r3bus.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
-import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,24 +25,24 @@ public class CentroTest {
 		centro.addAttivita("sample", now, now.plusHours(1));
 		assertEquals(1, centro.contaAttivita());
 	}
-	
+
 	@Test
 	public void addAttivita_sequence() {
 		centro.addAttivita("sample1", now, now.plusHours(1));
 		centro.addAttivita("sample2", now.plusHours(1), now.plusHours(2));
 		assertEquals(2, centro.contaAttivita());
 	}
-	
+
 	@Test
 	public void addAttivita_overlap() {
 		// TODO
 	}
-	
+
 	@Test
 	public void addAttivita_sameName() {
 		// TODO
 	}
-	
+
 	@Test
 	public void getAttivitaDisponibili_empty() {
 		assertEquals(0, centro.getAttivitaDisponibili().size());

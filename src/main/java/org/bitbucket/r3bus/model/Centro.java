@@ -40,7 +40,7 @@ public class Centro {
 		attivita = new HashMap<>();
 	}
 
-	public Attivita getAttivita(int codiceAttivita) {
+	public Attivita getAttivita(long codiceAttivita) {
 		return attivita.get(codiceAttivita);
 	}
 

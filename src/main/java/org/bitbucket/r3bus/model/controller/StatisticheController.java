@@ -21,8 +21,12 @@ public class StatisticheController {
 	private LocalDate fine;
 	private Centro centro;
 	private Azienda azienda;
+	
+	public StatisticheController(Azienda azienda) {
+		this.azienda = azienda;
+	}
 
-	public void setCentro(int codiceCentro) {
+	public void setCentro(long codiceCentro) {
 		this.centro = this.azienda.getCentro(codiceCentro);
 	}
 
@@ -61,6 +65,12 @@ public class StatisticheController {
 		float mediaPrenotatiGiornaliera = attivita.stream().mapToInt(Attivita::getNumeroAllieviPrenotati).sum()
 				/ (float) attivita.size();
 		return mediaPrenotatiGiornaliera;
+	}
+	
+	//per test
+	
+	public void setCentro(Centro c) {
+		this.centro = c;
 	}
 
 }
