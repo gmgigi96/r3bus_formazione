@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
@@ -71,7 +72,7 @@ public class StatisticheController {
 	 * @return Mappa del numero di attivita giornaliere nell'intervallo specificato
 	 */
 	public Map<LocalDate, Long> getNumeroAttivitaGiornaliere() {
-		Map<LocalDate,Long> res = new HashMap<>();
+		Map<LocalDate,Long> res = new TreeMap<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			res.put(data, centro.getNumeroAttivita(data));
 		}
