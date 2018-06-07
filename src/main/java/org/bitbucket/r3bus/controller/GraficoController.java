@@ -5,9 +5,13 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.bitbucket.r3bus.model.ChartGenerator;
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
@@ -21,7 +25,13 @@ public class GraficoController {
 	
 	@RequestMapping("/grafico")
 	public void plot(HttpServletResponse response ) {
-		JFreeChart chart = null;
+		ChartGenerator chartGenerator = new ChartGenerator();
+		Map<LocalDate, Long> mappa = new HashMap<>();
+		mappa.put(LocalDate.now(), (long) 3);
+		mappa.put(LocalDate.now().plusDays(1), (long) 2);
+		mappa.put(LocalDate.now().plusDays(5), (long) 5);
+
+		JFreeChart chart = chartGenerator.creaGraficoAttivitaGiornaliere(mappa);
 		OutputStream out;
 		
 		try {
