@@ -41,7 +41,9 @@ public class Attivita {
 	}
 
 	public void prenota(Allievo allievo) {
-		allieviPrenotati.add(allievo);
+		if (!this.allieviPrenotati.contains(allievo)) {
+			allieviPrenotati.add(allievo);
+		}		
 	}
 
 	public void annullaPrenotazione(Allievo allievo) {
