@@ -111,6 +111,8 @@ public class StatisticheController {
 	}
 
 	private float mediaAllieviPrenotati(List<Attivita> attivita) {
+		if (attivita.isEmpty())
+			return 0;
 		float mediaPrenotatiGiornaliera = attivita.stream().mapToInt(Attivita::getNumeroAllieviPrenotati).sum()
 				/ (float) attivita.size();
 		return mediaPrenotatiGiornaliera;
