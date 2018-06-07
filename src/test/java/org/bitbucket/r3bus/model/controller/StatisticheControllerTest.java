@@ -96,10 +96,14 @@ public class StatisticheControllerTest {
 		LocalDateTime now = LocalDateTime.now();
 
 		Centro centroConUnAttivita_zeroPartecipanti = new Centro();
-		centroConUnAttivita_zeroPartecipanti.addAttivita("attivitaZeroPartecipanti", now, now.plusHours(1));
+		Attivita attivitaZeroPartecipanti = new Attivita("attivitaZeroPartecipanti", now, now.plusHours(1));
+		centroConUnAttivita_zeroPartecipanti.addAttivita(attivitaZeroPartecipanti);
+		
+		statisticheController1.setCentro(centroConUnAttivita_zeroPartecipanti);
+		statisticheController1.setIntervallo(inizio, fine);
 
 		Map<String, Integer> res = statisticheController1.getElencoAttivita();
-		assertEquals(new Integer(0), res.get("attivitaZeroPartecipanti"));
+		assertEquals(new Integer(0), res.get(attivitaZeroPartecipanti.toString()));
 		assertEquals(1, res.values().size());
 	}
 
