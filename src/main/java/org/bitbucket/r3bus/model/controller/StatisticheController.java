@@ -1,11 +1,11 @@
 package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
@@ -84,7 +84,7 @@ public class StatisticheController {
 	 * @return Mappa attivita/numero allievi prenotati
 	 */
 	public Map<String, Integer> getElencoAttivita() {
-		Map<String, Integer> attivita2prenotati = new TreeMap<>();
+		Map<String, Integer> attivita2prenotati = new HashMap<>();
 		for (Attivita a : centro.getAttivitaInIntervallo(inizio, fine)) {
 			attivita2prenotati.put(a.toString(), a.getNumeroAllieviPrenotati());
 		}
