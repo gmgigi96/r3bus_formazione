@@ -4,13 +4,13 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{fragments/layout}">
 <head>
-<title th:text="#{pages.activity_list.title}">Activity List</title>
+<title th:text="#{|pages.${pageId}.title|}">Activity List</title>
 </head>
 <body>
 	<div layout:fragment="content">
 		<div id="slider2">
 			<div class="controls-center">
-				<h3 th:text="#{pages.activity_list.headline}">Activity List</h3>
+				<h3 th:text="#{|pages.${pageId}.headline|}">Activity List</h3>
 			</div>
 		</div>
 		<div class="activity-list">
@@ -34,13 +34,15 @@
 							<td th:text="*{{orarioInizio}}">2018-06-06 12:00</td>
 							<td th:text="*{{orarioFine}}">2018-06-06 14:00</td>
 							<td th:if="${editActivity}">
-								<a th:href="@{'attivita/'+${activity.id}+'/modifica'}">Modify</a>
+								<a th:href="@{'attivita/'+${activity.id}+'/modifica'}"
+									th:text="#{activity.edit}">Modify</a>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="activity-actions" th:if="${multiSelect}">
-					<button type="submit" name="select">Send Selection</button>
+					<button type="submit" name="select"
+						th:text="#{|pages.${pageId}.send_selection|}">Send Selection</button>
 				</div>
 			</form>
 		</div>

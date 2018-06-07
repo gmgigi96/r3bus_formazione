@@ -47,6 +47,7 @@ public class OrganizzatoreController {
 		model.addAttribute("activityList", ls);
 		// model.addAttribute("multiSelect", true);
 		model.addAttribute("editActivity", true);
+		model.addAttribute("pageId", "managed_activities");
 		return "activity_list";
 	}
 
