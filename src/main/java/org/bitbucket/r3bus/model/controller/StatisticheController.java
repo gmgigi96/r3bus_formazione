@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
@@ -104,14 +103,14 @@ public class StatisticheController {
 	public List<Float> getMediaPrenotati() {
 		List<Float> res = new LinkedList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
-			Set<Attivita> attivita = centro.getAttivitaInIntervallo(data, data);
+			List<Attivita> attivita = centro.getAttivitaInIntervallo(data, data);
 			float mediaPrenotatiGiornaliera = mediaAllieviPrenotati(attivita);
 			res.add(mediaPrenotatiGiornaliera / centro.getCapienza());
 		}
 		return res;
 	}
 
-	private float mediaAllieviPrenotati(Set<Attivita> attivita) {
+	private float mediaAllieviPrenotati(List<Attivita> attivita) {
 		float mediaPrenotatiGiornaliera = attivita.stream().mapToInt(Attivita::getNumeroAllieviPrenotati).sum()
 				/ (float) attivita.size();
 		return mediaPrenotatiGiornaliera;
