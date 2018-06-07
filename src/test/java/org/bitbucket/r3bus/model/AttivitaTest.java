@@ -64,7 +64,14 @@ public class AttivitaTest {
 
 	@Test
 	public void testAggiornaParametri() {
-		fail("Not yet implemented");
+		LocalDateTime nuovoInizio = LocalDateTime.now();
+		LocalDateTime nuovaFine = nuovoInizio.plusHours(3);
+		String nuovoNome = "nuovoNome";
+		
+		attivitaConZeroPrenotati.aggiornaParametri(nuovoNome, nuovoInizio, nuovaFine);
+		assertEquals(nuovoNome, attivitaConZeroPrenotati.getNome());
+		assertEquals(nuovoInizio, attivitaConZeroPrenotati.getOrarioInizio());
+		assertEquals(nuovaFine, attivitaConZeroPrenotati.getOrarioFine());
 	}
 
 	@Test
