@@ -55,7 +55,8 @@ public class OrganizzatoreController {
 
 	@GetMapping("/organizzatore/{centroID}/attivita/inserisci")
 	public String nuovaAttivitaForm(@PathVariable("centroID") Long centroID, ModelMap model) {
-		model.addAttribute("activity", new Attivita()); // TOFIX
+		model.addAttribute("pageID", "new_activity");
+		model.addAttribute("activity", new Attivita()); // TODEL
 		return "activity_form";
 	}
 
@@ -75,6 +76,7 @@ public class OrganizzatoreController {
 	public String modificaAttivitaForm(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
 			ModelMap model) {
 		// find activity and bind to model
+		model.addAttribute("pageID", "edit_activity");
 		model.addAttribute("activity", new Attivita()); // TODEL
 		return "activity_form";
 	}

@@ -4,14 +4,14 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{fragments/layout}">
 <head>
-<title th:text="#{pages.activity_form.title}">New/Modify Activity</title>
+<title th:text="#{|pages.${pageID}.title|}">New/Modify Activity</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
 </head>
 <body>
 	<div layout:fragment="content">
 		<div id="slider2">
 			<div class="controls-center">
-				<h3 th:text="#{pages.activity_form.headline}">Activity Data</h3>
+				<h3 th:text="#{|pages.${pageID}.headline|}">Activity Data</h3>
 			</div>
 		</div>
 		<form th:action="@{''}" method="post" th:object="${activity}" class="user-form">
@@ -32,7 +32,7 @@
 					<input th:field="*{orarioFine}" class="text" th:errorclass="invalid" type="datetime-local" required />
 				</li>
 				<li class="buttons">
-					<button type="submit" th:text="#{pages.activity_form.save}">Login</button>
+					<button type="submit" th:text="#{|pages.${pageID}.save|}">Save</button>
 				</li>
 			</ul>
 		</form>
