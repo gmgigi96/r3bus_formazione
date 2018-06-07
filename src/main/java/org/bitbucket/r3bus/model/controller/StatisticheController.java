@@ -9,6 +9,7 @@ import java.util.Map;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
+import org.bitbucket.r3bus.model.ChartGenerator;
 import org.bitbucket.r3bus.utils.LocalDateRange;
 
 /**
@@ -23,6 +24,7 @@ public class StatisticheController {
 	private LocalDate fine;
 	private Centro centro;
 	private Azienda azienda;
+	private ChartGenerator chartGenerator;
 
 	/**
 	 * Crea una classe capace di generare statistiche dei centri dell'azienda data
@@ -52,6 +54,10 @@ public class StatisticheController {
 	public void setIntervallo(LocalDate inizio, LocalDate fine) {
 		this.inizio = inizio;
 		this.fine = fine;
+	}
+	
+	public void creaGraficoAttivitaGiornaliere() {
+		chartGenerator.creaGraficoAttivitaGiornaliere(getNumeroAttivitaGiornaliere());
 	}
 
 	/**
