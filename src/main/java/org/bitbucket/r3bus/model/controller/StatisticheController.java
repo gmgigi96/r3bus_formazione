@@ -62,12 +62,12 @@ public class StatisticheController {
 	 * @see #setCentro(long)
 	 * @see #setIntervallo(LocalDate, LocalDate)
 	 * 
-	 * @return Lista del numero di attivita giornaliere nell'intervallo specificato
+	 * @return Mappa del numero di attivita giornaliere nell'intervallo specificato
 	 */
-	public List<Long> getNumeroAttivitaGiornaliere() {
-		List<Long> res = new LinkedList<>();
+	public Map<LocalDate, Long> getNumeroAttivitaGiornaliere() {
+		Map<LocalDate,Long> res = new HashMap<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
-			res.add(centro.getNumeroAttivita(data));
+			res.put(data, centro.getNumeroAttivita(data));
 		}
 		return res;
 	}
