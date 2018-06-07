@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title th:text="#{|pages.${pageId}.title|}">Activity List</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div id="slider2">
+			<div class="controls-center">
+				<h3 th:text="#{|pages.${pageId}.headline|}">Activity List</h3>
+			</div>
+		</div>
+		<div class="activity-list">
+			<form th:action="${actionUrl}" method="post">
+				<table>
+					<thead>
+						<tr>
+							<td th:if="${multiSelect}"></td>
+							<td th:text="#{activity.name}">Name</td>
+							<td th:text="#{activity.begin_time}">Begin</td>
+							<td th:text="#{activity.end_time}">End</td>
+							<td th:if="${editActivity}"></td>
+						<tr>
+					</thead>
+					<tbody>
+						<tr th:each="activity : ${activityList}" th:object="${activity}">
+							<td th:if="${multiSelect}">
+								<input type="checkbox" name="selection" th:value="*{id}"/>
+							</td>
+							<td th:text="*{nome}">Activity 1</td>
+							<td th:text="*{{orarioInizio}}">2018-06-06 12:00</td>
+							<td th:text="*{{orarioFine}}">2018-06-06 14:00</td>
+							<td th:if="${editActivity}">
+								<a th:href="@{'attivita/'+${activity.id}+'/modifica'}"
+									th:text="#{activity.edit}">Modify</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="activity-actions" th:if="${multiSelect}">
+					<button type="submit" name="select"
+						th:text="#{|pages.${pageId}.send_selection|}">Send Selection</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

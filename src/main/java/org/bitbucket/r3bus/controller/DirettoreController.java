@@ -1,7 +1,11 @@
 package org.bitbucket.r3bus.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +31,12 @@ public class DirettoreController {
 	// mostra statistiche
 	
 	@GetMapping("/direttore/{id}/statistiche")
-	public String statistics(@PathVariable("id") Long id) {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+	public String statistics(@PathVariable("id") Long id, ModelMap model) {
+		Map<String,Integer> mp = new HashMap<>();
+		mp.put("Esercitazione", 23);
+		mp.put("Sicurezza sul lavoro", 12);
+		mp.put("Spring MVC", 34);
+		model.addAttribute("activityMap", mp);
+		return "stats";
 	}
 }

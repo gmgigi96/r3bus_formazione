@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head></head>
 <body th:fragment="sidebar">
 	<nav class="menu">
 		<ul>
 			<!-- TODO: add .active dynamically to current page -->
-			<li><a th:href="@{/}">Home</a></li>
-			<li><a th:href="@{/portfolio}">Portfolio</a></li>
-			<li><a th:href="@{/about}">About</a></li>
+			<th:block sec:authorize="hasAuthority('RESPONSABILE')">
+				<li>
+					<a th:href="@{/responsabile/allievo}"
+						th:text="#{pages.manage_learner.title}">Manage Learner</a>
+				</li>
+				<li>
+					<a th:href="@{/responsabile/allievo/termina-gestione}"
+						th:text="#{pages.end_learner_management.title}">End Learner Management</a>
+				</li>
+				<li>
+					<a th:href="@{/responsabile/allievo/inserisci}"
+						th:text="#{pages.new_learner.title}">New Learner</a>
+				</li>
+				<li>
+					<a th:href="@{/responsabile/allievo/rimuovi}"
+						th:text="#{pages.remove_learner.title}">Remove Learner</a>
+				</li>
+				<li>
+					<a th:href="@{/responsabile/allievo/attivita}"
+						th:text="#{pages.booked_activities.title}">Booked Activities</a>
+				</li>
+				<li>
+					<a th:href="@{/responsabile/attivita}"
+						th:text="#{pages.available_activities.title}">Available Activities</a>
+				</li>
+			</th:block>
+			<th:block sec:authorize="hasAuthority('DIRETTORE')">
+				<li>
+					<a th:href="@{/direttore}"
+						th:text="#{pages.select_center.title}">Select Center</a>
+				</li>
+			</th:block>
+			<th:block sec:authorize="hasAuthority('ORGANIZZATORE')">
+				<li>
+					<a th:href="@{/organizzatore}"
+						th:text="#{pages.select_center.title}">Select Center</a>
+				</li>
+			</th:block>
 		</ul>
 	</nav>
 </body>

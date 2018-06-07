@@ -1,8 +1,13 @@
 package org.bitbucket.r3bus.controller;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Allievo;
+import org.bitbucket.r3bus.model.Attivita;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -74,8 +79,17 @@ public class ResponsabileController {
 	// lista attivita prenotabili
 	
 	@GetMapping("/responsabile/attivita")
-	public String attivitaDisponibili() {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+	public String attivitaDisponibili(ModelMap model) {
+		model.addAttribute("multiSelect", true);
+		model.addAttribute("pageId", "available_activities");
+		List<Attivita> ls = new ArrayList<>(3);
+		LocalDateTime n = LocalDateTime.now();
+		int h = 0;
+		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
+		model.addAttribute("activityList", ls);
+		return "activity_list";
 	}
 	
 	// prenota attivita
