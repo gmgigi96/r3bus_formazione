@@ -29,6 +29,7 @@ public class StatisticheControllerTest {
 	public void setUp() throws Exception {
 		azienda = new Azienda();
 		centroConZeroAttivita = new Centro();
+		centroConZeroAttivita.setCapienza(1);
 		centroConUnAttivita = new Centro();
 		centroConDueAttivitaStessoGiorno = new Centro();
 		azienda.addCentro(centroConUnAttivita);
@@ -119,7 +120,7 @@ public class StatisticheControllerTest {
 		statisticheController1.setIntervallo(inizio, fine);
 
 		Map<String, Integer> res = statisticheController1.getElencoAttivita();
-		assertEquals(new Integer(1), res.get("attivitaConUnPartecipante"));
+		assertEquals(new Integer(1), res.get(attivitaConUnPartecipante.toString()));
 		assertEquals(1, res.values().size());
 	}
 
@@ -159,6 +160,7 @@ public class StatisticheControllerTest {
 		LocalDateTime fine = inizio.plusHours(3);
 
 		Centro centroConUnAttivita_zeroPartecipanti = new Centro();
+		centroConUnAttivita_zeroPartecipanti.setCapienza(1);
 		centroConUnAttivita_zeroPartecipanti.addAttivita("attivitaConZeroPartecipanti", inizio, fine);
 
 		statisticheController1.setCentro(centroConUnAttivita_zeroPartecipanti);
@@ -178,6 +180,7 @@ public class StatisticheControllerTest {
 		LocalDateTime fine = inizio.plusHours(3);
 
 		Centro centroConUnAttivita_unPartecipante = new Centro();
+		centroConUnAttivita_unPartecipante.setCapienza(1);
 		Attivita attivitaConUnPartecipante = new Attivita("attivitaConUnPartecipante", inizio, fine);
 		attivitaConUnPartecipante.prenota(new Allievo());
 		centroConUnAttivita_unPartecipante.addAttivita(attivitaConUnPartecipante);
