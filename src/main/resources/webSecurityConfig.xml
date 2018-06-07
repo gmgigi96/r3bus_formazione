@@ -6,6 +6,7 @@
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http use-expressions="true">
+		<intercept-url pattern="/favicon.ico" access="permitAll" />
 		<intercept-url pattern="/login*" access="permitAll" />
 		<intercept-url pattern="/error" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
