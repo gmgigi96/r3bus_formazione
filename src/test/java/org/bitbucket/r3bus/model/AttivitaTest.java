@@ -1,7 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,13 +76,56 @@ public class AttivitaTest {
 	}
 
 	@Test
-	public void testGetNumeroAllieviPrenotati() {
-		fail("Not yet implemented");
+	public void testOverlap_inizioInMezzoAdOrariAttivita_fineDopoFineAttivita() {
+		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
+		Attivita attivita = new Attivita("nome", time, time.plusHours(3));
+		assertTrue(attivita.overlap(time.plusHours(1), time.plusHours(4)));
 	}
-
+	
 	@Test
-	public void testOverlap() {
-		fail("Not yet implemented");
+	public void testOverlap_inizioInMezzoAdOrariAttivita_fineInMezzoAdOrariAttivita() {
+		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
+		Attivita attivita = new Attivita("nome", time, time.plusHours(3));
+		assertTrue(attivita.overlap(time.plusHours(1), time.plusHours(2)));
+	}
+	
+	@Test
+	public void testOverlap_fineInMezzoAdOrariAttivita_inizioPrimaInizioAttivita() {
+		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
+		Attivita attivita = new Attivita("nome", time, time.plusHours(3));
+		assertTrue(attivita.overlap(time.minusHours(1), time.plusHours(2)));
+	}
+	
+	@Test
+	public void testOverlap_stessiOrari() {
+		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
+		LocalDateTime fine = time.plusHours(3);
+		Attivita attivita = new Attivita("nome", time, fine);
+		assertTrue(attivita.overlap(time, fine));
+	}
+	
+	@Test
+	public void testOverlap_inizioUgualeFineAttivita() {
+		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
+		LocalDateTime fine = time.plusHours(3);
+		Attivita attivita = new Attivita("nome", time, fine);
+		assertFalse(attivita.overlap(fine, fine.plusHours(3)));
+	}
+	
+	@Test
+	public void testOverlap_inizioUgualeInizioAttivita_fineInMezzoAdOrariAttivita() {
+		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
+		LocalDateTime fine = time.plusHours(3);
+		Attivita attivita = new Attivita("nome", time, fine);
+		assertTrue(attivita.overlap(time, fine.minusHours(1)));
+	}
+	
+	@Test
+	public void testOverlap_inizioInMezzoAdOrariAttivita_fineUgualeFineAttivita() {
+		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
+		LocalDateTime fine = time.plusHours(3);
+		Attivita attivita = new Attivita("nome", time, fine);
+		assertTrue(attivita.overlap(time.plusHours(1), fine));
 	}
 
 }
