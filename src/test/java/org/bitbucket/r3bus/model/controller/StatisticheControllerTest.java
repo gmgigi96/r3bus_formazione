@@ -1,11 +1,16 @@
 package org.bitbucket.r3bus.model.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
+import org.bitbucket.r3bus.model.Allievo;
+import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
 import org.junit.Before;
@@ -14,6 +19,7 @@ import org.junit.Test;
 public class StatisticheControllerTest {
 
 	private Azienda azienda;
+	private Centro centroConZeroAttivita;
 	private Centro centroConUnAttivita;
 	private Centro centroConDueAttivitaStessoGiorno;
 	private LocalDateTime now = LocalDateTime.now();
@@ -22,13 +28,14 @@ public class StatisticheControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		azienda = new Azienda();
+		centroConZeroAttivita = new Centro();
 		centroConUnAttivita = new Centro();
 		centroConDueAttivitaStessoGiorno = new Centro();
 		azienda.addCentro(centroConUnAttivita);
 
 		centroConUnAttivita.addAttivita("attivita1", now, now.plusHours(3));
 
-		centroConDueAttivitaStessoGiorno.addAttivita("attivita2", now, now.plusHours(3));
+		centroConDueAttivitaStessoGiorno.addAttivita("attivita1", now, now.plusHours(3));
 		centroConDueAttivitaStessoGiorno.addAttivita("attivita2", now.plusHours(4), now.plusHours(7));
 
 		statisticheController1 = new StatisticheController(azienda);
@@ -70,8 +77,65 @@ public class StatisticheControllerTest {
 	}
 
 	@Test
-	public void testGetElencoAttivita() {
-		fail("Not yet implemented");
+	public void testGetElencoAttivita_centroConNessunaAttivita() {
+		LocalDate inizio = LocalDate.MIN;
+		LocalDate fine = LocalDate.MAX;
+		
+		statisticheController1.setCentro(centroConZeroAttivita);
+		statisticheController1.setIntervallo(inizio, fine);
+		
+		assertTrue(statisticheController1.getElencoAttivita().isEmpty());
+	}
+	
+	@Test
+	public void testGetElencoAttivita_centroConUnaAttivita_zeroPartecipanti() {
+		LocalDate inizio = LocalDate.MIN;
+		LocalDate fine = LocalDate.MAX;
+		
+		LocalDateTime now = LocalDateTime.now();
+		
+		Centro centroConUnAttivita_zeroPartecipanti = new Centro();
+		centroConUnAttivita_zeroPartecipanti.addAttivita("attivitaZeroPartecipanti", now, now.plusHours(1));
+		
+		Map<String, Integer> res = statisticheController1.getElencoAttivita();
+		assertEquals(new Integer(0), res.get("attivitaZeroPartecipanti"));
+		assertEquals(1, res.values().size());
+	}
+	
+	@Test
+	public void testGetElencoAttivita_centroConUnaAttivita_unPartecipante() {
+		LocalDate inizio = LocalDate.MIN;
+		LocalDate fine = LocalDate.MAX;
+		
+		LocalDateTime now = LocalDateTime.now();
+		
+		Centro centroConUnAttivita_unPartecipante = new Centro();
+		Attivita attivitaConUnPartecipante = new Attivita("attivitaConUnPartecipante", now, now.plusHours(3));
+		attivitaConUnPartecipante.prenota(new Allievo());
+		
+		centroConUnAttivita_unPartecipante.addAttivita(attivitaConUnPartecipante);
+		
+		statisticheController1.setCentro(centroConUnAttivita_unPartecipante);
+		statisticheController1.setIntervallo(inizio, fine);
+		
+		Map<String, Integer> res = statisticheController1.getElencoAttivita();
+		assertEquals(new Integer(1), res.get("attivitaConUnPartecipante"));
+		assertEquals(1, res.values().size());
+	}
+	
+	@Test
+	public void testGetElencoAttivita_centroConUnaAttivita_zeroPartecipanti_intervalloNonComprendenteAttivita() {
+		LocalDateTime t = LocalDateTime.of(2018, 10, 10, 10, 0);		
+		
+		Centro centroConUnAttivita_zeroPartecipanti = new Centro();
+		Attivita attivitaConZeroPartecipanti = new Attivita("attivitaConZeroPartecipanti", t, t.plusHours(3));
+		
+		centroConUnAttivita_zeroPartecipanti.addAttivita(attivitaConZeroPartecipanti);
+		
+		statisticheController1.setCentro(centroConUnAttivita_zeroPartecipanti);
+		statisticheController1.setIntervallo(t.toLocalDate().minusDays(10), t.toLocalDate().minusDays(1));
+		
+		assertTrue(statisticheController1.getElencoAttivita().isEmpty());
 	}
 
 	@Test
