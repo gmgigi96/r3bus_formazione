@@ -51,8 +51,15 @@ public class AttivitaTest {
 	}
 
 	@Test
-	public void testAnnullaPrenotazione() {
-		fail("Not yet implemented");
+	public void testAnnullaPrenotazione_utentePrenotato() {
+		attivitaConUnPrenotato.annullaPrenotazione(allievoInserito);
+		assertEquals(0, attivitaConUnPrenotato.getNumeroAllieviPrenotati());
+	}
+	
+	@Test
+	public void testAnnullaPrenotazione_utenteNonPrenotato() {
+		attivitaConUnPrenotato.annullaPrenotazione(allievoNonAncoraInserito);
+		assertEquals(1, attivitaConUnPrenotato.getNumeroAllieviPrenotati());
 	}
 
 	@Test
