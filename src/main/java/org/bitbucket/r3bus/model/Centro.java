@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -111,8 +111,8 @@ public class Centro {
 	 * @param fine
 	 * @return Un insieme di attività in un dato intervallo
 	 */
-	public SortedSet<Attivita> getAttivitaInIntervallo(LocalDate inizio, LocalDate fine) {
-		SortedSet<Attivita> attivita = new TreeSet<>();
+	public List<Attivita> getAttivitaInIntervallo(LocalDate inizio, LocalDate fine) {
+		List<Attivita> attivita = new LinkedList<>();
 
 		this.attivita.forEach((att) -> {
 			if (att.getOrarioInizio().toLocalDate().compareTo(inizio) >= 0
