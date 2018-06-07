@@ -7,9 +7,17 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.bitbucket.r3bus.repository.AttivitaRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
+@DataJpaTest
 public class AttivitaTest {
 
 	private Attivita attivitaConZeroPrenotati;
@@ -17,6 +25,12 @@ public class AttivitaTest {
 	private LocalDateTime time;
 	private Allievo allievoInserito;
 	private Allievo allievoNonAncoraInserito;
+	
+	@Autowired
+	private TestEntityManager entityManager;
+
+	@Autowired
+	private AttivitaRepository attivitaRepository;
 
 	@Before
 	public void setUp() throws Exception {
@@ -30,6 +44,12 @@ public class AttivitaTest {
 		
 		attivitaConUnPrenotato = new Attivita("attivitaConUnprenotato", time, time.plusHours(3));
 		attivitaConUnPrenotato.prenota(allievoInserito);
+		
+		entityManager.clear();
+		
+		entityManager.persist(attivitaConZeroPrenotati);
+		entityManager.persist(attivitaConUnPrenotato);
+		entityManager.flush();
 	}
 
 	@Test
@@ -42,13 +62,13 @@ public class AttivitaTest {
 	@Test
 	public void testPrenota_unAllievoPrenotato_prenotazioneAllievoDiverso() {
 		attivitaConUnPrenotato.prenota(allievoNonAncoraInserito);
-		assertEquals(2, attivitaConZeroPrenotati.getNumeroAllieviPrenotati());
+		assertEquals(2, attivitaConUnPrenotato.getNumeroAllieviPrenotati());
 	}
 	
 	@Test
 	public void testPrenota_unAllievoPrenotato_prenotazioneStessoAllievo() {
 		attivitaConUnPrenotato.prenota(allievoInserito);
-		assertEquals(0, attivitaConZeroPrenotati.getNumeroAllieviPrenotati());
+		assertEquals(1, attivitaConUnPrenotato.getNumeroAllieviPrenotati());
 	}
 
 	@Test
@@ -85,8 +105,9 @@ public class AttivitaTest {
 	@Test
 	public void testOverlap_inizioInMezzoAdOrariAttivita_fineInMezzoAdOrariAttivita() {
 		LocalDateTime time = LocalDateTime.of(2018, 10, 10, 10, 10);
-		Attivita attivita = new Attivita("nome", time, time.plusHours(3));
-		assertTrue(attivita.overlap(time.plusHours(1), time.plusHours(2)));
+		LocalDateTime fine = time.plusHours(3);
+		Attivita attivita = new Attivita("nome", time, fine);
+		assertTrue(attivita.overlap(time.plusHours(1), fine.minusHours(2)));
 	}
 	
 	@Test
