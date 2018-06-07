@@ -1,30 +1,53 @@
 package org.bitbucket.r3bus.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class AttivitaTest {
-	
+
 	private Attivita attivitaConZeroPrenotati;
+	private Attivita attivitaConUnPrenotato;
 	private LocalDateTime time;
-	private Allievo allievo1;
-	private Allievo allievo2;
-	
+	private Allievo allievoInserito;
+	private Allievo allievoNonAncoraInserito;
+
 	@Before
 	public void setUp() throws Exception {
 		time = LocalDateTime.of(2018, 10, 10, 10, 0);
 		attivitaConZeroPrenotati = new Attivita("attivitaConZeroPrenotati", time, time.plusHours(3));
+
+		allievoInserito = new Allievo("mario", "rossi", "mario.rossi@bianco.verde", "0123456789", LocalDate.of(1985, 10, 10),
+				"Colorandia", "cf1");
+		allievoNonAncoraInserito = new Allievo("paolo", "rossi", "paolo.rossi@bianco.verde", "0321456789", LocalDate.of(1975, 9, 5),
+				"Colorandia", "cf2");
 		
-		//allievo1 = new Allievo();
+		attivitaConUnPrenotato = new Attivita("attivitaConUnprenotato", time, time.plusHours(3));
+		attivitaConUnPrenotato.prenota(allievoInserito);
 	}
 
 	@Test
-	public void testPrenota() {
-		
+	public void testPrenota_nessunAllievoPrenotato() {
+		assertEquals(0, attivitaConZeroPrenotati.getNumeroAllieviPrenotati());
+		attivitaConZeroPrenotati.prenota(allievoInserito);
+		assertEquals(1, attivitaConZeroPrenotati.getNumeroAllieviPrenotati());
+	}
+	
+	@Test
+	public void testPrenota_unAllievoPrenotato_prenotazioneAllievoDiverso() {
+		attivitaConUnPrenotato.prenota(allievoNonAncoraInserito);
+		assertEquals(2, attivitaConZeroPrenotati.getNumeroAllieviPrenotati());
+	}
+	
+	@Test
+	public void testPrenota_unAllievoPrenotato_prenotazioneStessoAllievo() {
+		attivitaConUnPrenotato.prenota(allievoInserito);
+		assertEquals(0, attivitaConZeroPrenotati.getNumeroAllieviPrenotati());
 	}
 
 	@Test
