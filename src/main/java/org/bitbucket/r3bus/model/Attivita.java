@@ -84,7 +84,9 @@ public class Attivita {
 	}
 
 	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
-		return (isBetween(this.getOrarioInizio(), inizio, fine) || isBetween(this.getOrarioFine(), inizio, fine))
+		return (isBetween(this.getOrarioInizio(), inizio, fine) || isBetween(this.getOrarioFine(), inizio, fine)
+				|| isBetween(inizio, this.getOrarioInizio(), this.getOrarioFine())
+				|| isBetween(fine, this.getOrarioInizio(), this.getOrarioFine()))
 				&& !this.getOrarioInizio().equals(fine) && !this.getOrarioFine().equals(inizio);
 	}
 
