@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/html"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fragments/layout}">
+	layout:decorate="~{fragments/layout}"
+	th:with="headline=#{pages.error.headline}">
 <head>
 <title th:text="|${status} ${error}|">Error</title>
 </head>
 <body>
 	<div layout:fragment="content">
-		<h1 th:text="#{pages.error.headline}">Whoopsie!</h1>
 		<p><b>[[${path}]]</b> <i>[[${error}]]</i></p>
 	</div>
 </body>

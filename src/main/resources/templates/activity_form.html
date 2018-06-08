@@ -2,17 +2,13 @@
 <html xmlns="http://www.w3.org/1999/html"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fragments/layout}">
+	layout:decorate="~{fragments/layout}"
+	th:with="headline=#{|pages.${pageID}.headline|}">
 <head>
 <title th:text="#{|pages.${pageID}.title|}">New/Modify Activity</title>
 </head>
 <body>
 	<div layout:fragment="content">
-		<div id="slider2">
-			<div class="controls-center">
-				<h3 th:text="#{|pages.${pageID}.headline|}">Activity Data</h3>
-			</div>
-		</div>
 		<form th:action="@{''}" method="post" th:object="${activity}" class="user-form">
 			<ul th:if="${#fields.hasAnyErrors()}" class="error-list">
 				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">Field Error</li>
