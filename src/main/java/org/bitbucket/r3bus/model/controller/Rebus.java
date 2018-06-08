@@ -49,9 +49,9 @@ public class Rebus {
 		c.addAttivita(nome, inizio, fine);
 	}
 
-	// TOFIX: il "centroGestito" non ha nulla a che vedere con questo caso d'uso
-	public void modificaAttivita(int codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
-		Attivita a = centroGestito.getAttivita(codiceAttivita);
+	public void modificaAttivita(int codiceCentro, int codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
+		Centro c = azienda.getCentro(codiceCentro);
+		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);
 	}
 
