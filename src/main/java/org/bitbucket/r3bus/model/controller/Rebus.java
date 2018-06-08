@@ -8,14 +8,14 @@ import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
 import org.jfree.chart.JFreeChart;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import lombok.Data;
 
 @Data
 @Component
-//@Scope("session")
+@SessionScope
 public class Rebus {
 
 	private Allievo allievoCorrente;
