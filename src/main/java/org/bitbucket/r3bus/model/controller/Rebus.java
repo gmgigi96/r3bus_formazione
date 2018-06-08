@@ -15,14 +15,19 @@ import lombok.Data;
 
 @Data
 @Component
-@Scope("session")
+//@Scope("session")
 public class Rebus {
 
 	private Allievo allievoCorrente;
-	private Azienda azienda;
+	private Azienda azienda = new Azienda();
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
 
+	public Rebus() {
+		azienda = new Azienda();
+		statisticheController = new StatisticheController(azienda);
+	}
+	
 	// gestione allievo
 
 	public void gestisciAllievo(String codiceFiscale) {
@@ -63,11 +68,13 @@ public class Rebus {
 
 	public JFreeChart creaGraficoAttivitaGiornaliere(LocalDate inizio, LocalDate fine) {
 		this.statisticheController.setIntervallo(inizio, fine);
+		this.statisticheController.setCentro(this.centroGestito);
 		return this.statisticheController.creaGraficoAttivitaGiornaliere();
 	}
 
 	public JFreeChart creaGraficoPrenotazioniGiornaliere(LocalDate inizio, LocalDate fine) {
 		this.statisticheController.setIntervallo(inizio, fine);
+		this.statisticheController.setCentro(this.centroGestito);
 		return this.statisticheController.creaGraficoPrenotazioniGiornaliere();
 	}
 
