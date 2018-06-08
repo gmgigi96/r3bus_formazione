@@ -3,10 +3,12 @@ package org.bitbucket.r3bus.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.bitbucket.r3bus.model.controller.Rebus;
+import org.bitbucket.r3bus.utils.ChartGenerator;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +24,19 @@ public class GraficoController {
 	@Autowired
 	Rebus rebus;
 	
+	@Autowired
+	ChartGenerator chartGenerator;
+	
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/attivita_giornaliere.png")
 	public void graficoAttivitaGiornaliere(@PathVariable("centro") int codiceCentro, 
 											@PathVariable("mese")  @DateTimeFormat(iso = ISO.DATE) LocalDate mese,
 												HttpServletResponse response ) {
 		LocalDate inizio = mese.withDayOfMonth(1);
 		LocalDate fine = mese.withDayOfMonth(mese.lengthOfMonth());
-		rebus.setCentroGestito(codiceCentro);
 		
-		JFreeChart chart = rebus.creaGraficoAttivitaGiornaliere(inizio, fine);
-
+		List<Number> lista = this.rebus.getNumeroAttivitaGiornaliere(codiceCentro, inizio, fine);
+		
+		JFreeChart chart = chartGenerator.creaGrafico(lista, inizio, fine, 0, 20);
 		creaImmagineGrafico(response, chart);
 	}
 
@@ -41,10 +46,10 @@ public class GraficoController {
 													HttpServletResponse response ) {
 		LocalDate inizio = mese.withDayOfMonth(1);
 		LocalDate fine = mese.withDayOfMonth(mese.lengthOfMonth());
-		rebus.setCentroGestito(codiceCentro);
 		
-		JFreeChart chart = rebus.creaGraficoPrenotazioniGiornaliere(inizio, fine);
-
+		List<Number> lista = this.rebus.getMediaPrenotati(codiceCentro, inizio, fine);
+		
+		JFreeChart chart = chartGenerator.creaGrafico(lista, inizio, fine, 0, 1);
 		creaImmagineGrafico(response, chart);
 	}
 
