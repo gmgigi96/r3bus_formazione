@@ -6,11 +6,12 @@ import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.bitbucket.r3bus.model.Centro;
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,9 @@ public class GraficoController {
 	Rebus rebus;
 	
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/attivita_giornaliere.png")
-	public void graficoAttivitaGiornaliere(@PathVariable("centro") int codiceCentro, @PathVariable("mese") LocalDate mese, HttpServletResponse response ) {
+	public void graficoAttivitaGiornaliere(@PathVariable("centro") int codiceCentro, 
+											@PathVariable("mese")  @DateTimeFormat(iso = ISO.DATE) LocalDate mese,
+												HttpServletResponse response ) {
 		LocalDate inizio = mese.withDayOfMonth(1);
 		LocalDate fine = mese.withDayOfMonth(mese.lengthOfMonth());
 		rebus.setCentroGestito(codiceCentro);
@@ -33,7 +36,9 @@ public class GraficoController {
 	}
 
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/prenotazioni_giornaliere.png")
-	public void graficoPrenotazioniGiornaliere(@PathVariable("centro") int codiceCentro, @PathVariable("mese") LocalDate mese, HttpServletResponse response ) {
+	public void graficoPrenotazioniGiornaliere(@PathVariable("centro") int codiceCentro,
+												@PathVariable("mese") @DateTimeFormat(iso = ISO.DATE) LocalDate mese,
+													HttpServletResponse response ) {
 		LocalDate inizio = mese.withDayOfMonth(1);
 		LocalDate fine = mese.withDayOfMonth(mese.lengthOfMonth());
 		rebus.setCentroGestito(codiceCentro);
