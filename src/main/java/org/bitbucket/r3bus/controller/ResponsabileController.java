@@ -8,14 +8,12 @@ import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.HttpClientErrorException;
 
 @Controller
 public class ResponsabileController {
@@ -29,7 +27,7 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/allievo")
 	public String gestisciAllievoForm() {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+		return "manage_learner";
 	}
 
 	@PostMapping("/responsabile/allievo")
@@ -58,28 +56,40 @@ public class ResponsabileController {
 
 	// rimuovi allievo
 
-	@GetMapping("/responsabile/allievo/rimuovi")
-	public String rimuoviAllievoForm() {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+	@GetMapping("/responsabile/allievo/elimina")
+	public String rimuoviAllievoForm(ModelMap model) {
+		model.addAttribute("managingLearner", true);
+		return "delete_learner";
 	}
 
-	@PostMapping("/responsabile/allievo/rimuovi")
+	@PostMapping("/responsabile/allievo/elimina")
 	public String rimuoviAllievo() {
 		// processa dati
-		return "redirect:/responsabile/allievo";
+		return "redirect:/responsabile/allievo?message=deleted";
 	}
 
 	// gestisci attivita allievo
 
 	@GetMapping("/responsabile/allievo/attivita")
-	public String attivitaAllievo() {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+	public String attivitaAllievo(ModelMap model) {
+		model.addAttribute("pageId", "booked_activities");
+		model.addAttribute("managingLearner", true);
+		List<Attivita> ls = new ArrayList<>(3);
+		LocalDateTime n = LocalDateTime.now();
+		int h = 0;
+		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
+		model.addAttribute("activityList", ls);
+		return "activity_list";
 	}
-	
+
 	// lista attivita prenotabili
-	
+
 	@GetMapping("/responsabile/attivita")
 	public String attivitaDisponibili(ModelMap model) {
+		// if (rebus.allievoInGestione())
+		//	model.addAttribute("managingLearner", true);
 		model.addAttribute("multiSelect", true);
 		model.addAttribute("pageId", "available_activities");
 		List<Attivita> ls = new ArrayList<>(3);
@@ -91,18 +101,18 @@ public class ResponsabileController {
 		model.addAttribute("activityList", ls);
 		return "activity_list";
 	}
-	
+
 	// prenota attivita
-	
+
 	@PostMapping("/responsabile/attivita/prenota")
 	public String prenotaAttivita() {
-		return "redirect:/responsabile/allievo/attivita";
+		return "redirect:/responsabile/allievo/attivita?message=success";
 	}
-	
+
 	// termina gestione
-	
+
 	@GetMapping("/responsabile/allievo/termina-gestione")
 	public String terminaGestione() {
-		return "redirect:/responsabile/allievo";
+		return "redirect:/responsabile/allievo?message=finished";
 	}
 }

@@ -5,48 +5,66 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head></head>
 <body th:fragment="sidebar">
-	<nav class="menu">
+
+	<nav class="menu" th:if="${showBackButton}">
+		<a th:href="${backUrl}" class="back-button">Back</a>
+	</nav>
+
+	<nav class="menu" sec:authorize="hasAuthority('RESPONSABILE')" th:unless="${showBackButton}">
 		<ul>
-			<!-- TODO: add .active dynamically to current page -->
-			<th:block sec:authorize="hasAuthority('RESPONSABILE')">
-				<li>
-					<a th:href="@{/responsabile/allievo}"
-						th:text="#{pages.manage_learner.title}">Manage Learner</a>
-				</li>
+			<!--/* TODO: add .active dynamically to current page */-->
+			<th:block th:if="${managingUser}">
 				<li>
 					<a th:href="@{/responsabile/allievo/termina-gestione}"
-						th:text="#{pages.end_learner_management.title}">End Learner Management</a>
+						th:text="#{actions.end_learner_management}">End Learner Management</a>
 				</li>
 				<li>
-					<a th:href="@{/responsabile/allievo/inserisci}"
-						th:text="#{pages.new_learner.title}">New Learner</a>
-				</li>
-				<li>
-					<a th:href="@{/responsabile/allievo/rimuovi}"
-						th:text="#{pages.remove_learner.title}">Remove Learner</a>
+					<a th:href="@{/responsabile/allievo/elimina}"
+						th:text="#{pages.delete_learner.title}">Delete Learner</a>
 				</li>
 				<li>
 					<a th:href="@{/responsabile/allievo/attivita}"
 						th:text="#{pages.booked_activities.title}">Booked Activities</a>
 				</li>
+			</th:block>
+			<th:block th:unless="${managingUser}">
 				<li>
-					<a th:href="@{/responsabile/attivita}"
-						th:text="#{pages.available_activities.title}">Available Activities</a>
+					<a th:href="@{/responsabile/allievo}"
+						th:text="#{pages.manage_learner.title}">Manage Learner</a>
+				</li>	
+				<li>
+					<a th:href="@{/responsabile/allievo/inserisci}"
+						th:text="#{pages.new_learner.title}">New Learner</a>
 				</li>
 			</th:block>
-			<th:block sec:authorize="hasAuthority('DIRETTORE')">
-				<li>
-					<a th:href="@{/direttore}"
-						th:text="#{pages.select_center.title}">Select Center</a>
-				</li>
-			</th:block>
-			<th:block sec:authorize="hasAuthority('ORGANIZZATORE')">
-				<li>
-					<a th:href="@{/organizzatore}"
-						th:text="#{pages.select_center.title}">Select Center</a>
-				</li>
-			</th:block>
+			<li>
+				<a th:href="@{/responsabile/attivita}"
+					th:text="#{pages.available_activities.title}">Available Activities</a>
+			</li>
 		</ul>
 	</nav>
+
+	<div class="menu" sec:authorize="hasAuthority('ORGANIZZATORE') || hasAuthority('DIRETTORE')"
+			th:unless="${showBackButton}">
+		<h2 th:text="#{actions.select_center}">Select Center</h2>
+		<form class="user-form" method="post" th:action="@{${centerActionUrl}}">
+			<ul>
+				<li>
+					<select name="centerId" required>
+						<option th:each="center : ${centerMap}"
+							th:value="${key}"
+							th:text="${value}">Center 12</option>
+					</select>
+				</li>
+				<li th:if="${selectMonth}">
+					<input type="date" name="date" required />
+				</li>
+				<li>
+					<button type="submit" th:text="#{actions.choose}">Choose</button>
+				</li>
+			</ul>
+		</form>
+	</div>
+
 </body>
 </html>

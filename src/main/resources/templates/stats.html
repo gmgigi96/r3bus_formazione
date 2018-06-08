@@ -2,26 +2,21 @@
 <html xmlns="http://www.w3.org/1999/html"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fragments/layout}">
+	layout:decorate="~{fragments/layout}"
+	th:with="headline=#{pages.stats.headline}">
 <head>
 <title th:text="#{pages.stats.title}">Statistics</title>
 </head>
 <body>
 	<div layout:fragment="content">
-		<div id="slider2">
-			<div class="controls-center">
-				<!-- TODO: fix outline -->
-				<h3 th:text="#{pages.stats.headline}">Statistics</h3>
-			</div>
-		</div>
 		<div class="stats-frame">
 			<div class="daily-activities">
 				<h3 th:text="#{stats.daily_activities}">Daily Activities</h3>
-				<!-- graph here -->
+				<img th:src="@{statistiche/attivita_giornaliere.png}" th:alt-title="#{stats.daily_activities}" />
 			</div>
 			<div class="daily-bookings">
 				<h3 th:text="#{stats.daily_bookings}"></h3>
-				<!-- graph here -->
+				<img th:src="@{statistiche/prenotazioni_giornaliere.png}" th:alt-title="#{stats.daily_bookings}" />
 			</div>
 			<div class="activity-bookings">
 				<table>

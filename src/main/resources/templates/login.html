@@ -2,30 +2,25 @@
 <html xmlns="http://www.w3.org/1999/html"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{fragments/layout}">
+	layout:decorate="~{fragments/layout}"
+	th:with="headline=#{pages.login.title}">
 <head>
 <title th:text="#{pages.login.title}">Login</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/forms.css}" />
 </head>
 <body>
 	<div layout:fragment="content">
-		<div id="slider2">
-			<div class="controls-center">
-				<h3 th:text="#{pages.login.title}">Login</h3>
-			</div>
-		</div>
 		<form th:action="@{/login}" method="post" class="user-form">
 			<ul>
 				<li>
 					<label for="username">ID</label>
-					<input name="username" class="text" type="text" required />
+					<input name="username" id="username" class="text" type="text" required />
 				</li>
 				<li>
 					<label for="password">Password</label>
-					<input name="password" class="text" type="password" required />
+					<input name="password" id="password" class="text" type="password" required />
 				</li>
 				<li class="buttons">
-					<button type="submit" th:text="#{pages.login.login}">Login</button>
+					<button type="submit" th:text="#{actions.login}">Login</button>
 				</li>
 			</ul>
 			<div th:if="${param.error}" th:text="#{pages.login.invalid_credentials}">Invalid credentials</div>

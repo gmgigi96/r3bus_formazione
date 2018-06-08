@@ -18,7 +18,8 @@
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 
 		<form-login login-page="/login"
-					default-target-url="/"
+					default-target-url="/loginSuccess"
+					always-use-default-target="true"
 					authentication-failure-url="/login?error" />
 
 		<logout logout-url="/logout" logout-success-url="/login?logout" />
@@ -29,6 +30,8 @@
 		<authentication-provider>
 			<user-service>
 				<user name="responsabile" password="{noop}responsabile"
+					authorities="RESPONSABILE" />
+				<user name="centro-26" password="{noop}centro-26"
 					authorities="RESPONSABILE" />
 				<user name="direttore" password="{noop}direttore"
 					authorities="DIRETTORE" />

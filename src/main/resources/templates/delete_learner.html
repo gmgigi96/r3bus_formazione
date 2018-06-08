@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}"
+	th:with="headline=#{pages.delete_learner.headline}">
+<head>
+<title th:text="#{pages.delete_learner.title}">Manage Learner</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{''}" method="post" class="user-form">
+			<ul>
+				<li th:text="#{pages.delete_learner.confirm_message}">Are you sure?</li>
+				<li class="buttons">
+					<button type="submit" th:text="#{pages.delete_learner.delete}">Delete</button>
+				</li>
+			</ul>
+		</form>
+	</div>
+</body>
+</html>

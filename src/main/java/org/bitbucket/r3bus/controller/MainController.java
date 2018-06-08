@@ -26,13 +26,28 @@ public class MainController {
 	@GetMapping("/")
 	public String indexPage() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String role = auth.getAuthorities().toArray()[0].toString();
-		
-		return "redirect:/" + role.toLowerCase();
+		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
+
+		return "redirect:/" + role;
 	}
 
-	@RequestMapping("/login")
-	public String contactPage() {
+	@RequestMapping("/loginSuccess")
+	public String init() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
+
+		// collega centro corrente
+		if (role.equals("responsabile")) {
+			String id = auth.getName().split("-")[1];
+			System.out.printf("Managing center with id: %s\n", id);
+			// rebus.setCentroGestito(id);
+		}
+
+		return "redirect:/";
+	}
+
+	@GetMapping("/login")
+	public String loginPage() {
 		return "login";
 	}
 
@@ -61,21 +76,22 @@ public class MainController {
 		allievo.setTelefono("000000");
 		// creazione attivita
 		Attivita attivita = new Attivita("prima attivita", LocalDateTime.now(), LocalDateTime.now().plusHours(10));
-		Attivita attivita2 = new Attivita("seconda attivita", LocalDateTime.now().plusHours(10), LocalDateTime.now().plusHours(11));
-		
-		//creazione centro
+		Attivita attivita2 = new Attivita("seconda attivita", LocalDateTime.now().plusHours(10),
+				LocalDateTime.now().plusHours(11));
+
+		// creazione centro
 		Centro centro = new Centro();
 		centro.setCapienza(100);
 		centro.setNome("primo Centro");
-		
+
 		centro = centroService.save(centro);
-		
+
 		allievoService.save(allievo);
 		allievo.prenotaAttivita(attivita);
 		centro.addAttivita(attivita);
 		centro.addAttivita(attivita2);
 		centroService.flush();
-		
+
 		return "index";
 	}
 }
