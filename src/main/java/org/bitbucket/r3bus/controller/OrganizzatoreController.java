@@ -7,7 +7,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Attivita;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.HttpClientErrorException;
 
 @Controller
 public class OrganizzatoreController {
@@ -24,7 +22,7 @@ public class OrganizzatoreController {
 
 	@GetMapping("/organizzatore")
 	public String selezioneCentroForm() {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+		return "fragments/layout";
 	}
 
 	@PostMapping("/organizzatore")

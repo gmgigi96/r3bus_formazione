@@ -66,18 +66,26 @@ public class ResponsabileController {
 	@PostMapping("/responsabile/allievo/rimuovi")
 	public String rimuoviAllievo() {
 		// processa dati
-		return "redirect:/responsabile/allievo";
+		return "redirect:/responsabile/allievo?message=deleted";
 	}
 
 	// gestisci attivita allievo
 
 	@GetMapping("/responsabile/allievo/attivita")
-	public String attivitaAllievo() {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+	public String attivitaAllievo(ModelMap model) {
+		model.addAttribute("pageId", "booked_activities");
+		List<Attivita> ls = new ArrayList<>(3);
+		LocalDateTime n = LocalDateTime.now();
+		int h = 0;
+		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
+		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
+		model.addAttribute("activityList", ls);
+		return "activity_list";
 	}
-	
+
 	// lista attivita prenotabili
-	
+
 	@GetMapping("/responsabile/attivita")
 	public String attivitaDisponibili(ModelMap model) {
 		model.addAttribute("multiSelect", true);
@@ -91,18 +99,18 @@ public class ResponsabileController {
 		model.addAttribute("activityList", ls);
 		return "activity_list";
 	}
-	
+
 	// prenota attivita
-	
+
 	@PostMapping("/responsabile/attivita/prenota")
 	public String prenotaAttivita() {
-		return "redirect:/responsabile/allievo/attivita";
+		return "redirect:/responsabile/allievo/attivita?message=success";
 	}
-	
+
 	// termina gestione
-	
+
 	@GetMapping("/responsabile/allievo/termina-gestione")
 	public String terminaGestione() {
-		return "redirect:/responsabile/allievo";
+		return "redirect:/responsabile/allievo?message=finished";
 	}
 }
