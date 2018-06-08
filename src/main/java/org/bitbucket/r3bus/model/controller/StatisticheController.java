@@ -1,6 +1,7 @@
 package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.Map;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
+import org.bitbucket.r3bus.model.ChartGenerator;
 import org.bitbucket.r3bus.utils.LocalDateRange;
+import org.jfree.chart.JFreeChart;
 
 /**
  * La classe StatisticheController genera le statistiche. Per generare le
@@ -23,6 +26,7 @@ public class StatisticheController {
 	private LocalDate fine;
 	private Centro centro;
 	private Azienda azienda;
+	private ChartGenerator chartGenerator;
 
 	/**
 	 * Crea una classe capace di generare statistiche dei centri dell'azienda data
@@ -32,6 +36,7 @@ public class StatisticheController {
 	 */
 	public StatisticheController(Azienda azienda) {
 		this.azienda = azienda;
+		this.chartGenerator = new ChartGenerator();
 	}
 
 	/**
@@ -53,6 +58,15 @@ public class StatisticheController {
 		this.inizio = inizio;
 		this.fine = fine;
 	}
+	
+	public JFreeChart creaGraficoAttivitaGiornaliere() {
+		return chartGenerator.creaGrafico(getNumeroAttivitaGiornaliere(), this.inizio, this.fine, 0, 20);
+	}
+	
+
+	public JFreeChart creaGraficoPrenotazioniGiornaliere() {
+		return chartGenerator.creaGrafico(getMediaPrenotati(), this.inizio, this.fine, 0, 1);
+	}
 
 	/**
 	 * Restituisce il numero di attività giornaliere del centro specificato
@@ -62,10 +76,10 @@ public class StatisticheController {
 	 * @see #setCentro(long)
 	 * @see #setIntervallo(LocalDate, LocalDate)
 	 * 
-	 * @return Lista del numero di attivita giornaliere nell'intervallo specificato
+	 * @return Mappa del numero di attivita giornaliere nell'intervallo specificato
 	 */
-	public List<Long> getNumeroAttivitaGiornaliere() {
-		List<Long> res = new LinkedList<>();
+	public List<Number> getNumeroAttivitaGiornaliere() {
+		List<Number>  res = new ArrayList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			res.add(centro.getNumeroAttivita(data));
 		}
@@ -100,8 +114,8 @@ public class StatisticheController {
 	 * 
 	 * @return Lista della media giornaliera di allievi prenotati alle attivita
 	 */
-	public List<Float> getMediaPrenotati() {
-		List<Float> res = new LinkedList<>();
+	public List<Number> getMediaPrenotati() {
+		List<Number> res = new LinkedList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			List<Attivita> attivita = centro.getAttivitaInIntervallo(data, data);
 			float mediaPrenotatiGiornaliera = mediaAllieviPrenotati(attivita);
