@@ -51,7 +51,7 @@ public class GraficoController {
 	private void creaImmagineGrafico(HttpServletResponse response, JFreeChart chart) {
 		try {
 			OutputStream out = response.getOutputStream();
-			ChartUtils.writeChartAsPNG(out, chart, 500, 500);
+			ChartUtils.writeChartAsPNG(out, chart, 800, 400);
 			response.flushBuffer();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
