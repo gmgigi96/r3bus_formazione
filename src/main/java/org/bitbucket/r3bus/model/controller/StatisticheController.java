@@ -1,17 +1,18 @@
 package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
 import org.bitbucket.r3bus.model.ChartGenerator;
 import org.bitbucket.r3bus.utils.LocalDateRange;
+import org.jfree.chart.JFreeChart;
 
 /**
  * La classe StatisticheController genera le statistiche. Per generare le
@@ -57,8 +58,13 @@ public class StatisticheController {
 		this.fine = fine;
 	}
 	
-	public void creaGraficoAttivitaGiornaliere() {
-		chartGenerator.creaGraficoAttivitaGiornaliere(getNumeroAttivitaGiornaliere());
+	public JFreeChart creaGraficoAttivitaGiornaliere() {
+		return chartGenerator.creaGrafico(getNumeroAttivitaGiornaliere(), this.inizio, this.fine);
+	}
+	
+
+	public JFreeChart creaGraficoPrenotazioniGiornaliere() {
+		return chartGenerator.creaGrafico(getMediaPrenotati(), this.inizio, this.fine);
 	}
 
 	/**
@@ -71,10 +77,10 @@ public class StatisticheController {
 	 * 
 	 * @return Mappa del numero di attivita giornaliere nell'intervallo specificato
 	 */
-	public Map<LocalDate, Long> getNumeroAttivitaGiornaliere() {
-		Map<LocalDate,Long> res = new TreeMap<>();
+	public List<Number> getNumeroAttivitaGiornaliere() {
+		List<Number>  res = new ArrayList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
-			res.put(data, centro.getNumeroAttivita(data));
+			res.add(centro.getNumeroAttivita(data));
 		}
 		return res;
 	}
@@ -107,8 +113,8 @@ public class StatisticheController {
 	 * 
 	 * @return Lista della media giornaliera di allievi prenotati alle attivita
 	 */
-	public List<Float> getMediaPrenotati() {
-		List<Float> res = new LinkedList<>();
+	public List<Number> getMediaPrenotati() {
+		List<Number> res = new LinkedList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			List<Attivita> attivita = centro.getAttivitaInIntervallo(data, data);
 			float mediaPrenotatiGiornaliera = mediaAllieviPrenotati(attivita);
