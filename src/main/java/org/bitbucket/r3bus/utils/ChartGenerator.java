@@ -1,19 +1,20 @@
-package org.bitbucket.r3bus.model;
+package org.bitbucket.r3bus.utils;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import org.bitbucket.r3bus.utils.LocalDateRange;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
 @Data
+@Component
 public class ChartGenerator {
 
 	public JFreeChart creaGrafico(List<Number> dati, LocalDate inizio, LocalDate fine, double min, double max) {
