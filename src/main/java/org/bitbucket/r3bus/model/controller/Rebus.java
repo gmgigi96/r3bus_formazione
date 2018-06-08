@@ -19,7 +19,7 @@ import lombok.Data;
 public class Rebus {
 
 	private Allievo allievoCorrente;
-	private Azienda azienda = new Azienda();
+	private Azienda azienda;
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
 
