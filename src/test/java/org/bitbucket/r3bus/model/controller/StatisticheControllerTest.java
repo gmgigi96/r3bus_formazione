@@ -48,12 +48,12 @@ public class StatisticheControllerTest {
 		LocalDate oggi = now.toLocalDate();
 		LocalDate domani = now.plusDays(1).toLocalDate();
 		statisticheController1.setIntervallo(ieri, domani);
-		Map<LocalDate, Long> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
+		List<Number> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
 
 		assertEquals(3, mappa.size());
-		assertEquals(new Long(0), mappa.get(ieri));
-		assertEquals(new Long(1), mappa.get(oggi));
-		assertEquals(new Long(0), mappa.get(domani));
+		assertEquals(new Long(0), mappa.get(0));
+		assertEquals(new Long(1), mappa.get(1));
+		assertEquals(new Long(0), mappa.get(2));
 	}
 
 	@Test
@@ -64,12 +64,12 @@ public class StatisticheControllerTest {
 		LocalDate oggi = now.toLocalDate();
 		LocalDate domani = now.plusDays(1).toLocalDate();
 		statisticheController1.setIntervallo(ieri, domani);
-		Map<LocalDate, Long> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
+		List<Number> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
 
 		assertEquals(3, mappa.size());
-		assertEquals(new Long(0), mappa.get(ieri));
-		assertEquals(new Long(2), mappa.get(oggi));
-		assertEquals(new Long(0), mappa.get(domani));
+		assertEquals(new Long(0), mappa.get(0));
+		assertEquals(new Long(2), mappa.get(1));
+		assertEquals(new Long(0), mappa.get(2));
 	}
 
 	@Test
@@ -79,11 +79,11 @@ public class StatisticheControllerTest {
 		LocalDate domani = now.plusDays(1).toLocalDate();
 		LocalDate dopodomani = now.plusDays(2).toLocalDate();
 		statisticheController1.setIntervallo(domani, dopodomani);
-		Map<LocalDate, Long> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
+		List<Number> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
 
 		assertEquals(2, mappa.size());
-		assertEquals(new Long(0), mappa.get(domani));
-		assertEquals(new Long(0), mappa.get(dopodomani));
+		assertEquals(new Long(0), mappa.get(0));
+		assertEquals(new Long(0), mappa.get(1));
 	}
 
 	@Test
@@ -160,7 +160,7 @@ public class StatisticheControllerTest {
 		statisticheController1.setCentro(centroConZeroAttivita);
 		statisticheController1.setIntervallo(inizio, fine);
 
-		List<Float> res = statisticheController1.getMediaPrenotati();
+		List<Number> res = statisticheController1.getMediaPrenotati();
 
 		assertEquals(2, res.size());
 		assertEquals(new Float(0), res.get(0));
@@ -179,7 +179,7 @@ public class StatisticheControllerTest {
 		statisticheController1.setCentro(centroConUnAttivita_zeroPartecipanti);
 		statisticheController1.setIntervallo(inizio.toLocalDate().minusDays(1), fine.toLocalDate().plusDays(1));
 
-		List<Float> res = statisticheController1.getMediaPrenotati();
+		List<Number> res = statisticheController1.getMediaPrenotati();
 
 		assertEquals(3, res.size());
 		assertEquals(new Float(0), res.get(0));
@@ -201,7 +201,7 @@ public class StatisticheControllerTest {
 		statisticheController1.setCentro(centroConUnAttivita_unPartecipante);
 		statisticheController1.setIntervallo(inizio.toLocalDate().minusDays(1), fine.toLocalDate().plusDays(1));
 
-		List<Float> res = statisticheController1.getMediaPrenotati();
+		List<Number> res = statisticheController1.getMediaPrenotati();
 
 		assertEquals(3, res.size());
 		assertEquals(new Float(0), res.get(0));
