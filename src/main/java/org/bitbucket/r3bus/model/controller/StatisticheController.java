@@ -8,11 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.bitbucket.r3bus.model.Attivita;
-import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
-import org.bitbucket.r3bus.model.ChartGenerator;
 import org.bitbucket.r3bus.utils.LocalDateRange;
-import org.jfree.chart.JFreeChart;
 
 /**
  * La classe StatisticheController genera le statistiche. Per generare le
@@ -22,63 +19,27 @@ import org.jfree.chart.JFreeChart;
  */
 public class StatisticheController {
 
-	private LocalDate inizio;
-	private LocalDate fine;
-	private Centro centro;
-	private Azienda azienda;
-	private ChartGenerator chartGenerator;
-
 	/**
 	 * Crea una classe capace di generare statistiche dei centri dell'azienda data
 	 * per parametro.
 	 * 
 	 * @param azienda
 	 */
-	public StatisticheController(Azienda azienda) {
-		this.azienda = azienda;
-		this.chartGenerator = new ChartGenerator();
-	}
-
-	/**
-	 * Setta il centro di cui calcolare le statistiche.
-	 * 
-	 * @param codiceCentro
-	 */
-	public void setCentro(long codiceCentro) {
-		this.centro = this.azienda.getCentro(codiceCentro);
-	}
-
-	/**
-	 * Setta l'intervallo temporale entro cui calcolare le statistiche.
-	 * 
-	 * @param inizio
-	 * @param fine
-	 */
-	public void setIntervallo(LocalDate inizio, LocalDate fine) {
-		this.inizio = inizio;
-		this.fine = fine;
-	}
-	
-	public JFreeChart creaGraficoAttivitaGiornaliere() {
-		return chartGenerator.creaGrafico(getNumeroAttivitaGiornaliere(), this.inizio, this.fine, 0, 20);
-	}
-	
-
-	public JFreeChart creaGraficoPrenotazioniGiornaliere() {
-		return chartGenerator.creaGrafico(getMediaPrenotati(), this.inizio, this.fine, 0, 1);
+	public StatisticheController() {
 	}
 
 	/**
 	 * Restituisce il numero di attività giornaliere del centro specificato
 	 * ({@link #setCentro(long)}), nell'intervallo temporale scelto
 	 * ({@link #setIntervallo(LocalDate, LocalDate)}).
+	 * @param centro 
 	 * 
 	 * @see #setCentro(long)
 	 * @see #setIntervallo(LocalDate, LocalDate)
 	 * 
 	 * @return Mappa del numero di attivita giornaliere nell'intervallo specificato
 	 */
-	public List<Number> getNumeroAttivitaGiornaliere() {
+	public List<Number> getNumeroAttivitaGiornaliere(Centro centro, LocalDate inizio, LocalDate fine) {
 		List<Number>  res = new ArrayList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			res.add(centro.getNumeroAttivita(data));
@@ -96,7 +57,7 @@ public class StatisticheController {
 	 * 
 	 * @return Mappa attivita/numero allievi prenotati
 	 */
-	public Map<String, Integer> getElencoAttivita() {
+	public Map<String, Integer> getElencoAttivita(Centro centro, LocalDate inizio, LocalDate fine) {
 		Map<String, Integer> attivita2prenotati = new HashMap<>();
 		for (Attivita a : centro.getAttivitaInIntervallo(inizio, fine)) {
 			attivita2prenotati.put(a.toString(), a.getNumeroAllieviPrenotati());
@@ -108,13 +69,14 @@ public class StatisticheController {
 	 * Restituisce una media giornaliera di allievi prenotati alle attivita del
 	 * centro scelto ({@link #setCentro(long)}, in un intervallo temporale
 	 * ({@link StatisticheController#setIntervallo(LocalDate, LocalDate)}).
+	 * @param centro 
 	 * 
 	 * @see #setCentro(long)
 	 * @see #setIntervallo(LocalDate, LocalDate)
 	 * 
 	 * @return Lista della media giornaliera di allievi prenotati alle attivita
 	 */
-	public List<Number> getMediaPrenotati() {
+	public List<Number> getMediaPrenotati(Centro centro, LocalDate inizio, LocalDate fine) {
 		List<Number> res = new LinkedList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			List<Attivita> attivita = centro.getAttivitaInIntervallo(data, data);
@@ -127,12 +89,6 @@ public class StatisticheController {
 	private float mediaAllieviPrenotati(List<Attivita> attivita) {
 		return attivita.isEmpty() ? 0
 				: (float) attivita.stream().mapToInt(Attivita::getNumeroAllieviPrenotati).average().getAsDouble();
-	}
-
-	// per test
-
-	public void setCentro(Centro c) {
-		this.centro = c;
 	}
 
 }

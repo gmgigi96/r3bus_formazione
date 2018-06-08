@@ -2,12 +2,12 @@ package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
-import org.jfree.chart.JFreeChart;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -19,13 +19,13 @@ import lombok.Data;
 public class Rebus {
 
 	private Allievo allievoCorrente;
-	private Azienda azienda = new Azienda();
+	private Azienda azienda;
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
 
 	public Rebus() {
 		azienda = new Azienda();
-		statisticheController = new StatisticheController(azienda);
+		statisticheController = new StatisticheController();
 	}
 	
 	// gestione allievo
@@ -66,21 +66,21 @@ public class Rebus {
 		a.aggiornaParametri(nome, inizio, fine);
 	}
 
-	public JFreeChart creaGraficoAttivitaGiornaliere(LocalDate inizio, LocalDate fine) {
-		this.statisticheController.setIntervallo(inizio, fine);
-		this.statisticheController.setCentro(this.centroGestito);
-		return this.statisticheController.creaGraficoAttivitaGiornaliere();
-	}
-
-	public JFreeChart creaGraficoPrenotazioniGiornaliere(LocalDate inizio, LocalDate fine) {
-		this.statisticheController.setIntervallo(inizio, fine);
-		this.statisticheController.setCentro(this.centroGestito);
-		return this.statisticheController.creaGraficoPrenotazioniGiornaliere();
-	}
-
 	public void setCentroGestito(int codiceCentro) {
 		Centro c = azienda.getCentro(codiceCentro);
 		this.centroGestito = c;
+	}
+
+	//per i grafici
+	
+	public List<Number> getNumeroAttivitaGiornaliere(int codiceCentro, LocalDate inizio, LocalDate fine) {
+		Centro c = azienda.getCentro(codiceCentro);
+		return statisticheController.getNumeroAttivitaGiornaliere(c, inizio, fine);
+	}
+
+	public List<Number> getMediaPrenotati(int codiceCentro, LocalDate inizio, LocalDate fine) {
+		Centro c = azienda.getCentro(codiceCentro);
+		return statisticheController.getMediaPrenotati(c, inizio, fine);
 	}
 
 }
