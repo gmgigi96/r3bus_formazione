@@ -17,7 +17,8 @@ public class DirettoreController {
 	// selezione centro
 
 	@GetMapping("/direttore")
-	public String selezioneCentroForm() {
+	public String selezioneCentroForm(ModelMap model) {
+		model.addAttribute("selectMonth", true);
 		return "fragments/layout";
 	}
 
@@ -34,6 +35,7 @@ public class DirettoreController {
 
 	@GetMapping("/direttore/{id}/{mese}/statistiche")
 	public String statistics(@PathVariable("id") Long id, ModelMap model) {
+		model.addAttribute("selectMonth", true);
 		Map<String, Integer> mp = new HashMap<>();
 		mp.put("Esercitazione", 23);
 		mp.put("Sicurezza sul lavoro", 12);

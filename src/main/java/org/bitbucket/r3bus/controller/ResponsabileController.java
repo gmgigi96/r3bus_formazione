@@ -74,6 +74,7 @@ public class ResponsabileController {
 	@GetMapping("/responsabile/allievo/attivita")
 	public String attivitaAllievo(ModelMap model) {
 		model.addAttribute("pageId", "booked_activities");
+		model.addAttribute("managingLearner", true);
 		List<Attivita> ls = new ArrayList<>(3);
 		LocalDateTime n = LocalDateTime.now();
 		int h = 0;
@@ -88,6 +89,8 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/attivita")
 	public String attivitaDisponibili(ModelMap model) {
+		// if (rebus.allievoInGestione())
+		//	model.addAttribute("managingLearner", true);
 		model.addAttribute("multiSelect", true);
 		model.addAttribute("pageId", "available_activities");
 		List<Attivita> ls = new ArrayList<>(3);

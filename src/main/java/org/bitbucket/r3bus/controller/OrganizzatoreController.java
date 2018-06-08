@@ -53,6 +53,8 @@ public class OrganizzatoreController {
 
 	@GetMapping("/organizzatore/{centroID}/attivita/inserisci")
 	public String nuovaAttivitaForm(@PathVariable("centroID") Long centroID, ModelMap model) {
+		model.addAttribute("showBackButton", true);
+		model.addAttribute("backUrl", "../");
 		model.addAttribute("pageID", "new_activity");
 		model.addAttribute("activity", new Attivita()); // TODEL
 		return "activity_form";
@@ -61,6 +63,8 @@ public class OrganizzatoreController {
 	@PostMapping("/organizzatore/{centroID}/attivita/inserisci")
 	public String nuovaAttivita(@PathVariable("centroID") Long centroID,
 			@Valid @ModelAttribute("activity") Attivita activity, BindingResult bindingResult, ModelMap model) {
+		model.addAttribute("showBackButton", true);
+		model.addAttribute("backUrl", "../");
 		if (bindingResult.hasErrors())
 			return "activity_form";
 		// controller stuff
@@ -73,6 +77,8 @@ public class OrganizzatoreController {
 	@GetMapping("/organizzatore/{centroID}/attivita/{id}/modifica")
 	public String modificaAttivitaForm(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
 			ModelMap model) {
+		model.addAttribute("showBackButton", true);
+		model.addAttribute("backUrl", "../../");
 		// find activity and bind to model
 		model.addAttribute("pageID", "edit_activity");
 		model.addAttribute("activity", new Attivita()); // TODEL
@@ -80,7 +86,10 @@ public class OrganizzatoreController {
 	}
 
 	@PostMapping("/organizzatore/{centroID}/attivita/{id}/modifica")
-	public String modificaAttivita(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id) {
+	public String modificaAttivita(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
+			ModelMap model) {
+		model.addAttribute("showBackButton", true);
+		model.addAttribute("backUrl", "../../");
 		// processa dati
 		return "redirect:/organizzatore/" + centroID + "/attivita";
 	}
