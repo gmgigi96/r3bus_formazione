@@ -36,6 +36,7 @@ public class StatisticheController {
 	 */
 	public StatisticheController(Azienda azienda) {
 		this.azienda = azienda;
+		this.chartGenerator = new ChartGenerator();
 	}
 
 	/**
@@ -59,12 +60,12 @@ public class StatisticheController {
 	}
 	
 	public JFreeChart creaGraficoAttivitaGiornaliere() {
-		return chartGenerator.creaGrafico(getNumeroAttivitaGiornaliere(), this.inizio, this.fine);
+		return chartGenerator.creaGrafico(getNumeroAttivitaGiornaliere(), this.inizio, this.fine, 0, 20);
 	}
 	
 
 	public JFreeChart creaGraficoPrenotazioniGiornaliere() {
-		return chartGenerator.creaGrafico(getMediaPrenotati(), this.inizio, this.fine);
+		return chartGenerator.creaGrafico(getMediaPrenotati(), this.inizio, this.fine, 0, 1);
 	}
 
 	/**
