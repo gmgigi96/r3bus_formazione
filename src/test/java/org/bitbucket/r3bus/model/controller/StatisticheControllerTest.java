@@ -2,7 +2,6 @@ package org.bitbucket.r3bus.model.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,36 +44,46 @@ public class StatisticheControllerTest {
 	@Test
 	public void testGetNumeroAttivitaGiornaliere_unaSolaAttivitaInUnCentro() {
 		statisticheController1.setCentro(centroConUnAttivita);
-		statisticheController1.setIntervallo(now.minusDays(1).toLocalDate(), now.plusDays(1).toLocalDate());
-		List<Long> lista = statisticheController1.getNumeroAttivitaGiornaliere();
+		LocalDate ieri = now.minusDays(1).toLocalDate();
+		LocalDate oggi = now.toLocalDate();
+		LocalDate domani = now.plusDays(1).toLocalDate();
+		statisticheController1.setIntervallo(ieri, domani);
+		Map<LocalDate, Long> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
 
-		assertEquals(3, lista.size());
-		assertEquals(new Long(0), lista.get(0));
-		assertEquals(new Long(1), lista.get(1));
-		assertEquals(new Long(0), lista.get(2));
+		assertEquals(3, mappa.size());
+		assertEquals(new Long(0), mappa.get(ieri));
+		assertEquals(new Long(1), mappa.get(oggi));
+		assertEquals(new Long(0), mappa.get(domani));
 	}
 
 	@Test
 	public void testGetNumeroAttivitaGiornaliere_dueAttivitaNelloStessoGiorno() {
 		statisticheController1.setCentro(centroConDueAttivitaStessoGiorno);
-		statisticheController1.setIntervallo(now.minusDays(1).toLocalDate(), now.plusDays(1).toLocalDate());
-		List<Long> lista = statisticheController1.getNumeroAttivitaGiornaliere();
+		
+		LocalDate ieri = now.minusDays(1).toLocalDate();
+		LocalDate oggi = now.toLocalDate();
+		LocalDate domani = now.plusDays(1).toLocalDate();
+		statisticheController1.setIntervallo(ieri, domani);
+		Map<LocalDate, Long> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
 
-		assertEquals(3, lista.size());
-		assertEquals(new Long(0), lista.get(0));
-		assertEquals(new Long(2), lista.get(1));
-		assertEquals(new Long(0), lista.get(2));
+		assertEquals(3, mappa.size());
+		assertEquals(new Long(0), mappa.get(ieri));
+		assertEquals(new Long(2), mappa.get(oggi));
+		assertEquals(new Long(0), mappa.get(domani));
 	}
 
 	@Test
 	public void testGetNumeroAttivitaGiornaliere_unAttivitaInUnGiorno_intervalloNonConGiorno() {
 		statisticheController1.setCentro(centroConDueAttivitaStessoGiorno);
-		statisticheController1.setIntervallo(now.plusDays(1).toLocalDate(), now.plusDays(2).toLocalDate());
-		List<Long> lista = statisticheController1.getNumeroAttivitaGiornaliere();
+		
+		LocalDate domani = now.plusDays(1).toLocalDate();
+		LocalDate dopodomani = now.plusDays(2).toLocalDate();
+		statisticheController1.setIntervallo(domani, dopodomani);
+		Map<LocalDate, Long> mappa = statisticheController1.getNumeroAttivitaGiornaliere();
 
-		assertEquals(2, lista.size());
-		assertEquals(new Long(0), lista.get(0));
-		assertEquals(new Long(0), lista.get(1));
+		assertEquals(2, mappa.size());
+		assertEquals(new Long(0), mappa.get(domani));
+		assertEquals(new Long(0), mappa.get(dopodomani));
 	}
 
 	@Test
