@@ -71,4 +71,9 @@ public class Rebus {
 		return this.statisticheController.creaGraficoPrenotazioniGiornaliere();
 	}
 
+	public void setCentroGestito(int codiceCentro) {
+		Centro c = azienda.getCentro(codiceCentro);
+		this.centroGestito = c;
+	}
+
 }
