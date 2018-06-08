@@ -1,11 +1,13 @@
 package org.bitbucket.r3bus.model.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
+import org.jfree.chart.JFreeChart;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -57,6 +59,16 @@ public class Rebus {
 	public void modificaAttivita(int codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
 		Attivita a = centroGestito.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);
+	}
+
+	public JFreeChart creaGraficoAttivitaGiornaliere(LocalDate inizio, LocalDate fine) {
+		this.statisticheController.setIntervallo(inizio, fine);
+		return this.statisticheController.creaGraficoAttivitaGiornaliere();
+	}
+
+	public JFreeChart creaGraficoPrenotazioniGiornaliere(LocalDate inizio, LocalDate fine) {
+		this.statisticheController.setIntervallo(inizio, fine);
+		return this.statisticheController.creaGraficoPrenotazioniGiornaliere();
 	}
 
 }
