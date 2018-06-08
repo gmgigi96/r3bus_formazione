@@ -29,7 +29,7 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/allievo")
 	public String gestisciAllievoForm() {
-		throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
+		return "manage_learner";
 	}
 
 	@PostMapping("/responsabile/allievo")
