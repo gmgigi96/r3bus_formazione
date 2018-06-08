@@ -20,7 +20,7 @@
 					<input name="password" id="password" class="text" type="password" required />
 				</li>
 				<li class="buttons">
-					<button type="submit" th:text="#{pages.login.login}">Login</button>
+					<button type="submit" th:text="#{actions.login}">Login</button>
 				</li>
 			</ul>
 			<div th:if="${param.error}" th:text="#{pages.login.invalid_credentials}">Invalid credentials</div>

@@ -16,7 +16,7 @@
 			<th:block th:if="${managingUser}">
 				<li>
 					<a th:href="@{/responsabile/allievo/termina-gestione}"
-						th:text="#{pages.end_learner_management.title}">End Learner Management</a>
+						th:text="#{actions.end_learner_management}">End Learner Management</a>
 				</li>
 				<li>
 					<a th:href="@{/responsabile/allievo/elimina}"
@@ -46,7 +46,7 @@
 
 	<div class="menu" sec:authorize="hasAuthority('ORGANIZZATORE') || hasAuthority('DIRETTORE')"
 			th:unless="${showBackButton}">
-		<h2 th:text="#{pages.select_center.title}">Select Center</h2>
+		<h2 th:text="#{actions.select_center}">Select Center</h2>
 		<form class="user-form" method="post" th:action="@{${centerActionUrl}}">
 			<ul>
 				<li>
@@ -60,7 +60,7 @@
 					<input type="date" name="date" required />
 				</li>
 				<li>
-					<button type="submit">Choose</button>
+					<button type="submit" th:text="#{actions.choose}">Choose</button>
 				</li>
 			</ul>
 		</form>
