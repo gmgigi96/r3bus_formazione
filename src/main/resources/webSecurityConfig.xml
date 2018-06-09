@@ -12,6 +12,7 @@
 		<intercept-url pattern="/js/**" access="permitAll" />
 		<intercept-url pattern="/css/**" access="permitAll" />
 		<intercept-url pattern="/images/**" access="permitAll" />
+		<intercept-url pattern="/webjars/**" access="permitAll" />
 		<intercept-url pattern="/responsabile/**" access="hasAuthority('RESPONSABILE')" />
 		<intercept-url pattern="/direttore/**" access="hasAuthority('DIRETTORE')" />
 		<intercept-url pattern="/organizzatore/**" access="hasAuthority('ORGANIZZATORE')" />
