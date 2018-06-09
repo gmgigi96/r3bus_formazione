@@ -65,6 +65,7 @@ public class OrganizzatoreController {
 			@Valid @ModelAttribute("activity") Attivita activity, BindingResult bindingResult, ModelMap model) {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./");
+		model.addAttribute("pageId", "new_activity");
 		if (bindingResult.hasErrors())
 			return "activity_form";
 		// controller stuff
