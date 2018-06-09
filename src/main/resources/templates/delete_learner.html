@@ -10,12 +10,8 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{''}" method="post" class="user-form">
-			<ul>
-				<li th:text="#{pages.delete_learner.confirm_message}">Are you sure?</li>
-				<li class="buttons">
-					<button type="submit" th:text="#{pages.delete_learner.delete}">Delete</button>
-				</li>
-			</ul>
+			<p class="alert alert-danger" th:text="#{pages.delete_learner.confirm_message}">Are you sure?</p>
+			<button class="btn btn-danger" type="submit" th:text="#{pages.delete_learner.delete}">Delete</button>
 		</form>
 	</div>
 </body>

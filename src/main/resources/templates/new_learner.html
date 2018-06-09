@@ -10,42 +10,63 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{''}" method="post" th:object="${learner}" class="user-form">
-			<ul th:if="${#fields.hasAnyErrors()}" class="error-list">
-				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">Field Error</li>
-			</ul>
-			<ul>
-				<li>
-					<label for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
-					<input th:field="*{codiceFiscale}" class="text" th:errorclass="invalid" type="text" required />
-				</li>
-				<li>
-					<label for="nome" th:text="#{learner.name}">First Name</label>
-					<input th:field="*{nome}" class="text" th:errorclass="invalid" type="text" required />
-				</li>
-				<li>
-					<label for="cognome" th:text="#{learner.surname}">Last Name</label>
-					<input th:field="*{cognome}" class="text" th:errorclass="invalid" type="text" required />
-				</li>
-				<li>
-					<label for="email" th:text="#{learner.email}">E-mail</label>
-					<input th:field="*{email}" class="text" th:errorclass="invalid" type="email" />
-				</li>
-				<li>
-					<label for="telefono" th:text="#{learner.phone}">Phone</label>
-					<input th:field="*{telefono}" class="text" th:errorclass="invalid" type="tel" />
-				</li>
-				<li>
-					<label for="dataNascita" th:text="#{learner.birth_date}">Birth Date</label>
-					<input th:field="*{dataNascita}" class="text" th:errorclass="invalid" type="date" />
-				</li>
-				<li>
-					<label for="luogoNascita" th:text="#{learner.birth_place}">Birth Place</label>
-					<input th:field="*{luogoNascita}" class="text" th:errorclass="invalid" type="text" />
-				</li>
-				<li class="buttons">
-					<button type="submit" th:text="#{pages.new_learner.signup}">Login</button>
-				</li>
-			</ul>
+			<th:block th:if="${#fields.hasAnyErrors()}">
+				<p class="alert alert-warning" th:each="err : ${#fields.allErrors()}" th:text="${err}">Field Error</p>
+			</th:block>
+			<div class="form-group">
+				<label for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
+				<div class="input-group">
+					<input th:field="*{codiceFiscale}" class="form-control" th:errorclass="invalid" type="text" required />
+					<div class="input-group-addon">
+						<span class="fa fa-barcode"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="nome" th:text="#{learner.name}">First Name</label>
+				<input th:field="*{nome}" class="form-control" th:errorclass="invalid" type="text" required />
+			</div>
+			<div class="form-group">
+				<label for="cognome" th:text="#{learner.surname}">Last Name</label>
+				<input th:field="*{cognome}" class="form-control" th:errorclass="invalid" type="text" required />
+			</div>
+			<div class="form-group">
+				<label for="email" th:text="#{learner.email}">E-mail</label>
+				<div class="input-group">
+					<input th:field="*{email}" class="form-control" th:errorclass="invalid" type="email" />
+					<div class="input-group-addon">
+						<span class="fa fa-at"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="telefono" th:text="#{learner.phone}">Phone</label>
+				<div class="input-group">
+					<input th:field="*{telefono}" class="form-control" th:errorclass="invalid" type="tel" />
+					<div class="input-group-addon">
+						<span class="fa fa-phone"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="dataNascita" th:text="#{learner.birth_date}">Birth Date</label>
+				<div class="input-group date" data-datetimepicker-format="YYYY-MM-DD">
+					<input th:field="*{dataNascita}" class="form-control" th:errorclass="invalid" type="text" />
+					<div class="input-group-addon">
+						<span class="fa fa-calendar"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="luogoNascita" th:text="#{learner.birth_place}">Birth Place</label>
+				<div class="input-group">
+					<input th:field="*{luogoNascita}" class="form-control" th:errorclass="invalid" type="text" />
+					<div class="input-group-addon">
+						<span class="fa fa-map-marker"></span>
+					</div>
+				</div>
+			</div>
+			<button class="btn" type="submit" th:text="#{pages.new_learner.signup}">Login</button>
 		</form>
 	</div>
 </body>
