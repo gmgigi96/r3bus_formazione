@@ -1,0 +1,27 @@
+sidebar:
+	// dove risulta utile
+- showBackButton : boolean
+- backUrl : String
+	// responsabile
+- managingLearner : bool (se un allievo è in gestione)
+	// organizzatore & direttore
+- centerActionUrl : String
+- selectMonth : boolean (per direttore)
+- centerMap : Map<Int,String> (codice → nome)
+
+activity_form:
+- pageId : String of ["new_activity", "edit_activity"]
+- activity: Attivita
+
+activity_list:
+- pageId : String of [...] (vedi messages.properties)
+- activityActionUrl : String
+- multiSelect : boolean (mostra checkbox e bottone invia)
+- editActivity: boolean (mostra bottone di modifica su ogni riga)
+- activityList : List<Attivita>
+
+new_learner:
+- learner : Allievo
+
+stats:
+- activityMap : Map<String,Int> (nome → prenotazioni)
