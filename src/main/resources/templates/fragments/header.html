@@ -8,17 +8,10 @@
 	<div class="logo">
 		<a th:href="@{/}" class="logo-name">R3busFormazione</a>
 	</div>
-	
 	<div class="session-menu" th:if="${#authorization.expr('isAuthenticated()')}">
 		<span th:text="${#authentication.name}" class="role-name">username</span>
 		<form th:action="@{/logout}" method="post">
 			<button type="submit" th:text="#{actions.logout}">Logout</button>
-		</form>
-	</div>
-	
-	<div class="session-menu" th:if="!${#authorization.expr('isAuthenticated()')}">
-		<form th:action="@{/login}" method="get">
-			<button type="submit" th:text="#{actions.login}">Login</button>
 		</form>
 	</div>
 </body>

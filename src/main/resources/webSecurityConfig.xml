@@ -7,7 +7,7 @@
 
 	<http use-expressions="true">
 		<intercept-url pattern="/favicon.ico" access="permitAll" />
-		<intercept-url pattern="/login*" access="permitAll" />
+		<intercept-url pattern="/login" access="isAnonymous()" />
 		<intercept-url pattern="/error" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
 		<intercept-url pattern="/css/**" access="permitAll" />
