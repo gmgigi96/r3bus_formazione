@@ -3,9 +3,9 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{fragments/layout}"
-	th:with="headline=#{|pages.${pageID}.headline|}">
+	th:with="headline=#{|pages.${pageId}.headline|}">
 <head>
-<title th:text="#{|pages.${pageID}.title|}">New/Modify Activity</title>
+<title th:text="#{|pages.${pageId}.title|}">New/Modify Activity</title>
 </head>
 <body>
 	<div layout:fragment="content">
@@ -27,7 +27,7 @@
 					<input th:field="*{orarioFine}" class="text" th:errorclass="invalid" type="datetime-local" required />
 				</li>
 				<li class="buttons">
-					<button type="submit" th:text="#{|pages.${pageID}.save|}">Save</button>
+					<button type="submit" th:text="#{|pages.${pageId}.save|}">Save</button>
 				</li>
 			</ul>
 		</form>

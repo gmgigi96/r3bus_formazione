@@ -13,7 +13,7 @@
 	<nav class="menu" sec:authorize="hasAuthority('RESPONSABILE')" th:unless="${showBackButton}">
 		<ul>
 			<!--/* TODO: add .active dynamically to current page */-->
-			<th:block th:if="${managingUser}">
+			<th:block th:if="${managingLearner}">
 				<li>
 					<a th:href="@{/responsabile/allievo/termina-gestione}"
 						th:text="#{actions.end_learner_management}">End Learner Management</a>
@@ -27,7 +27,7 @@
 						th:text="#{pages.booked_activities.title}">Booked Activities</a>
 				</li>
 			</th:block>
-			<th:block th:unless="${managingUser}">
+			<th:block th:unless="${managingLearner}">
 				<li>
 					<a th:href="@{/responsabile/allievo/}"
 						th:text="#{pages.manage_learner.title}">Manage Learner</a>

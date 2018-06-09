@@ -55,7 +55,7 @@ public class OrganizzatoreController {
 	public String nuovaAttivitaForm(@PathVariable("centroID") Long centroID, ModelMap model) {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./");
-		model.addAttribute("pageID", "new_activity");
+		model.addAttribute("pageId", "new_activity");
 		model.addAttribute("activity", new Attivita()); // TODEL
 		return "activity_form";
 	}
@@ -80,7 +80,7 @@ public class OrganizzatoreController {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./../");
 		// find activity and bind to model
-		model.addAttribute("pageID", "edit_activity");
+		model.addAttribute("pageId", "edit_activity");
 		model.addAttribute("activity", new Attivita()); // TODEL
 		return "activity_form";
 	}
