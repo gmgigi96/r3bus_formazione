@@ -18,22 +18,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ResponsabileController {
 
-	@GetMapping("/responsabile")
+	@GetMapping("/responsabile/")
 	public String defaultOperation() {
-		return "redirect:/responsabile/allievo";
+		return "redirect:/responsabile/allievo/";
 	}
 
 	// gestisci allievo
 
-	@GetMapping("/responsabile/allievo")
+	@GetMapping("/responsabile/allievo/")
 	public String gestisciAllievoForm() {
 		return "manage_learner";
 	}
 
-	@PostMapping("/responsabile/allievo")
+	@PostMapping("/responsabile/allievo/")
 	public String gestisciAllievo() {
 		// processa dati
-		return "redirect:/responsabile/attivita";
+		return "redirect:/responsabile/attivita/";
 	}
 
 	// inserisci allievo
@@ -51,7 +51,7 @@ public class ResponsabileController {
 			return "new_learner";
 		// add to db / call grasp controller
 		model.clear();
-		return "redirect:/responsabile/allievo";
+		return "redirect:/responsabile/allievo/";
 	}
 
 	// rimuovi allievo
@@ -65,7 +65,7 @@ public class ResponsabileController {
 	@PostMapping("/responsabile/allievo/elimina")
 	public String rimuoviAllievo() {
 		// processa dati
-		return "redirect:/responsabile/allievo?message=deleted";
+		return "redirect:/responsabile/allievo/?message=deleted";
 	}
 
 	// gestisci attivita allievo
@@ -86,7 +86,7 @@ public class ResponsabileController {
 
 	// lista attivita prenotabili
 
-	@GetMapping("/responsabile/attivita")
+	@GetMapping("/responsabile/attivita/")
 	public String attivitaDisponibili(ModelMap model) {
 		// if (rebus.allievoInGestione())
 		//	model.addAttribute("managingLearner", true);
@@ -106,13 +106,13 @@ public class ResponsabileController {
 
 	@PostMapping("/responsabile/attivita/prenota")
 	public String prenotaAttivita() {
-		return "redirect:/responsabile/allievo/attivita?message=success";
+		return "redirect:/responsabile/allievo/attivita/?message=success";
 	}
 
 	// termina gestione
 
 	@GetMapping("/responsabile/allievo/termina-gestione")
 	public String terminaGestione() {
-		return "redirect:/responsabile/allievo?message=finished";
+		return "redirect:/responsabile/allievo/?message=finished";
 	}
 }

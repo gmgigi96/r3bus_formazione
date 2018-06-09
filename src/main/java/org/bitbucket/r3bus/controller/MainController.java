@@ -28,7 +28,7 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
-		return "redirect:/" + role;
+		return "redirect:/" + role + "/";
 	}
 
 	@RequestMapping("/loginSuccess")
@@ -52,16 +52,6 @@ public class MainController {
 	}
 
 	/* ↓↓ mapping di prova (da eliminare) */
-
-	@GetMapping("/about")
-	public String aboutPage() {
-		return "about";
-	}
-
-	@GetMapping("/portfolio")
-	public String portfoliotPage() {
-		return "portfolio";
-	}
 
 	@GetMapping("/aggiungi")
 	public String aggiungiPage() {

@@ -29,7 +29,7 @@
 			</th:block>
 			<th:block th:unless="${managingUser}">
 				<li>
-					<a th:href="@{/responsabile/allievo}"
+					<a th:href="@{/responsabile/allievo/}"
 						th:text="#{pages.manage_learner.title}">Manage Learner</a>
 				</li>	
 				<li>
@@ -38,7 +38,7 @@
 				</li>
 			</th:block>
 			<li>
-				<a th:href="@{/responsabile/attivita}"
+				<a th:href="@{/responsabile/attivita/}"
 					th:text="#{pages.available_activities.title}">Available Activities</a>
 			</li>
 		</ul>

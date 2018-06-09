@@ -16,24 +16,24 @@ public class DirettoreController {
 
 	// selezione centro
 
-	@GetMapping("/direttore")
+	@GetMapping("/direttore/")
 	public String selezioneCentroForm(ModelMap model) {
 		model.addAttribute("selectMonth", true);
 		return "fragments/layout";
 	}
 
-	@PostMapping("/direttore")
+	@PostMapping("/direttore/")
 	public String selezioneCentro() {
 		// processa dati
 		long id = 1;
 		LocalDate month = LocalDate.now();
 		return "redirect:/direttore/" + id + "/" + month.format(DateTimeFormatter.ofPattern("yyyy-MM"))
-				+ "/statistiche";
+				+ "/statistiche/";
 	}
 
 	// mostra statistiche
 
-	@GetMapping("/direttore/{id}/{mese}/statistiche")
+	@GetMapping("/direttore/{id}/{mese}/statistiche/")
 	public String statistics(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("selectMonth", true);
 		Map<String, Integer> mp = new HashMap<>();

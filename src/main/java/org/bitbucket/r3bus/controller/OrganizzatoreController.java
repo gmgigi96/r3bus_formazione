@@ -20,21 +20,21 @@ public class OrganizzatoreController {
 
 	// selezione centro
 
-	@GetMapping("/organizzatore")
+	@GetMapping("/organizzatore/")
 	public String selezioneCentroForm() {
 		return "fragments/layout";
 	}
 
-	@PostMapping("/organizzatore")
+	@PostMapping("/organizzatore/")
 	public String selezioneCentro() {
 		// processa dati
 		long centroID = 1;
-		return "redirect:/organizzatore/" + centroID + "/attivita";
+		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
 
 	// lista attivita
 
-	@GetMapping("/organizzatore/{centroID}/attivita")
+	@GetMapping("/organizzatore/{centroID}/attivita/")
 	public String listaAttivita(@PathVariable("centroID") Long centroID, ModelMap model) {
 		List<Attivita> ls = new ArrayList<>(3);
 		LocalDateTime n = LocalDateTime.now();
@@ -54,7 +54,7 @@ public class OrganizzatoreController {
 	@GetMapping("/organizzatore/{centroID}/attivita/inserisci")
 	public String nuovaAttivitaForm(@PathVariable("centroID") Long centroID, ModelMap model) {
 		model.addAttribute("showBackButton", true);
-		model.addAttribute("backUrl", "../");
+		model.addAttribute("backUrl", "./");
 		model.addAttribute("pageID", "new_activity");
 		model.addAttribute("activity", new Attivita()); // TODEL
 		return "activity_form";
@@ -64,12 +64,12 @@ public class OrganizzatoreController {
 	public String nuovaAttivita(@PathVariable("centroID") Long centroID,
 			@Valid @ModelAttribute("activity") Attivita activity, BindingResult bindingResult, ModelMap model) {
 		model.addAttribute("showBackButton", true);
-		model.addAttribute("backUrl", "../");
+		model.addAttribute("backUrl", "./");
 		if (bindingResult.hasErrors())
 			return "activity_form";
 		// controller stuff
 		model.clear();
-		return "redirect:/organizzatore/" + centroID + "/attivita";
+		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
 
 	// modifica attivita
@@ -78,7 +78,7 @@ public class OrganizzatoreController {
 	public String modificaAttivitaForm(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
 			ModelMap model) {
 		model.addAttribute("showBackButton", true);
-		model.addAttribute("backUrl", "../../");
+		model.addAttribute("backUrl", "./../");
 		// find activity and bind to model
 		model.addAttribute("pageID", "edit_activity");
 		model.addAttribute("activity", new Attivita()); // TODEL
@@ -89,8 +89,8 @@ public class OrganizzatoreController {
 	public String modificaAttivita(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
 			ModelMap model) {
 		model.addAttribute("showBackButton", true);
-		model.addAttribute("backUrl", "../../");
+		model.addAttribute("backUrl", "./../");
 		// processa dati
-		return "redirect:/organizzatore/" + centroID + "/attivita";
+		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
 }
