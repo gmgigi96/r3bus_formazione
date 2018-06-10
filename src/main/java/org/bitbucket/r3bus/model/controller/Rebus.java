@@ -30,20 +30,25 @@ public class Rebus {
 	
 	// gestione allievo
 
-	public void gestisciAllievo(String codiceFiscale) {
+	public boolean gestisciAllievo(String codiceFiscale) {
 		this.allievoCorrente = azienda.getAllievo(codiceFiscale);
+		
+		if(this.allievoCorrente != null) {
+			return true;
+		}
+		return false;
 	}
 
 	public void terminaGestioneAllievo() {
 		this.allievoCorrente = null;
 	}
 
-	public void prenotaAttivita(int codiceAttivita) {
+	public void prenotaAttivita(Long codiceAttivita) {
 		Attivita attivita = this.centroGestito.getAttivita(codiceAttivita);
 		this.allievoCorrente.prenotaAttivita(attivita);
 	}
 
-	public void annullaPrenotazione(int codiceAttivita) {
+	public void annullaPrenotazione(Long codiceAttivita) {
 		Attivita attivita = centroGestito.getAttivita(codiceAttivita);
 		allievoCorrente.annullaPrenotazione(attivita);
 	}
@@ -55,32 +60,36 @@ public class Rebus {
 
 	// gestione attività
 
-	public void creaNuovaAttivita(int codiceCentro, String nome, LocalDateTime inizio, LocalDateTime fine) {
+	public void creaNuovaAttivita(Long codiceCentro, String nome, LocalDateTime inizio, LocalDateTime fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		c.addAttivita(nome, inizio, fine);
 	}
 
-	public void modificaAttivita(int codiceCentro, int codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
+	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);
 	}
 
-	public void setCentroGestito(int codiceCentro) {
+	public void setCentroGestito(Long codiceCentro) {
 		Centro c = azienda.getCentro(codiceCentro);
 		this.centroGestito = c;
 	}
 
 	//per i grafici
 	
-	public List<Number> getNumeroAttivitaGiornaliere(int codiceCentro, LocalDate inizio, LocalDate fine) {
+	public List<Number> getNumeroAttivitaGiornaliere(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getNumeroAttivitaGiornaliere(c, inizio, fine);
 	}
 
-	public List<Number> getMediaPrenotati(int codiceCentro, LocalDate inizio, LocalDate fine) {
+	public List<Number> getMediaPrenotati(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getMediaPrenotati(c, inizio, fine);
+	}
+
+	public void aggiungiAllievo(Allievo allievo) {
+		this.azienda.addAllievo(allievo);
 	}
 
 }
