@@ -1,7 +1,8 @@
 package org.bitbucket.r3bus.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.bitbucket.r3bus.service.AllievoService;
+import org.bitbucket.r3bus.service.CentroService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Data;
 
@@ -10,33 +11,30 @@ public class Azienda {
 
 	private String nome;
 
-	private final Map<String, Allievo> allievi;
-	private final Map<Long, Centro> centri;
-
-	public Azienda() {
-		allievi = new HashMap<>();
-		centri = new HashMap<>();
-	}
+	@Autowired
+	private AllievoService allievi;
+	@Autowired
+	private CentroService centri;
 
 	public Allievo getAllievo(String codiceFiscale) {
-		return allievi.get(codiceFiscale);
+		return allievi.findByCodiceFiscale(codiceFiscale);
 	}
 
 	public void eliminaAllievo(Allievo allievo) {
-		this.allievi.remove(allievo.getCodiceFiscale());
+		this.allievi.deleteAllievoByCodiceFiscale(allievo.getCodiceFiscale());
 	}
 
-	public Centro getCentro(long codiceCentro) {
-		return this.centri.get(codiceCentro);
+	public Centro getCentro(Long codiceCentro) {
+		return this.centri.findbyId(codiceCentro);
+	}
+	
+	public void addAllievo(Allievo allievo) {
+		this.allievi.save(allievo);
 	}
 	
 	// per test
-	public void addAllievo(Allievo allievo) {
-		this.allievi.put(allievo.getCodiceFiscale(), allievo);
-	}
-	
 	public void addCentro(Centro centro) {
-		this.centri.put(centro.getId(), centro);
+		this.centri.save(centro);
 	}
 	
 }
