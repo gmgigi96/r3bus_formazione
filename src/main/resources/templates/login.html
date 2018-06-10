@@ -10,21 +10,19 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{/login}" method="post" class="user-form">
-			<ul>
-				<li>
-					<label for="username">ID</label>
-					<input name="username" id="username" class="text" type="text" required />
-				</li>
-				<li>
-					<label for="password">Password</label>
-					<input name="password" id="password" class="text" type="password" required />
-				</li>
-				<li class="buttons">
-					<button type="submit" th:text="#{actions.login}">Login</button>
-				</li>
-			</ul>
-			<div th:if="${param.error}" th:text="#{pages.login.invalid_credentials}">Invalid credentials</div>
-			<div th:if="${param.logout}" th:text="#{pages.login.logged_out}">Logged out</div>
+			<div class="alert alert-danger"
+				th:if="${param.error}" th:text="#{pages.login.invalid_credentials}">Invalid credentials</div>
+			<div class="alert alert-info"
+				th:if="${param.logout}" th:text="#{pages.login.logged_out}">Logged out</div>
+			<div class="form-group">
+				<label class="control-label" for="username">ID</label>
+				<input name="username" id="username" class="form-control" type="text" required />
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="password">Password</label>
+				<input name="password" id="password" class="form-control" type="password" required />
+			</div>
+			<button class="btn" type="submit" th:text="#{actions.login}">Login</button>
 		</form>
 	</div>
 </body>

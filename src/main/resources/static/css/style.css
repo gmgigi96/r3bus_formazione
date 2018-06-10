@@ -23,6 +23,10 @@ body {
 	flex-direction: column;
 }
 
+.table thead {
+	font-weight: bold;
+}
+
 /* clear fixes */
 
 .header_resize:after, .main_resize:after, .footer_resize:after, .clr:after {
@@ -45,7 +49,7 @@ body {
 }
 
 .header_resize {
-	width: 945px;
+	max-width: 945px;
 	margin: 0 auto;
 	padding: 10px 0;
 }
@@ -92,73 +96,6 @@ body {
 	flex-grow: 1;
 }
 
-.main_resize h2 {
-	font: normal 20px ;
-	color: #3a3a3a;
-	padding: 10px 5px;
-	margin: 0;
-}
-
-.main_resize h2 span {
-	font: normal 11px Arial, Helvetica, sans-serif;
-	color: #8f8f8f;
-}
-
-.main_resize p {
-	font: normal 12px Arial, Helvetica, sans-serif;
-	color: #565656;
-	line-height: 1.8em;
-	padding: 5px;
-	margin: 0;
-}
-
-.main_resize p span {
-	color: #cd4c0f;
-	font: normal 11px Arial, Helvetica, sans-serif;
-	line-height: 1.8em;
-}
-
-.main_resize p.grey {
-	font: normal 12px Arial, Helvetica, sans-serif;
-	color: #898989;
-	line-height: 1.8em;
-	padding: 5px;
-	margin: 0;
-}
-
-.main_resize a {
-	color: #cd4c0f;
-	text-decoration: none;
-	font: bold 11px Arial, Helvetica, sans-serif;
-	padding: 0;
-	margin: 0;
-}
-
-.main_resize img {
-	margin: 5px auto;
-	padding: 0;
-}
-
-.main_resize ul {
-	list-style: none;
-	margin: 10px 0 10px 5px;
-	padding: 0;
-}
-
-.main_resize li {
-	background: url(../images/ul_li.gif) left no-repeat;
-	padding: 5px 0 3px 20px;
-	margin: 0;
-	font: normal 12px Arial, Helvetica, sans-serif;
-	color: #898989;
-}
-
-.main_resize img.floated {
-	float: left;
-	margin: 5px 5px;
-	padding: 0;
-}
-
 .main_left {
 	width: 223px;
 	float: left;
@@ -174,9 +111,8 @@ body {
 }
 
 .headline {
-	width: 678px;
-	padding: 10px 0 0 0;
-	margin: 0;
+	margin-bottom: 5px;
+	padding-top: 10px;
 	background: #fff;
 	border: 1px solid #efefef;
 }
@@ -190,6 +126,14 @@ body {
 	margin: 0;
 }
 
+/*stats*/
+.stats-frame img {
+	max-width: 100%;
+}
+
+.stats-frame .activity-bookings {
+	margin-top: 20px;
+}
 
 /*menu*/
 .menu {
@@ -234,6 +178,23 @@ body {
 	background: url(../images/hover.gif) no-repeat top;
 }
 
+.menu h2 {
+	font-size: 24px;
+}
+
+.menu .back-button:before {
+	content: "← ";
+}
+
+.menu .back-button {
+	border: 1px solid #ccc;
+	padding: 12px 10px;
+	display: block;
+	background: #ddd;
+	color: black;
+}
+
+
 /*************footer**********/
 .footer {
 	padding: 0;
@@ -244,29 +205,18 @@ body {
 }
 
 .footer_resize {
-	width: 945px;
+	max-width: 945px;
 	margin: 0 auto;
 	padding: 10px 0;
 }
 
 .footer p {
 	text-align: center;
-	font: normal 11px Arial, Helvetica, sans-serif;
+	font-size: 11px;
 	color: #a1a1a1;
 }
 
 .footer a {
 	color: #c6c6c6;
 	text-decoration: none;
-}
-
-li.bg, .bg {
-	float: right;
-	clear: both;
-	border-top: 1px solid #e1e1e1;
-	width: 100%;
-	padding: 0;
-	margin: 5px 0;
-	background: none;
-	line-height: 0;
 }

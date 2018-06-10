@@ -10,7 +10,7 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{${activityActionUrl}}" method="post">
-			<table class="activity-list">
+			<table class="activity-list table">
 				<thead>
 					<tr>
 						<td th:if="${multiSelect}"></td>
@@ -36,7 +36,7 @@
 				</tbody>
 			</table>
 			<div class="activity-actions" th:if="${multiSelect}">
-				<button type="submit" name="select"
+				<button class="btn" type="submit" name="select"
 					th:text="#{|pages.${pageId}.send_selection|}">Send Selection</button>
 			</div>
 		</form>

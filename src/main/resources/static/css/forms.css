@@ -5,8 +5,8 @@
 	padding: 5px 5px;
 }
 
-.user-form * {
-	color: #F00;
+.user-form .form-control {
+	width: 80%;
 }
 
 .user-form ol, .user-form ul {
@@ -32,12 +32,7 @@
 	width: 0;
 }
 
-.user-form li.buttons {
-	margin: 5px 0;
-	clear: both;
-}
-
-.user-form label {
+.user-form .control-label {
 	margin: 0;
 	width: 150px;
 	display: block;
@@ -48,26 +43,8 @@
 	float: left;
 }
 
-.user-form input.text {
-	width: 530px;
-	border: 1px solid #e9e9e9;
-	margin: 2px 0;
-	padding: 5px 2px;
-	height: 16px;
-	background: #fff;
-	float: left;
-}
 
-.user-form textarea {
-	width: 530px;
-	border: 1px solid #e9e9e9;
-	margin: 2px 0;
-	padding: 2px;
-	background: #fff;
-	float: left;
-}
-
-.user-form .buttons button {
+.user-form .btn {
 	padding: 10px 300px 10px 30px;
 	margin: 10px 0 0 0;
 	border: 0;
@@ -77,6 +54,6 @@
 	cursor: pointer;
 }
 
-.user-form .buttons button:hover {
+.user-form .btn:hover {
 	background: #444;
 }

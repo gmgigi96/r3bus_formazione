@@ -10,15 +10,16 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{''}" method="post" class="user-form">
-			<ul>
-				<li>
-					<label for="taxid" th:text="#{learner.taxid}">Fiscal Code</label>
-					<input name="taxid" id="taxid" class="text" type="text" required />
-				</li>
-				<li class="buttons">
-					<button type="submit" th:text="#{pages.manage_learner.manage}">Save</button>
-				</li>
-			</ul>
+			<div class="form-group">
+				<label for="taxid" th:text="#{learner.taxid}">Fiscal Code</label>
+				<div class="input-group">
+					<input name="taxid" id="taxid" class="form-control" type="text" required />
+					<div class="input-group-addon">
+						<span class="fa fa-user"></span>
+					</div>
+				</div>
+			</div>
+			<button class="btn" type="submit" th:text="#{pages.manage_learner.manage}">Save</button>
 		</form>
 	</div>
 </body>

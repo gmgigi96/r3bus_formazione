@@ -10,26 +10,32 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{''}" method="post" th:object="${activity}" class="user-form">
-			<ul th:if="${#fields.hasAnyErrors()}" class="error-list">
-				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">Field Error</li>
-			</ul>
-			<ul>
-				<li>
-					<label for="nome" th:text="#{activity.name}">Activity Name</label>
-					<input th:field="*{nome}" class="text" th:errorclass="invalid" type="text" required />
-				</li>
-				<li>
-					<label for="orarioInizio" th:text="#{activity.begin_time}">Begin Time</label>
-					<input th:field="*{orarioInizio}" class="text" th:errorclass="invalid" type="datetime-local" required />
-				</li>
-				<li>
-					<label for="orarioFine" th:text="#{activity.end_time}">End Time</label>
-					<input th:field="*{orarioFine}" class="text" th:errorclass="invalid" type="datetime-local" required />
-				</li>
-				<li class="buttons">
-					<button type="submit" th:text="#{|pages.${pageId}.save|}">Save</button>
-				</li>
-			</ul>
+			<th:block th:each="err : ${#fields.allErrors()}"> 
+				<p th:text="${err}" class="alert alert-warning">Field Error</p>
+			</th:block>
+			<div class="form-group">
+				<label for="nome" class="control-label" th:text="#{activity.name}">Activity Name</label>
+				<input th:field="*{nome}" class="form-control" th:errorclass="has-error" type="text" required />
+			</div>
+			<div class="form-group">
+				<label for="orarioInizio" class="control-label" th:text="#{activity.begin_time}">Begin Time</label>
+				<div class="input-group date" data-datetimepicker-format="YYYY-MM-DD HH:mm">
+					<input th:field="*{orarioInizio}" class="form-control" th:errorclass="has-error" type="text" required />
+					<span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="orarioFine" class="control-label" th:text="#{activity.end_time}">End Time</label>
+				<div class="input-group date" data-datetimepicker-format="YYYY-MM-DD HH:mm">
+					<input th:field="*{orarioFine}" class="form-control" th:errorclass="has-error" type="text" required />
+					<span class="input-group-addon">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+				</div>
+			</div>
+			<button class="btn" type="submit" th:text="#{|pages.${pageId}.save|}">Save</button>
 		</form>
 	</div>
 </body>
