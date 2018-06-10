@@ -28,7 +28,7 @@ public class GraficoController {
 	ChartGenerator chartGenerator;
 	
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/attivita_giornaliere.png")
-	public void graficoAttivitaGiornaliere(@PathVariable("centro") int codiceCentro, 
+	public void graficoAttivitaGiornaliere(@PathVariable("centro") Long codiceCentro, 
 											@PathVariable("mese")  @DateTimeFormat(iso = ISO.DATE) LocalDate mese,
 												HttpServletResponse response ) {
 		LocalDate inizio = mese.withDayOfMonth(1);
@@ -41,7 +41,7 @@ public class GraficoController {
 	}
 
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/prenotazioni_giornaliere.png")
-	public void graficoPrenotazioniGiornaliere(@PathVariable("centro") int codiceCentro,
+	public void graficoPrenotazioniGiornaliere(@PathVariable("centro") Long codiceCentro,
 												@PathVariable("mese") @DateTimeFormat(iso = ISO.DATE) LocalDate mese,
 													HttpServletResponse response ) {
 		LocalDate inizio = mese.withDayOfMonth(1);
