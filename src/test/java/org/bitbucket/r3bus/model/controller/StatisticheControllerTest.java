@@ -19,7 +19,7 @@ public class StatisticheControllerTest {
 	private Centro centroConZeroAttivita;
 	private Centro centroConUnAttivita;
 	private Centro centroConDueAttivitaStessoGiorno;
-	private LocalDateTime now = LocalDateTime.now();
+	private LocalDateTime now = LocalDateTime.now().withHour(12);
 	private StatisticheController statisticheController1;
 
 	@Before
@@ -43,9 +43,9 @@ public class StatisticheControllerTest {
 		List<Number> mappa = statisticheController1.getNumeroAttivitaGiornaliere(centroConUnAttivita, ieri, domani);
 
 		assertEquals(3, mappa.size());
-		assertEquals(new Long(0), mappa.get(0));
-		assertEquals(new Long(1), mappa.get(1));
-		assertEquals(new Long(0), mappa.get(2));
+		assertEquals(0L, mappa.get(0));
+		assertEquals(1L, mappa.get(1));
+		assertEquals(0L, mappa.get(2));
 	}
 
 	@Test
@@ -55,9 +55,9 @@ public class StatisticheControllerTest {
 		List<Number> mappa = statisticheController1.getNumeroAttivitaGiornaliere(centroConDueAttivitaStessoGiorno, ieri, domani);
 
 		assertEquals(3, mappa.size());
-		assertEquals(new Long(0), mappa.get(0));
-		assertEquals(new Long(2), mappa.get(1));
-		assertEquals(new Long(0), mappa.get(2));
+		assertEquals(0L, mappa.get(0));
+		assertEquals(2L, mappa.get(1));
+		assertEquals(0L, mappa.get(2));
 	}
 
 	@Test
@@ -68,8 +68,8 @@ public class StatisticheControllerTest {
 		List<Number> mappa = statisticheController1.getNumeroAttivitaGiornaliere(centroConDueAttivitaStessoGiorno, domani, dopodomani);
 
 		assertEquals(2, mappa.size());
-		assertEquals(new Long(0), mappa.get(0));
-		assertEquals(new Long(0), mappa.get(1));
+		assertEquals(0L, mappa.get(0));
+		assertEquals(0L, mappa.get(1));
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class StatisticheControllerTest {
 		centroConUnAttivita_zeroPartecipanti.addAttivita(attivitaZeroPartecipanti);
 
 		Map<String, Number> res = statisticheController1.getElencoAttivita(centroConUnAttivita_zeroPartecipanti, inizio, fine);
-		assertEquals(new Integer(0), res.get(attivitaZeroPartecipanti.toString()));
+		assertEquals(0, res.get(attivitaZeroPartecipanti.toString()));
 		assertEquals(1, res.values().size());
 	}
 
@@ -111,7 +111,7 @@ public class StatisticheControllerTest {
 		centroConUnAttivita_unPartecipante.addAttivita(attivitaConUnPartecipante);
 
 		Map<String, Number> res = statisticheController1.getElencoAttivita(centroConUnAttivita_unPartecipante, inizio, fine);
-		assertEquals(new Integer(1), res.get(attivitaConUnPartecipante.toString()));
+		assertEquals(1, res.get(attivitaConUnPartecipante.toString()));
 		assertEquals(1, res.values().size());
 	}
 
@@ -135,8 +135,8 @@ public class StatisticheControllerTest {
 		List<Number> res = statisticheController1.getMediaPrenotati(centroConZeroAttivita, inizio, fine);
 
 		assertEquals(2, res.size());
-		assertEquals(new Float(0), res.get(0));
-		assertEquals(new Float(0), res.get(1));
+		assertEquals(0f, res.get(0));
+		assertEquals(0f, res.get(1));
 	}
 
 	@Test
@@ -151,9 +151,9 @@ public class StatisticheControllerTest {
 		List<Number> res = statisticheController1.getMediaPrenotati(centroConUnAttivita_zeroPartecipanti,inizio.toLocalDate().minusDays(1), fine.toLocalDate().plusDays(1));
 
 		assertEquals(3, res.size());
-		assertEquals(new Float(0), res.get(0));
-		assertEquals(new Float(0), res.get(1));
-		assertEquals(new Float(0), res.get(2));
+		assertEquals(0f, res.get(0));
+		assertEquals(0f, res.get(1));
+		assertEquals(0f, res.get(2));
 	}
 
 	@Test
@@ -170,9 +170,9 @@ public class StatisticheControllerTest {
 		List<Number> res = statisticheController1.getMediaPrenotati(centroConUnAttivita_unPartecipante,inizio.toLocalDate().minusDays(1), fine.toLocalDate().plusDays(1));
 
 		assertEquals(3, res.size());
-		assertEquals(new Float(0), res.get(0));
-		assertEquals(new Float(1), res.get(1));
-		assertEquals(new Float(0), res.get(2));
+		assertEquals(0f, res.get(0));
+		assertEquals(1f, res.get(1));
+		assertEquals(0f, res.get(2));
 	}
 
 }
