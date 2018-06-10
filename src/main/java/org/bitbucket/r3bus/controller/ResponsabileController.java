@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.controller.Rebus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ResponsabileController {
+
+	@Autowired
+	private Rebus rebus;
 
 	@GetMapping("/responsabile/")
 	public String defaultOperation() {
@@ -30,10 +35,14 @@ public class ResponsabileController {
 		return "manage_learner";
 	}
 
+	// sulle post redirect se successo
+
 	@PostMapping("/responsabile/allievo/")
-	public String gestisciAllievo() {
+	public String gestisciAllievo(@Valid @ModelAttribute("taxid") String codiceFiscale) {
 		// processa dati
-		return "redirect:/responsabile/attivita/";
+		if (rebus.gestisciAllievo(codiceFiscale))
+			return "redirect:/responsabile/attivita/";
+		return "manage_learner";
 	}
 
 	// inserisci allievo
@@ -50,6 +59,7 @@ public class ResponsabileController {
 		if (bindingResult.hasErrors())
 			return "new_learner";
 		// add to db / call grasp controller
+		rebus.aggiungiAllievo(learner);
 		model.clear();
 		return "redirect:/responsabile/allievo/";
 	}
@@ -65,6 +75,7 @@ public class ResponsabileController {
 	@PostMapping("/responsabile/allievo/elimina")
 	public String rimuoviAllievo() {
 		// processa dati
+		rebus.eliminaAllievo();
 		return "redirect:/responsabile/allievo/?message=deleted";
 	}
 
@@ -89,7 +100,7 @@ public class ResponsabileController {
 	@GetMapping("/responsabile/attivita/")
 	public String attivitaDisponibili(ModelMap model) {
 		// if (rebus.allievoInGestione())
-		//	model.addAttribute("managingLearner", true);
+		// model.addAttribute("managingLearner", true);
 		model.addAttribute("multiSelect", true);
 		model.addAttribute("pageId", "available_activities");
 		List<Attivita> ls = new ArrayList<>(3);
@@ -113,6 +124,7 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/allievo/termina-gestione")
 	public String terminaGestione() {
+		rebus.terminaGestioneAllievo();
 		return "redirect:/responsabile/allievo/?message=finished";
 	}
 }

@@ -41,6 +41,12 @@ public class Centro {
 	public Centro() {
 		attivita = new ArrayList<>();
 	}
+	
+	public Centro(String nome, int capienza) {
+		this();
+		this.nome = nome;
+		this.capienza = capienza;
+	}
 
 	/**
 	 * Restituisce l'attività corrispondente al codice attivita dato per paramentro

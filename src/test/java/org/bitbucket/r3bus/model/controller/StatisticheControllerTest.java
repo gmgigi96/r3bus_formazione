@@ -24,10 +24,9 @@ public class StatisticheControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		centroConZeroAttivita = new Centro();
-		centroConZeroAttivita.setCapienza(1);
-		centroConUnAttivita = new Centro();
-		centroConDueAttivitaStessoGiorno = new Centro();
+		centroConZeroAttivita = new Centro("centroConZeroAttivita", 1);
+		centroConUnAttivita = new Centro("centroConUnAttivita", 11);
+		centroConDueAttivitaStessoGiorno = new Centro("centroConDueAttivitaStessoGiorno", 100);
 
 		centroConUnAttivita.addAttivita("attivita1", now, now.plusHours(3));
 
@@ -89,7 +88,7 @@ public class StatisticheControllerTest {
 
 		LocalDateTime now = LocalDateTime.now();
 
-		Centro centroConUnAttivita_zeroPartecipanti = new Centro();
+		Centro centroConUnAttivita_zeroPartecipanti = new Centro("centroConUnAttivita_zeroPartecipanti", 10);
 		Attivita attivitaZeroPartecipanti = new Attivita("attivitaZeroPartecipanti", now, now.plusHours(1));
 		centroConUnAttivita_zeroPartecipanti.addAttivita(attivitaZeroPartecipanti);
 
@@ -105,7 +104,7 @@ public class StatisticheControllerTest {
 
 		LocalDateTime now = LocalDateTime.now();
 
-		Centro centroConUnAttivita_unPartecipante = new Centro();
+		Centro centroConUnAttivita_unPartecipante = new Centro("centroConUnAttivita_unPartecipante", 100);
 		Attivita attivitaConUnPartecipante = new Attivita("attivitaConUnPartecipante", now, now.plusHours(3));
 		attivitaConUnPartecipante.prenota(new Allievo());
 
@@ -120,7 +119,7 @@ public class StatisticheControllerTest {
 	public void testGetElencoAttivita_centroConUnaAttivita_zeroPartecipanti_intervalloNonComprendenteAttivita() {
 		LocalDateTime t = LocalDateTime.of(2018, 10, 10, 10, 0);
 
-		Centro centroConUnAttivita_zeroPartecipanti = new Centro();
+		Centro centroConUnAttivita_zeroPartecipanti = new Centro("centroConUnAttivita_zeroPartecipanti", 100);
 		Attivita attivitaConZeroPartecipanti = new Attivita("attivitaConZeroPartecipanti", t, t.plusHours(3));
 
 		centroConUnAttivita_zeroPartecipanti.addAttivita(attivitaConZeroPartecipanti);
@@ -145,7 +144,7 @@ public class StatisticheControllerTest {
 		LocalDateTime inizio = LocalDateTime.of(2018, 10, 10, 10, 0);
 		LocalDateTime fine = inizio.plusHours(3);
 
-		Centro centroConUnAttivita_zeroPartecipanti = new Centro();
+		Centro centroConUnAttivita_zeroPartecipanti = new Centro("centroConUnAttivita_zeroPartecipanti", 100);
 		centroConUnAttivita_zeroPartecipanti.setCapienza(1);
 		centroConUnAttivita_zeroPartecipanti.addAttivita("attivitaConZeroPartecipanti", inizio, fine);
 
@@ -162,7 +161,7 @@ public class StatisticheControllerTest {
 		LocalDateTime inizio = LocalDateTime.of(2018, 10, 10, 10, 0);
 		LocalDateTime fine = inizio.plusHours(3);
 
-		Centro centroConUnAttivita_unPartecipante = new Centro();
+		Centro centroConUnAttivita_unPartecipante = new Centro("centroConUnAttivita_unPartecipante", 100);
 		centroConUnAttivita_unPartecipante.setCapienza(1);
 		Attivita attivitaConUnPartecipante = new Attivita("attivitaConUnPartecipante", inizio, fine);
 		attivitaConUnPartecipante.prenota(new Allievo());

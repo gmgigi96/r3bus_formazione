@@ -33,6 +33,16 @@ public class AllievoService{
 		return null;
 	}
 	
+	public Allievo findByCodiceFiscale(String codiceFiscale) {
+		Allievo allievo = this.allievoRepository.findByCodiceFiscale(codiceFiscale);
+		
+		return allievo;
+	}
+	
+	public void deleteAllievoByCodiceFiscale(String codiceFiscale) {
+		this.allievoRepository.deleteByCodiceFiscale(codiceFiscale);
+	}
+	
 	public void flush() {
 		this.allievoRepository.flush();
 	}
