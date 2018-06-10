@@ -4,5 +4,8 @@ import org.bitbucket.r3bus.model.Allievo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AllievoRepository extends JpaRepository<Allievo, Long>{
-
+	
+	public Allievo findByCodiceFiscale(String codiceFiscale);
+	
+	public void deleteByCodiceFiscale(String codiceFiscale);
 }
