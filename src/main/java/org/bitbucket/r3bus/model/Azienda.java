@@ -3,9 +3,11 @@ package org.bitbucket.r3bus.model;
 import org.bitbucket.r3bus.service.AllievoService;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
+@Component
 @Data
 public class Azienda {
 
