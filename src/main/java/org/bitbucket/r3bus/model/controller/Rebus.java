@@ -8,6 +8,7 @@ import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -17,14 +18,15 @@ import lombok.Data;
 @Component
 @SessionScope
 public class Rebus {
-
-	private Allievo allievoCorrente;
+	@Autowired
 	private Azienda azienda;
+	
+	private Allievo allievoCorrente;
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
 
 	public Rebus() {
-		azienda = new Azienda();
+//		azienda = new Azienda();
 		statisticheController = new StatisticheController();
 	}
 	
@@ -37,6 +39,10 @@ public class Rebus {
 			return true;
 		}
 		return false;
+	}
+
+	public void aggiungiAllievo(Allievo allievo) {
+		this.azienda.addAllievo(allievo);
 	}
 
 	public void terminaGestioneAllievo() {
@@ -86,10 +92,6 @@ public class Rebus {
 	public List<Number> getMediaPrenotati(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getMediaPrenotati(c, inizio, fine);
-	}
-
-	public void aggiungiAllievo(Allievo allievo) {
-		this.azienda.addAllievo(allievo);
 	}
 
 }
