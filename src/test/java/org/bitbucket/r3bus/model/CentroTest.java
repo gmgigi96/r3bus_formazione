@@ -19,11 +19,11 @@ public class CentroTest {
 	@Before
 	public void setUp() throws Exception {
 		now = LocalDateTime.now();
-		centro = new Centro();
+		centro = new Centro("centro", 100);
 
 		a = new Attivita("sample", now, now.plusHours(1));
 
-		centroConZeroAttivita = new Centro();
+		centroConZeroAttivita = new Centro("zeroAttivita", 100);
 	}
 
 	@Test
