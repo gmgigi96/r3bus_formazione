@@ -36,10 +36,10 @@
 				</tbody>
 			</table>
 			<div class="activity-actions">
-				<button class="btn" type="submit" name="select"
+				<button class="btn btn-primary" type="submit" name="select"
 					th:if="${multiSelect}"
 					th:text="#{|pages.${pageId}.send_selection|}">Send Selection</button>
-				<a class="btn" href="inserisci"
+				<a class="btn btn-primary" href="inserisci"
 					th:if="${newActivity}"
 					th:text="#{activity.new}">New Activity</a>
 			</div>
