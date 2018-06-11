@@ -21,8 +21,9 @@ public class OrganizzatoreController {
 	// selezione centro
 
 	@GetMapping("/organizzatore/")
-	public String selezioneCentroForm() {
-		return "fragments/layout";
+	public String selezioneCentroForm(ModelMap model) {
+		model.addAttribute("pageId", "select_center");
+		return "message";
 	}
 
 	@PostMapping("/organizzatore/")
@@ -46,6 +47,7 @@ public class OrganizzatoreController {
 		// model.addAttribute("multiSelect", true);
 		model.addAttribute("editActivity", true);
 		model.addAttribute("pageId", "managed_activities");
+		model.addAttribute("newActivity", true);
 		return "activity_list";
 	}
 

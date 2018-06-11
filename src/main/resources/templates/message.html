@@ -3,13 +3,13 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{fragments/layout}"
-	th:with="headline=#{pages.error.headline}, showBackButton=true, backUrl='javascript:history.back()'">
+	th:with="headline=#{|pages.${pageId}.headline|}">
 <head>
-<title th:text="|${status} ${error}|">Error</title>
+<title th:text="#{|pages.${pageId}.title|}">Hello</title>
 </head>
 <body>
 	<div layout:fragment="content">
-		<p class="alert alert-danger"><b>[[${path}]]</b> <i>[[${error}]]</i></p>
+		<p class="alert alert-info" th:text="#{|pages.${pageId}.landing_message|}">This is a generic landing page</p>
 	</div>
 </body>
 </html>

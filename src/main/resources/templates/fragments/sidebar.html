@@ -7,7 +7,7 @@
 <body th:fragment="sidebar">
 
 	<nav class="menu" th:if="${showBackButton}">
-		<a th:href="${backUrl}" class="back-button" th:text="#{actions.back}">Back</a>
+		<a th:href="${backUrl}" class="btn btn-default back-button" th:text="#{actions.back}">Back</a>
 	</nav>
 
 	<nav class="menu" sec:authorize="hasAuthority('RESPONSABILE')" th:unless="${showBackButton}">
@@ -62,7 +62,7 @@
 					</span>
 				</div>
 			</div>
-			<button class="btn" type="submit" th:text="#{actions.choose}">Choose</button>
+			<button class="btn btn-default" type="submit" th:text="#{actions.choose}">Choose</button>
 		</form>
 	</div>
 

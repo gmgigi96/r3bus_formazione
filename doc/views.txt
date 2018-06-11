@@ -18,6 +18,7 @@ activity_list:
 - activityActionUrl : String
 - multiSelect : boolean (mostra checkbox e bottone invia)
 - editActivity: boolean (mostra bottone di modifica su ogni riga)
+- newActivity: boolean (mostra link per aggiunta)
 - activityList : List<Attivita>
 
 new_learner:

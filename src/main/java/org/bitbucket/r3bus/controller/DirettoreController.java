@@ -16,15 +16,16 @@ public class DirettoreController {
 
 	@Autowired
 	private Rebus rebus;
-	
+
 	// selezione centro
 
 	@GetMapping("/direttore/")
 	public String selezioneCentroForm(ModelMap model) {
 		model.addAttribute("selectMonth", true);
+		model.addAttribute("pageId", "select_stats");
 		model.addAttribute("centerActionUrl", "/direttore/");
 		// model.addAttribute("centerMap", rebus.getElencoCentri());
-		return "fragments/layout"; // TODO: cambiare, usare una vista vuota (da fare)
+		return "message";
 	}
 
 	@PostMapping("/direttore/")
@@ -39,12 +40,12 @@ public class DirettoreController {
 			ModelMap model) { 
 		LocalDate inizio = LocalDate.parse(month + "-01");
 		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
-		
+
 		model.addAttribute("selectMonth", true);
 		model.addAttribute("centerActionUrl", "/direttore/");
 		// model.addAttribute("centerMap", rebus.getElencoCentri());
 		model.addAttribute("activityMap", rebus.getPrenotazioniPerAttivita(id, inizio, fine));
-		
+
 		return "stats";
 	}
 }
