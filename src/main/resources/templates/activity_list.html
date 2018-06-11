@@ -35,9 +35,13 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="activity-actions" th:if="${multiSelect}">
+			<div class="activity-actions">
 				<button class="btn" type="submit" name="select"
+					th:if="${multiSelect}"
 					th:text="#{|pages.${pageId}.send_selection|}">Send Selection</button>
+				<a class="btn" href="inserisci"
+					th:if="${newActivity}"
+					th:text="#{activity.new}">New Activity</a>
 			</div>
 		</form>
 	</div>
