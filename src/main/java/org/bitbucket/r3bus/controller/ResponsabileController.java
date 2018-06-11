@@ -1,5 +1,6 @@
 package org.bitbucket.r3bus.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -7,6 +8,7 @@ import javax.validation.Valid;
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.controller.Rebus;
+import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +22,7 @@ public class ResponsabileController {
 
 	@Autowired
 	private Rebus rebus;
-
+	
 	@GetMapping("/responsabile/")
 	public String defaultOperation() {
 		return "redirect:/responsabile/allievo/";
@@ -97,6 +99,8 @@ public class ResponsabileController {
 		// model.addAttribute("managingLearner", true);
 		model.addAttribute("multiSelect", true);
 		model.addAttribute("pageId", "available_activities");
+		model.addAttribute("activityActionUrl", "prenota");
+
 		Set<Attivita> ls = this.rebus.getAttivitaDisponibili();
 
 		model.addAttribute("activityList", ls);
@@ -106,7 +110,12 @@ public class ResponsabileController {
 	// prenota attivita
 
 	@PostMapping("/responsabile/attivita/prenota")
-	public String prenotaAttivita() {
+	public String prenotaAttivita(@ModelAttribute("selection") List<Long> codiciAttivita, ModelMap model) {
+
+		for (Long id : codiciAttivita) {
+			System.out.println("ID of selected Activity: " + id);
+			rebus.prenotaAttivita(id);
+		}
 		return "redirect:/responsabile/allievo/attivita/?message=success";
 	}
 
