@@ -85,7 +85,7 @@ public class ResponsabileController {
 	public String attivitaAllievo(ModelMap model) {
 		model.addAttribute("pageId", "booked_activities");
 		model.addAttribute("managingLearner", true);
-		Set<Attivita> ls = this.rebus.getAttivitaDisponibili();
+		List<Attivita> ls = this.rebus.getAttivitaAllievo();
 
 		model.addAttribute("activityList", ls);
 		return "activity_list";
@@ -95,9 +95,10 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/attivita/")
 	public String attivitaDisponibili(ModelMap model) {
-		// if (rebus.allievoInGestione())
-		// model.addAttribute("managingLearner", true);
-		model.addAttribute("multiSelect", true);
+		 if (rebus.allievoInGestione()) {
+			 model.addAttribute("managingLearner", true);
+			 model.addAttribute("multiSelect", true);			 
+		 }
 		model.addAttribute("pageId", "available_activities");
 		model.addAttribute("activityActionUrl", "prenota");
 
@@ -111,6 +112,7 @@ public class ResponsabileController {
 
 	@PostMapping("/responsabile/attivita/prenota")
 	public String prenotaAttivita(@ModelAttribute("selection") List<Long> codiciAttivita, ModelMap model) {
+		model.addAttribute("managingLearner", true);
 
 		for (Long id : codiciAttivita) {
 			System.out.println("ID of selected Activity: " + id);

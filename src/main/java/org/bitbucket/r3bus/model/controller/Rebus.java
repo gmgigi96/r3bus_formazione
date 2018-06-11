@@ -99,4 +99,12 @@ public class Rebus {
 		return this.centroGestito.getAttivitaDisponibili();
 	}
 
+	public List<Attivita> getAttivitaAllievo() {
+		return this.allievoCorrente.getAttivitaPrenotate();
+	}
+
+	public boolean allievoInGestione() {
+		return this.allievoCorrente!=null;
+	}
+
 }
