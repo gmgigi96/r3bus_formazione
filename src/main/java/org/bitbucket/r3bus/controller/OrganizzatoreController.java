@@ -1,12 +1,12 @@
 package org.bitbucket.r3bus.controller;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.controller.Rebus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class OrganizzatoreController {
+
+	@Autowired
+	private Rebus rebus;
 
 	// selezione centro
 
@@ -36,13 +39,9 @@ public class OrganizzatoreController {
 
 	@GetMapping("/organizzatore/{centroID}/attivita/")
 	public String listaAttivita(@PathVariable("centroID") Long centroID, ModelMap model) {
-		List<Attivita> ls = new ArrayList<>(3);
-		LocalDateTime n = LocalDateTime.now();
-		int h = 0;
-		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
-		model.addAttribute("activityList", ls);
+		rebus.setCentroGestito(centroID);
+		Set<Attivita> attivita = rebus.getAttivitaDisponibili();
+		model.addAttribute("activityList", attivita);
 		// model.addAttribute("multiSelect", true);
 		model.addAttribute("editActivity", true);
 		model.addAttribute("pageId", "managed_activities");
