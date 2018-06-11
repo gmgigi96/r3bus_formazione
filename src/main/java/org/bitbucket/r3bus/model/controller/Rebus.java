@@ -97,7 +97,7 @@ public class Rebus {
 		return statisticheController.getMediaPrenotati(c, inizio, fine);
 	}
 	
-	public Map<String,Number> getElencoAttivita(Long codiceCentro, LocalDate inizio, LocalDate fine) {
+	public Map<String,Number> getPrenotazioniPerAttivita(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getElencoAttivita(c, inizio, fine);
 	}

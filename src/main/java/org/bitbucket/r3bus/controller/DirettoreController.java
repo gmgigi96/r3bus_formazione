@@ -23,7 +23,7 @@ public class DirettoreController {
 	public String selezioneCentroForm(ModelMap model) {
 		model.addAttribute("selectMonth", true);
 		model.addAttribute("centerActionUrl", "/direttore/");
-		// model.addAttribute("centerMap", rebus.getMappaCentri());
+		// model.addAttribute("centerMap", rebus.getElencoCentri());
 		return "fragments/layout"; // TODO: cambiare, usare una vista vuota (da fare)
 	}
 
@@ -42,8 +42,8 @@ public class DirettoreController {
 		
 		model.addAttribute("selectMonth", true);
 		model.addAttribute("centerActionUrl", "/direttore/");
-		// model.addAttribute("centerMap", rebus.getMappaCentri());
-		model.addAttribute("activityMap", rebus.getElencoAttivita(id, inizio, fine));
+		// model.addAttribute("centerMap", rebus.getElencoCentri());
+		model.addAttribute("activityMap", rebus.getPrenotazioniPerAttivita(id, inizio, fine));
 		
 		return "stats";
 	}
