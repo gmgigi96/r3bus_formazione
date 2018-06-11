@@ -15,7 +15,7 @@ create table utenti
 	primary key(username)
 );
 
-insert into utenti(username, pw, auth) values('centro-1', '$2y$12$0sAyK3xWVY9CX.Z3YgayJe7WAogoLqDcCvw7SEGMBvuFahYCG7KGi', 'RESPONSABILE');
-insert into utenti(username, pw, auth) values('centro-2', '$2y$12$WTjyc1mLtkajVHwSb6kD8evIDL4jlt7y8DoC0AP4KdkxT5OAr0fdq', 'RESPONSABILE');
+insert into utenti(username, pw, auth) values('centro-1', '$2a$04$ANz4UysPg8IIb17IsNvnpuZsf1ihHpKVMofXI4iaEXLZz8HwuxsIK', 'RESPONSABILE');
+insert into utenti(username, pw, auth) values('centro-2', '$2a$04$KQd5yXXhnrPo6AEvqMd1x.jbqNIoamTKT3VzXgd4cqiVO5ICT.QOK', 'RESPONSABILE');
 insert into utenti(username, pw, auth) values('organizzatore', '$2a$10$ZQ1Wn4Nc.gvz5KLShA9VoOHjK/c64A4OE3ReQeSvVaTD88fXPcJ5G', 'ORGANIZZATORE');
 insert into utenti(username, pw, auth) values('direttore', '$2a$10$mI4/HC5pvJQsOd9JG7GmU.0bEYSv5gd//sUfJSNmxIgJTYBgKrB9G', 'DIRETTORE');
