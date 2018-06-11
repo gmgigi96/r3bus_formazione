@@ -21,8 +21,9 @@ public class OrganizzatoreController {
 	// selezione centro
 
 	@GetMapping("/organizzatore/")
-	public String selezioneCentroForm() {
-		return "fragments/layout";
+	public String selezioneCentroForm(ModelMap model) {
+		model.addAttribute("pageId", "select_center");
+		return "message";
 	}
 
 	@PostMapping("/organizzatore/")

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}"
+	th:with="headline=#{|pages.${pageId}.headline|}">
+<head>
+<title th:text="#{|pages.${pageId}.title|}">Hello</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<p class="alert alert-info" th:text="#{|pages.${pageId}.landing_message|}">This is a generic landing page</p>
+	</div>
+</body>
+</html>

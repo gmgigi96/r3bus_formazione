@@ -19,7 +19,8 @@ public class DirettoreController {
 	@GetMapping("/direttore/")
 	public String selezioneCentroForm(ModelMap model) {
 		model.addAttribute("selectMonth", true);
-		return "fragments/layout";
+		model.addAttribute("pageId", "select_stats");
+		return "message";
 	}
 
 	@PostMapping("/direttore/")
