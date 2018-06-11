@@ -3,6 +3,7 @@ package org.bitbucket.r3bus.model.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.bitbucket.r3bus.model.Allievo;
@@ -21,22 +22,22 @@ import lombok.Data;
 public class Rebus {
 	@Autowired
 	private Azienda azienda;
-	
+
 	private Allievo allievoCorrente;
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
 
 	public Rebus() {
-//		azienda = new Azienda();
+		// azienda = new Azienda();
 		statisticheController = new StatisticheController();
 	}
-	
+
 	// gestione allievo
 
 	public boolean gestisciAllievo(String codiceFiscale) {
 		this.allievoCorrente = azienda.getAllievo(codiceFiscale);
-		
-		if(this.allievoCorrente != null) {
+
+		if (this.allievoCorrente != null) {
 			return true;
 		}
 		return false;
@@ -72,7 +73,8 @@ public class Rebus {
 		c.addAttivita(nome, inizio, fine);
 	}
 
-	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, String nome, LocalDateTime inizio, LocalDateTime fine) {
+	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, String nome, LocalDateTime inizio,
+			LocalDateTime fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);
@@ -83,8 +85,8 @@ public class Rebus {
 		this.centroGestito = c;
 	}
 
-	//per i grafici
-	
+	// statistiche
+
 	public List<Number> getNumeroAttivitaGiornaliere(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getNumeroAttivitaGiornaliere(c, inizio, fine);
@@ -94,6 +96,13 @@ public class Rebus {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getMediaPrenotati(c, inizio, fine);
 	}
+	
+	public Map<String,Number> getElencoAttivita(Long codiceCentro, LocalDate inizio, LocalDate fine) {
+		Centro c = azienda.getCentro(codiceCentro);
+		return statisticheController.getElencoAttivita(c, inizio, fine);
+	}
+
+	// interrogazioni
 
 	public Set<Attivita> getAttivitaDisponibili() {
 		return this.centroGestito.getAttivitaDisponibili();
@@ -104,7 +113,7 @@ public class Rebus {
 	}
 
 	public boolean allievoInGestione() {
-		return this.allievoCorrente!=null;
+		return this.allievoCorrente != null;
 	}
 
 }
