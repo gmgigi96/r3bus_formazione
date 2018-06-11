@@ -55,7 +55,14 @@ public class Centro {
 	 * @param codiceAttivita
 	 * @return Attivita corrispondente a codiceAttivita
 	 */
-	public Attivita getAttivita(long codiceAttivita) {
+	public Attivita getAttivita(Long codiceAttivita) {
+		for(Attivita a : attivita) {
+			if(a.getId().equals(codiceAttivita)){
+				return a;
+			}
+		}
+		
+		//TODO: lanciare un'eccezione
 		return null;
 	}
 
