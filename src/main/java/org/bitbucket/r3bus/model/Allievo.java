@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -30,6 +32,7 @@ public class Allievo {
 	@Email
 	private String    email;
 	private String    telefono;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascita;
 	private String    luogoNascita;
 	@Column(unique=true, nullable=false)
