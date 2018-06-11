@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{fragments/layout}"
-	th:with="headline=#{pages.error.headline}">
+	th:with="headline=#{pages.error.headline}, showBackButton=true, backUrl='javascript:history.back()'">
 <head>
 <title th:text="|${status} ${error}|">Error</title>
 </head>
