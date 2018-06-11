@@ -62,6 +62,11 @@ public class Attivita {
 	}
 
 	@Override
+	public String toString() {
+		return this.nome;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
