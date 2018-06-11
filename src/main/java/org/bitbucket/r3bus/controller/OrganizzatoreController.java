@@ -66,8 +66,8 @@ public class OrganizzatoreController {
 		model.addAttribute("backUrl", "./");
 		model.addAttribute("pageId", "new_activity");
 		if (bindingResult.hasErrors())
-			return "activity_form";		
-		rebus.creaNuovaAttivita(centroID, activity.getNome(), activity.getOrarioInizio(), activity.getOrarioFine()); //TOFIX		
+			return "activity_form";
+		rebus.creaNuovaAttivita(centroID, activity.getNome(), activity.getOrarioInizio(), activity.getOrarioFine()); // TOFIX
 		model.clear();
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
@@ -86,11 +86,12 @@ public class OrganizzatoreController {
 	}
 
 	@PostMapping("/organizzatore/{centroID}/attivita/{id}/modifica")
-	public String modificaAttivita(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
-			ModelMap model) {
+	public String modificaAttivita(@Valid @ModelAttribute("activity") Attivita activity,
+			@PathVariable("centroID") Long centroID, @PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./../");
 		// processa dati
+		rebus.modificaAttivita(centroID, id, activity.getNome(), activity.getOrarioInizio(), activity.getOrarioFine()); // TOFIX
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
 }
