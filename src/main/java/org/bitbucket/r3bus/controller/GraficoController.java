@@ -12,8 +12,6 @@ import org.bitbucket.r3bus.utils.ChartGenerator;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +27,10 @@ public class GraficoController {
 	
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/attivita_giornaliere.png")
 	public void graficoAttivitaGiornaliere(@PathVariable("centro") Long codiceCentro, 
-											@PathVariable("mese")  @DateTimeFormat(iso = ISO.DATE) LocalDate mese,
+											@PathVariable("mese") String mese,
 												HttpServletResponse response ) {
-		LocalDate inizio = mese.withDayOfMonth(1);
-		LocalDate fine = mese.withDayOfMonth(mese.lengthOfMonth());
+		LocalDate inizio = LocalDate.parse(mese + "-01");
+		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
 		
 		List<Number> lista = this.rebus.getNumeroAttivitaGiornaliere(codiceCentro, inizio, fine);
 		
@@ -42,10 +40,10 @@ public class GraficoController {
 
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/prenotazioni_giornaliere.png")
 	public void graficoPrenotazioniGiornaliere(@PathVariable("centro") Long codiceCentro,
-												@PathVariable("mese") @DateTimeFormat(iso = ISO.DATE) LocalDate mese,
+												@PathVariable("mese") String mese,
 													HttpServletResponse response ) {
-		LocalDate inizio = mese.withDayOfMonth(1);
-		LocalDate fine = mese.withDayOfMonth(mese.lengthOfMonth());
+		LocalDate inizio = LocalDate.parse(mese + "-01");
+		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
 		
 		List<Number> lista = this.rebus.getMediaPrenotati(codiceCentro, inizio, fine);
 		

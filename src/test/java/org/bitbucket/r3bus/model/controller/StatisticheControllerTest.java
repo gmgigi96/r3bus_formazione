@@ -92,8 +92,8 @@ public class StatisticheControllerTest {
 		Attivita attivitaZeroPartecipanti = new Attivita("attivitaZeroPartecipanti", now, now.plusHours(1));
 		centroConUnAttivita_zeroPartecipanti.addAttivita(attivitaZeroPartecipanti);
 
-		Map<String, Integer> res = statisticheController1.getElencoAttivita(centroConUnAttivita_zeroPartecipanti, inizio, fine);
-		assertEquals(0, (int)res.get(attivitaZeroPartecipanti.toString()));
+		Map<String, Number> res = statisticheController1.getElencoAttivita(centroConUnAttivita_zeroPartecipanti, inizio, fine);
+		assertEquals(0, res.get(attivitaZeroPartecipanti.toString()));
 		assertEquals(1, res.values().size());
 	}
 
@@ -110,8 +110,8 @@ public class StatisticheControllerTest {
 
 		centroConUnAttivita_unPartecipante.addAttivita(attivitaConUnPartecipante);
 
-		Map<String, Integer> res = statisticheController1.getElencoAttivita(centroConUnAttivita_unPartecipante, inizio, fine);
-		assertEquals(1, (int)res.get(attivitaConUnPartecipante.toString()));
+		Map<String, Number> res = statisticheController1.getElencoAttivita(centroConUnAttivita_unPartecipante, inizio, fine);
+		assertEquals(1, res.get(attivitaConUnPartecipante.toString()));
 		assertEquals(1, res.values().size());
 	}
 

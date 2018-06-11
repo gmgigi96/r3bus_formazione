@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Centro;
+import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.AllievoService;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
+	@Autowired
+	private Rebus rebus;
 	@Autowired
 	private AllievoService allievoService;
 	@Autowired
@@ -40,7 +43,7 @@ public class MainController {
 		if (role.equals("responsabile")) {
 			String id = auth.getName().split("-")[1];
 			System.out.printf("Managing center with id: %s\n", id);
-			// rebus.setCentroGestito(id);
+			rebus.setCentroGestito(new Long(id));
 		}
 
 		return "redirect:/";

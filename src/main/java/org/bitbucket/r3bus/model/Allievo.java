@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Allievo {
 	@Column(unique=true, nullable=false)
 	private String    codiceFiscale;
 
-	@ManyToMany(mappedBy="allieviPrenotati", cascade=CascadeType.PERSIST)
+	@ManyToMany(mappedBy="allieviPrenotati", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private final List<Attivita> attivitaPrenotate;
 
 	public Allievo() {

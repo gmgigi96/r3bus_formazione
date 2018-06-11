@@ -57,8 +57,8 @@ public class StatisticheController {
 	 * 
 	 * @return Mappa attivita/numero allievi prenotati
 	 */
-	public Map<String, Integer> getElencoAttivita(Centro centro, LocalDate inizio, LocalDate fine) {
-		Map<String, Integer> attivita2prenotati = new HashMap<>();
+	public Map<String, Number> getElencoAttivita(Centro centro, LocalDate inizio, LocalDate fine) {
+		Map<String, Number> attivita2prenotati = new HashMap<>();
 		for (Attivita a : centro.getAttivitaInIntervallo(inizio, fine)) {
 			attivita2prenotati.put(a.toString(), a.getNumeroAllieviPrenotati());
 		}
