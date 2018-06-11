@@ -3,6 +3,7 @@ package org.bitbucket.r3bus.model.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
@@ -92,6 +93,10 @@ public class Rebus {
 	public List<Number> getMediaPrenotati(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getMediaPrenotati(c, inizio, fine);
+	}
+
+	public Set<Attivita> getAttivitaDisponibili() {
+		return this.centroGestito.getAttivitaDisponibili();
 	}
 
 }

@@ -1,8 +1,6 @@
 package org.bitbucket.r3bus.controller;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -85,12 +83,8 @@ public class ResponsabileController {
 	public String attivitaAllievo(ModelMap model) {
 		model.addAttribute("pageId", "booked_activities");
 		model.addAttribute("managingLearner", true);
-		List<Attivita> ls = new ArrayList<>(3);
-		LocalDateTime n = LocalDateTime.now();
-		int h = 0;
-		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
+		Set<Attivita> ls = this.rebus.getAttivitaDisponibili();
+
 		model.addAttribute("activityList", ls);
 		return "activity_list";
 	}
@@ -103,12 +97,8 @@ public class ResponsabileController {
 		// model.addAttribute("managingLearner", true);
 		model.addAttribute("multiSelect", true);
 		model.addAttribute("pageId", "available_activities");
-		List<Attivita> ls = new ArrayList<>(3);
-		LocalDateTime n = LocalDateTime.now();
-		int h = 0;
-		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
+		Set<Attivita> ls = this.rebus.getAttivitaDisponibili();
+
 		model.addAttribute("activityList", ls);
 		return "activity_list";
 	}
