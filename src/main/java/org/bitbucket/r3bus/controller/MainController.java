@@ -83,7 +83,6 @@ public class MainController {
 		allievo.prenotaAttivita(attivita);
 		centro.addAttivita(attivita);
 		centro.addAttivita(attivita2);
-		centroService.flush();
 
 		return "index";
 	}
