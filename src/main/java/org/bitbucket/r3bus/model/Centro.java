@@ -60,8 +60,7 @@ public class Centro {
 				return a;
 			}
 		}
-		
-		//TODO: lanciare un'eccezione
+
 		return null;
 	}
 

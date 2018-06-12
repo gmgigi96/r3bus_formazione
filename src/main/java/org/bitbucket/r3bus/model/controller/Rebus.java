@@ -32,7 +32,6 @@ public class Rebus {
 	private AllievoService allievoService;
 
 	public Rebus() {
-		// azienda = new Azienda();
 		statisticheController = new StatisticheController();
 	}
 
@@ -40,11 +39,7 @@ public class Rebus {
 
 	public boolean gestisciAllievo(String codiceFiscale) {
 		this.allievoCorrente = azienda.getAllievo(codiceFiscale);
-
-		if (this.allievoCorrente != null) {
-			return true;
-		}
-		return false;
+		return this.allievoCorrente != null;
 	}
 
 	public void aggiungiAllievo(Allievo allievo) {
