@@ -32,10 +32,4 @@ public class CentroService {
 		}
 		return null;
 	}
-
-
-	public void flush() {
-		this.centroRepository.flush();
-	}
-
 }
