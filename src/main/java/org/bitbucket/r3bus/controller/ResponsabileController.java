@@ -1,5 +1,6 @@
 package org.bitbucket.r3bus.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class ResponsabileController {
 
 	@Autowired
 	private Rebus rebus;
-	
+
 	@GetMapping("/responsabile/")
 	public String defaultOperation() {
 		return "redirect:/responsabile/allievo/";
@@ -84,7 +85,7 @@ public class ResponsabileController {
 	public String attivitaAllievo(ModelMap model) {
 		model.addAttribute("pageId", "booked_activities");
 		model.addAttribute("managingLearner", true);
-		List<Attivita> ls = this.rebus.getAttivitaAllievo();
+		Set<Attivita> ls = this.rebus.getAttivitaAllievo();
 
 		model.addAttribute("activityList", ls);
 		return "activity_list";
@@ -94,14 +95,17 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/attivita/")
 	public String attivitaDisponibili(ModelMap model) {
-		 if (rebus.allievoInGestione()) {
-			 model.addAttribute("managingLearner", true);
-			 model.addAttribute("multiSelect", true);			 
-		 }
+		Set<Attivita> gestiti = new HashSet<>();
+		if (rebus.allievoInGestione()) {
+			model.addAttribute("managingLearner", true);
+			model.addAttribute("multiSelect", true);
+			gestiti = this.rebus.getAttivitaAllievo();
+		}
 		model.addAttribute("pageId", "available_activities");
 		model.addAttribute("activityActionUrl", "prenota");
 
 		Set<Attivita> ls = this.rebus.getAttivitaDisponibili();
+		ls.removeAll(gestiti);
 
 		model.addAttribute("activityList", ls);
 		return "activity_list";
@@ -113,10 +117,8 @@ public class ResponsabileController {
 	public String prenotaAttivita(@ModelAttribute("selection") List<Long> codiciAttivita, ModelMap model) {
 		model.addAttribute("managingLearner", true);
 
-		for (Long id : codiciAttivita) {
-			System.out.println("ID of selected Activity: " + id);
-			rebus.prenotaAttivita(id);
-		}
+		rebus.prenotaAttivita(codiciAttivita);
+
 		return "redirect:/responsabile/allievo/attivita/?message=success";
 	}
 
