@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,16 +28,20 @@ public class Allievo {
 	private Long	  id;
 
 	@Column(nullable=false)
+	@NotEmpty
 	private String    nome;
 	@Column(nullable=false)
+	@NotEmpty
 	private String    cognome;
 	@Email
 	private String    email;
 	private String    telefono;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascita;
+	
 	private String    luogoNascita;
 	@Column(unique=true, nullable=false)
+	@Size(min=11, max=16)
 	private String    codiceFiscale;
 
 	@ManyToMany(mappedBy="allieviPrenotati", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
