@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,7 +34,7 @@ public class Centro {
 	@Column(nullable = false)
 	private int capienza;
 
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "centro_id")
 	private final List<Attivita> attivita;
 
