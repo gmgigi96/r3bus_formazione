@@ -10,6 +10,7 @@ import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
+import org.bitbucket.r3bus.service.AllievoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -26,6 +27,9 @@ public class Rebus {
 	private Allievo allievoCorrente;
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
+	
+	@Autowired
+	private AllievoService allievoService;
 
 	public Rebus() {
 		// azienda = new Azienda();
@@ -51,9 +55,12 @@ public class Rebus {
 		this.allievoCorrente = null;
 	}
 
-	public void prenotaAttivita(Long codiceAttivita) {
-		Attivita attivita = this.centroGestito.getAttivita(codiceAttivita);
-		this.allievoCorrente.prenotaAttivita(attivita);
+	public void prenotaAttivita(List<Long> codiciAttivita) {
+		for (Long id : codiciAttivita) {
+			Attivita attivita = this.centroGestito.getAttivita(id);
+			this.allievoCorrente.prenotaAttivita(attivita);
+		}
+		this.allievoService.save(this.allievoCorrente);
 	}
 
 	public void annullaPrenotazione(Long codiceAttivita) {
@@ -108,7 +115,7 @@ public class Rebus {
 		return this.centroGestito.getAttivitaDisponibili();
 	}
 
-	public List<Attivita> getAttivitaAllievo() {
+	public Set<Attivita> getAttivitaAllievo() {
 		return this.allievoCorrente.getAttivitaPrenotate();
 	}
 
