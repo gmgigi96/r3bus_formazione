@@ -10,62 +10,81 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{''}" method="post" th:object="${learner}" class="user-form">
-			<th:block th:if="${#fields.hasAnyErrors()}">
-				<p class="alert alert-warning" th:each="err : ${#fields.allErrors()}" th:text="${err}">Field Error</p>
-			</th:block>
-			<div class="form-group">
-				<label for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
+			<p class="alert alert-danger" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Other Error</p>
+			<div class="form-group" th:classappend="${#fields.hasErrors('codiceFiscale')}? 'has-error'">
+				<label class="control-label" for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
 				<div class="input-group">
 					<input th:field="*{codiceFiscale}" class="form-control"
-							style="text-transform:uppercase;" th:errorclass="invalid" type="text" required />
+							style="text-transform:uppercase;" type="text" required />
 					<div class="input-group-addon">
 						<span class="fa fa-barcode"></span>
 					</div>
 				</div>
+				<div class="help-block"
+					th:each="err : ${#fields.errors('codiceFiscale')}"
+					th:text="${err}">Some error</div>
 			</div>
-			<div class="form-group">
-				<label for="nome" th:text="#{learner.name}">First Name</label>
-				<input th:field="*{nome}" class="form-control" th:errorclass="invalid" type="text" required />
+			<div class="form-group" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+				<label class="control-label" for="nome" th:text="#{learner.name}">First Name</label>
+				<input th:field="*{nome}" class="form-control" type="text" required />
+				<div class="help-block"
+					th:each="err : ${#fields.errors('nome')}"
+					th:text="${err}">Some error</div>
 			</div>
-			<div class="form-group">
-				<label for="cognome" th:text="#{learner.surname}">Last Name</label>
-				<input th:field="*{cognome}" class="form-control" th:errorclass="invalid" type="text" required />
+			<div class="form-group" th:classappend="${#fields.hasErrors('cognome')}? 'has-error'">
+				<label class="control-label" for="cognome" th:text="#{learner.surname}">Last Name</label>
+				<input th:field="*{cognome}" class="form-control" type="text" required />
+				<div class="help-block"
+					th:each="err : ${#fields.errors('cognome')}"
+					th:text="${err}">Some error</div>
 			</div>
-			<div class="form-group">
-				<label for="email" th:text="#{learner.email}">E-mail</label>
+			<div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+				<label class="control-label" for="email" th:text="#{learner.email}">E-mail</label>
 				<div class="input-group">
-					<input th:field="*{email}" class="form-control" th:errorclass="invalid" type="email" />
+					<input th:field="*{email}" class="form-control" type="email" />
 					<div class="input-group-addon">
 						<span class="fa fa-at"></span>
 					</div>
 				</div>
+				<div class="help-block"
+					th:each="err : ${#fields.errors('email')}"
+					th:text="${err}">Some error</div>
 			</div>
-			<div class="form-group">
-				<label for="telefono" th:text="#{learner.phone}">Phone</label>
+			<div class="form-group" th:classappend="${#fields.hasErrors('telefono')}? 'has-error'">
+				<label class="control-label" for="telefono" th:text="#{learner.phone}">Phone</label>
 				<div class="input-group">
-					<input th:field="*{telefono}" class="form-control" th:errorclass="invalid" type="tel" />
+					<input th:field="*{telefono}" class="form-control" type="tel" />
 					<div class="input-group-addon">
 						<span class="fa fa-phone"></span>
 					</div>
 				</div>
+				<div class="help-block"
+					th:each="err : ${#fields.errors('telefono')}"
+					th:text="${err}">Some error</div>
 			</div>
-			<div class="form-group">
-				<label for="dataNascita" th:text="#{learner.birth_date}">Birth Date</label>
+			<div class="form-group" th:classappend="${#fields.hasErrors('dataNascita')}? 'has-error'">
+				<label class="control-label" for="dataNascita" th:text="#{learner.birth_date}">Birth Date</label>
 				<div class="input-group date" data-datetimepicker-format="YYYY-MM-DD">
-					<input th:field="*{dataNascita}" class="form-control" th:errorclass="invalid" type="text" />
+					<input th:field="*{dataNascita}" class="form-control" type="text" />
 					<div class="input-group-addon">
 						<span class="fa fa-calendar"></span>
 					</div>
 				</div>
+				<div class="help-block"
+					th:each="err : ${#fields.errors('dataNascita')}"
+					th:text="${err}">Some error</div>
 			</div>
-			<div class="form-group">
-				<label for="luogoNascita" th:text="#{learner.birth_place}">Birth Place</label>
+			<div class="form-group" th:classappend="${#fields.hasErrors('luogoNascita')}? 'has-error'">
+				<label class="control-label" for="luogoNascita" th:text="#{learner.birth_place}">Birth Place</label>
 				<div class="input-group">
-					<input th:field="*{luogoNascita}" class="form-control" th:errorclass="invalid" type="text" />
+					<input th:field="*{luogoNascita}" class="form-control" type="text" />
 					<div class="input-group-addon">
 						<span class="fa fa-map-marker"></span>
 					</div>
 				</div>
+				<div class="help-block"
+					th:each="err : ${#fields.errors('luogoNascita')}"
+					th:text="${err}">Some error</div>
 			</div>
 			<button class="btn btn-primary" type="submit" th:text="#{pages.new_learner.signup}">Login</button>
 		</form>
