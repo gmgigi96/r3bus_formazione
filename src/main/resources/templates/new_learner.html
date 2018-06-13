@@ -15,7 +15,8 @@
 				<label class="control-label" for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
 				<div class="input-group">
 					<input th:field="*{codiceFiscale}" class="form-control"
-							style="text-transform:uppercase;" type="text" required />
+							style="text-transform:uppercase;" type="text" required
+							minlength="11" maxlength="16" pattern="[a-zA-Z0-9]*" title="ABCDEF1234" />
 					<div class="input-group-addon">
 						<span class="fa fa-barcode"></span>
 					</div>
@@ -53,7 +54,8 @@
 			<div class="form-group" th:classappend="${#fields.hasErrors('telefono')}? 'has-error'">
 				<label class="control-label" for="telefono" th:text="#{learner.phone}">Phone</label>
 				<div class="input-group">
-					<input th:field="*{telefono}" class="form-control" type="tel" />
+					<input th:field="*{telefono}" class="form-control" type="tel"
+							title="+12 123456789" pattern="[+0-9 ]*" />
 					<div class="input-group-addon">
 						<span class="fa fa-phone"></span>
 					</div>
