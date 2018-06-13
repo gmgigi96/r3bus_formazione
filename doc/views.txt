@@ -3,11 +3,13 @@ sidebar:
 - showBackButton : boolean
 - backUrl : String
 	// responsabile
-- managingLearner : bool (se un allievo è in gestione)
+- managingLearner : boolean (se un allievo è in gestione)
 	// organizzatore & direttore
 - centerActionUrl : String
+- currentCenter : Long (id del centro corrente)
+- currentMonth : String (yyyy-MM del mese corrente)
 - selectMonth : boolean (per direttore)
-- centerMap : Map<Int,String> (codice → nome)
+- centerMap : Map<Long, String> (codice → nome)
 
 activity_form:
 - pageId : String of ["new_activity", "edit_activity"]
@@ -25,4 +27,4 @@ new_learner:
 - learner : Allievo
 
 stats:
-- activityMap : Map<String,Int> (nome → prenotazioni)
+- activityMap : Map<String, Int> (nome → prenotazioni)

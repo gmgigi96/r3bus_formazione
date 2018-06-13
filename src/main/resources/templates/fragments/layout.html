@@ -57,7 +57,8 @@
 		$(".date").each(function(){
 			$(this).datetimepicker({
 				format: $(this).data("datetimepicker-format"),
-				keepInvalid: $(this).parents("form[novalidate]").length != 0
+				keepInvalid: $(this).parents("form[novalidate]").length != 0,
+				allowInputToggle: true
 			})
 		});
 	</script>
