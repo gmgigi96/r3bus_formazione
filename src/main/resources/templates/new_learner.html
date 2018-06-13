@@ -16,7 +16,8 @@
 			<div class="form-group">
 				<label for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
 				<div class="input-group">
-					<input th:field="*{codiceFiscale}" class="form-control" th:errorclass="invalid" type="text" required />
+					<input th:field="*{codiceFiscale}" class="form-control"
+							style="text-transform:uppercase;" th:errorclass="invalid" type="text" required />
 					<div class="input-group-addon">
 						<span class="fa fa-barcode"></span>
 					</div>
