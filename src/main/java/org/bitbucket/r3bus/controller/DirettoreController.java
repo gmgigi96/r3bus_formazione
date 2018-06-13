@@ -42,6 +42,8 @@ public class DirettoreController {
 		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
 
 		model.addAttribute("selectMonth", true);
+		model.addAttribute("currentMonth", month);
+		model.addAttribute("currentCenter", id);
 		model.addAttribute("centerActionUrl", "/direttore/");
 		// model.addAttribute("centerMap", rebus.getElencoCentri());
 		model.addAttribute("activityMap", rebus.getPrenotazioniPerAttivita(id, inizio, fine));

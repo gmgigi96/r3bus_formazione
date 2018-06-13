@@ -18,6 +18,7 @@ body {
 	padding: 0;
 	position: absolute;
 	min-height: 100%;
+	min-width: 730px;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -49,9 +50,9 @@ body {
 }
 
 .header_resize {
-	max-width: 945px;
+	max-width: 960px;
 	margin: 0 auto;
-	padding: 10px 0;
+	padding: 8px 15px;
 }
 
 .header .logo {
@@ -67,6 +68,7 @@ body {
 }
 
 .header .session-menu {
+	padding-top: 4px;
 	float: right;
 }
 
@@ -84,30 +86,26 @@ body {
 	color: white;
 	text-decoration: underline;
 	cursor: pointer;
-	
 }
 
 /*************main**********/
 
 .main_resize {
-	margin: 0 auto;
-	padding: 0;
-	width: 945px;
+	padding: 15px;
 	flex-grow: 1;
+	min-width: 730px;
+	max-width: 960px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .main_left {
 	width: 223px;
 	float: left;
-	padding: 0;
-	margin: 0;
 }
 
 .main_right {
-	width: 680px;
-	float: right;
-	padding: 0;
-	margin: 0;
+	padding-left: 263px;
 }
 
 .headline {
@@ -124,6 +122,12 @@ body {
 	color: #111;
 	padding: 10px 20px 15px 0;
 	margin: 0;
+}
+
+.content h3 {
+	margin-left: 10px;
+	border-bottom: 1px dotted #aaa;
+	padding-bottom: 5px;
 }
 
 /*stats*/
@@ -159,23 +163,19 @@ body {
 
 .menu ul a {
 	background: none;
-	width: 197px;
+	border: 2px outset transparent;
 	display: block;
 	margin: 0;
-	padding: 11px 0 11px 26px;
+	padding: 10px 0 10px 24px;
 	color: #111;
-	font: normal 14px Arial, Helvetica, sans-serif;
+	font-size: 14px;
 	text-decoration: none;
 }
 
-.menu ul a:hover {
+.menu ul a:hover, .menu ul a:active {
 	color: #fff;
-	background: url(../images/hover.gif) no-repeat top;
-}
-
-.menu ul a.active {
-	color: #fff;
-	background: url(../images/hover.gif) no-repeat top;
+	background-color: #222;
+	border-color: black;
 }
 
 .menu h2 {

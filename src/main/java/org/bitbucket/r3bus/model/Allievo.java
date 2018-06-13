@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,6 +36,7 @@ public class Allievo {
 	private String    cognome;
 	@Email
 	private String    email;
+	@Pattern(regexp = "[+0-9 ]*")
 	private String    telefono;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascita;
@@ -42,6 +44,7 @@ public class Allievo {
 	private String    luogoNascita;
 	@Column(unique=true, nullable=false)
 	@Size(min=11, max=16)
+	@Pattern(regexp = "[a-zA-Z0-9]*")
 	private String    codiceFiscale;
 
 	@ManyToMany(mappedBy="allieviPrenotati", fetch=FetchType.EAGER, cascade=CascadeType.ALL)

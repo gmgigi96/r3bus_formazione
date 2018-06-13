@@ -54,7 +54,13 @@
 
 	<script>
 		// inject date pickers
-		$(".date").each(function(){ $(this).datetimepicker({format: $(this).data("datetimepicker-format")}) });
+		$(".date").each(function(){
+			$(this).datetimepicker({
+				format: $(this).data("datetimepicker-format"),
+				keepInvalid: $(this).parents("form[novalidate]").length != 0,
+				allowInputToggle: true
+			})
+		});
 	</script>
 </body>
 </html>
