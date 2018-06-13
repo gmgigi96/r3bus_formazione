@@ -33,8 +33,4 @@ public class AttivitaService {
 		}
 		return null;
 	}
-	
-	public void flush() {
-		this.attivitaRepository.flush();
-	}
 }

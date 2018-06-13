@@ -1,8 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -23,17 +26,20 @@ public class Attivita {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(nullable = false)
+	@NotEmpty
 	private String nome;
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime orarioInizio;
 	@Column(nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime orarioFine;
 
-	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private final List<Allievo> allieviPrenotati;
+	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	private final Set<Allievo> allieviPrenotati;
 
 	public Attivita() {
-		allieviPrenotati = new ArrayList<>();
+		allieviPrenotati = new HashSet<>();
 	}
 
 	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
@@ -42,9 +48,7 @@ public class Attivita {
 	}
 
 	public void prenota(Allievo allievo) {
-		if (!this.allieviPrenotati.contains(allievo)) {
-			allieviPrenotati.add(allievo);
-		}		
+		allieviPrenotati.add(allievo);
 	}
 
 	public void annullaPrenotazione(Allievo allievo) {

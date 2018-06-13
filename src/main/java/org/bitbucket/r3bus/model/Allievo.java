@@ -1,8 +1,8 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -24,22 +28,27 @@ public class Allievo {
 	private Long	  id;
 
 	@Column(nullable=false)
+	@NotEmpty
 	private String    nome;
 	@Column(nullable=false)
+	@NotEmpty
 	private String    cognome;
 	@Email
 	private String    email;
 	private String    telefono;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascita;
+	
 	private String    luogoNascita;
 	@Column(unique=true, nullable=false)
+	@Size(min=11, max=16)
 	private String    codiceFiscale;
 
-	@ManyToMany(mappedBy="allieviPrenotati", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	private final List<Attivita> attivitaPrenotate;
+	@ManyToMany(mappedBy="allieviPrenotati", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private final Set<Attivita> attivitaPrenotate;
 
 	public Allievo() {
-		attivitaPrenotate = new LinkedList<>();
+		attivitaPrenotate = new HashSet<>();
 	}
 
 	public Allievo(String nome, String cognome, String email, String telefono, LocalDate dataNascita, String luogoNascita, String codiceFiscale) {

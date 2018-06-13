@@ -1,12 +1,12 @@
 package org.bitbucket.r3bus.controller;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.controller.Rebus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class OrganizzatoreController {
+
+	@Autowired
+	private Rebus rebus;
 
 	// selezione centro
 
@@ -37,13 +40,9 @@ public class OrganizzatoreController {
 
 	@GetMapping("/organizzatore/{centroID}/attivita/")
 	public String listaAttivita(@PathVariable("centroID") Long centroID, ModelMap model) {
-		List<Attivita> ls = new ArrayList<>(3);
-		LocalDateTime n = LocalDateTime.now();
-		int h = 0;
-		ls.add(new Attivita("Esercitazione", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("Sicurezza sul lavoro", n.plusHours(h++), n.plusHours(h++)));
-		ls.add(new Attivita("VueJS", n.plusHours(h++), n.plusHours(h++)));
-		model.addAttribute("activityList", ls);
+		rebus.setCentroGestito(centroID);
+		Set<Attivita> attivita = rebus.getAttivitaDisponibili();
+		model.addAttribute("activityList", attivita);
 		// model.addAttribute("multiSelect", true);
 		model.addAttribute("editActivity", true);
 		model.addAttribute("pageId", "managed_activities");
@@ -70,7 +69,7 @@ public class OrganizzatoreController {
 		model.addAttribute("pageId", "new_activity");
 		if (bindingResult.hasErrors())
 			return "activity_form";
-		// controller stuff
+		rebus.creaNuovaAttivita(centroID, activity.getNome(), activity.getOrarioInizio(), activity.getOrarioFine()); // TOFIX
 		model.clear();
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
@@ -89,11 +88,12 @@ public class OrganizzatoreController {
 	}
 
 	@PostMapping("/organizzatore/{centroID}/attivita/{id}/modifica")
-	public String modificaAttivita(@PathVariable("centroID") Long centroID, @PathVariable("id") Long id,
-			ModelMap model) {
+	public String modificaAttivita(@Valid @ModelAttribute("activity") Attivita activity,
+			@PathVariable("centroID") Long centroID, @PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./../");
 		// processa dati
+		rebus.modificaAttivita(centroID, id, activity.getNome(), activity.getOrarioInizio(), activity.getOrarioFine()); // TOFIX
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
 }
