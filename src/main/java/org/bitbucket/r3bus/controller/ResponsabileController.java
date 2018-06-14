@@ -95,6 +95,7 @@ public class ResponsabileController {
 		Set<Attivita> ls = this.rebus.getAttivitaAllievo();
 
 		model.addAttribute("activityList", ls);
+		model.addAttribute("multiSelect", true);
 		return "activity_list";
 	}
 
