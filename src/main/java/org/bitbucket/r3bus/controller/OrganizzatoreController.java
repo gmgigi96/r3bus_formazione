@@ -93,7 +93,7 @@ public class OrganizzatoreController {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./../");
 		// processa dati
-		rebus.modificaAttivita(centroID, id, activity.getNome(), activity.getOrarioInizio(), activity.getOrarioFine()); // TOFIX
+		rebus.modificaAttivita(centroID, id, activity);
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
 }
