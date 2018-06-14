@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Allievo;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ResponsabileController {
@@ -38,18 +40,24 @@ public class ResponsabileController {
 	// sulle post redirect se successo
 
 	@PostMapping("/responsabile/allievo/")
-	public String gestisciAllievo(@Valid @ModelAttribute("taxid") String codiceFiscale) {
+	public String gestisciAllievo(@Valid @ModelAttribute("taxid") String codiceFiscale, HttpSession session) {
 		// processa dati
 		if (rebus.gestisciAllievo(codiceFiscale))
 			return "redirect:/responsabile/attivita/";
-		return "manage_learner";
+		
+		session.setAttribute("faxid", codiceFiscale);
+		session.setAttribute("isNew", true);
+		return "redirect:/responsabile/allievo/inserisci";
 	}
 
 	// inserisci allievo
 
 	@GetMapping("/responsabile/allievo/inserisci")
-	public String nuovoAllievoForm(ModelMap model) {
-		model.addAttribute("learner", new Allievo()); // TOFIX
+	public String nuovoAllievoForm(ModelMap model, HttpSession session) {
+		String codiceFiscale = (String) session.getAttribute("faxid");
+		Allievo allievo = new Allievo();
+		allievo.setCodiceFiscale(codiceFiscale);
+		model.addAttribute("learner", allievo); // TOFIX
 		return "new_learner";
 	}
 
@@ -88,7 +96,18 @@ public class ResponsabileController {
 		Set<Attivita> ls = this.rebus.getAttivitaAllievo();
 
 		model.addAttribute("activityList", ls);
+		model.addAttribute("multiSelect", true);
+		model.addAttribute("activityActionUrl", "/responsabile/allievo/attivita/annulla");
 		return "activity_list";
+	}	
+	
+	@PostMapping("/responsabile/allievo/attivita/annulla")
+	public String annullaAttivita(@RequestParam("selection") List<Long> codiciAttivita, ModelMap model) {
+		model.addAttribute("managingLearner", true);
+
+		rebus.annullaPrenotazione(codiciAttivita);
+
+		return "redirect:/responsabile/allievo/attivita/?message=success";
 	}
 
 	// lista attivita prenotabili
@@ -114,9 +133,9 @@ public class ResponsabileController {
 	// prenota attivita
 
 	@PostMapping("/responsabile/attivita/prenota")
-	public String prenotaAttivita(@ModelAttribute("selection") List<Long> codiciAttivita, ModelMap model) {
+	public String prenotaAttivita(@RequestParam("selection") List<Long> codiciAttivita, ModelMap model) {
 		model.addAttribute("managingLearner", true);
-
+		System.out.println();
 		rebus.prenotaAttivita(codiciAttivita);
 
 		return "redirect:/responsabile/allievo/attivita/?message=success";

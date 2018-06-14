@@ -27,7 +27,7 @@ public class Rebus {
 	private Allievo allievoCorrente;
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
-	
+
 	@Autowired
 	private AllievoService allievoService;
 
@@ -58,9 +58,12 @@ public class Rebus {
 		this.allievoService.save(this.allievoCorrente);
 	}
 
-	public void annullaPrenotazione(Long codiceAttivita) {
-		Attivita attivita = centroGestito.getAttivita(codiceAttivita);
-		allievoCorrente.annullaPrenotazione(attivita);
+	public void annullaPrenotazione(List<Long> codiciAttivita) {
+		for (Long id : codiciAttivita) {
+			Attivita attivita = centroGestito.getAttivita(id);
+			allievoCorrente.annullaPrenotazione(attivita);
+		}
+		this.allievoService.save(this.allievoCorrente);
 	}
 
 	public void eliminaAllievo() {
@@ -75,11 +78,22 @@ public class Rebus {
 		c.addAttivita(nome, inizio, fine);
 	}
 
+	public void creaNuovaAttivita(Long codiceCentro, Attivita attivita) {
+		Centro c = azienda.getCentro(codiceCentro);
+		c.addAttivita(attivita);
+	}
+
 	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, String nome, LocalDateTime inizio,
 			LocalDateTime fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);
+	}
+	
+	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, Attivita attivita) {
+		Centro c = azienda.getCentro(codiceCentro);
+		Attivita a = c.getAttivita(codiceAttivita);
+		a.aggiornaParametri(attivita.getNome(), attivita.getOrarioInizio(), attivita.getOrarioFine());
 	}
 
 	public void setCentroGestito(Long codiceCentro) {
@@ -98,8 +112,8 @@ public class Rebus {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getMediaPrenotati(c, inizio, fine);
 	}
-	
-	public Map<String,Number> getPrenotazioniPerAttivita(Long codiceCentro, LocalDate inizio, LocalDate fine) {
+
+	public Map<String, Number> getPrenotazioniPerAttivita(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getElencoAttivita(c, inizio, fine);
 	}

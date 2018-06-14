@@ -16,6 +16,7 @@
 /responsabile/allievo/inserisci
 /responsabile/allievo/elimina
 /responsabile/allievo/attivita
+/responsabile/allievo/attivita/annulla
 /responsabile/allievo/termina-gestione
 /responsabile/attivita/
 /responsabile/allievo/prenota
