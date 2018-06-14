@@ -27,7 +27,7 @@ public class Rebus {
 	private Allievo allievoCorrente;
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
-	
+
 	@Autowired
 	private AllievoService allievoService;
 
@@ -75,6 +75,11 @@ public class Rebus {
 		c.addAttivita(nome, inizio, fine);
 	}
 
+	public void creaNuovaAttivita(Long codiceCentro, Attivita attivita) {
+		Centro c = azienda.getCentro(codiceCentro);
+		c.addAttivita(attivita);
+	}
+
 	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, String nome, LocalDateTime inizio,
 			LocalDateTime fine) {
 		Centro c = azienda.getCentro(codiceCentro);
@@ -98,8 +103,8 @@ public class Rebus {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getMediaPrenotati(c, inizio, fine);
 	}
-	
-	public Map<String,Number> getPrenotazioniPerAttivita(Long codiceCentro, LocalDate inizio, LocalDate fine) {
+
+	public Map<String, Number> getPrenotazioniPerAttivita(Long codiceCentro, LocalDate inizio, LocalDate fine) {
 		Centro c = azienda.getCentro(codiceCentro);
 		return statisticheController.getElencoAttivita(c, inizio, fine);
 	}

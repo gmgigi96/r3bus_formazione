@@ -34,14 +34,14 @@ public class Centro {
 	@Column(nullable = false)
 	private int capienza;
 
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "centro_id")
 	private final List<Attivita> attivita;
 
 	public Centro() {
 		attivita = new ArrayList<>();
 	}
-	
+
 	public Centro(String nome, int capienza) {
 		this();
 		this.nome = nome;
@@ -55,8 +55,8 @@ public class Centro {
 	 * @return Attivita corrispondente a codiceAttivita
 	 */
 	public Attivita getAttivita(Long codiceAttivita) {
-		for(Attivita a : attivita) {
-			if(a.getId().equals(codiceAttivita)){
+		for (Attivita a : attivita) {
+			if (a.getId().equals(codiceAttivita)) {
 				return a;
 			}
 		}
@@ -172,11 +172,11 @@ public class Centro {
 		return result;
 	}
 
-	// metodi ausiliari per test
-
 	public void addAttivita(Attivita a) {
 		attivita.add(a);
 	}
+
+	// metodi ausiliari per test
 
 	int contaAttivita() {
 		return attivita.size();
