@@ -133,9 +133,9 @@ public class ResponsabileController {
 	// prenota attivita
 
 	@PostMapping("/responsabile/attivita/prenota")
-	public String prenotaAttivita(@ModelAttribute("selection") List<Long> codiciAttivita, ModelMap model) {
+	public String prenotaAttivita(@RequestParam("selection") List<Long> codiciAttivita, ModelMap model) {
 		model.addAttribute("managingLearner", true);
-
+		System.out.println();
 		rebus.prenotaAttivita(codiciAttivita);
 
 		return "redirect:/responsabile/allievo/attivita/?message=success";
