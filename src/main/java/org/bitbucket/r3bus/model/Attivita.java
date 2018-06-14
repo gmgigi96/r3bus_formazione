@@ -70,12 +70,17 @@ public class Attivita {
 		return this.nome;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	
+
+	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
+		return (isBetween(this.getOrarioInizio(), inizio, fine) || isBetween(this.getOrarioFine(), inizio, fine)
+				|| isBetween(inizio, this.getOrarioInizio(), this.getOrarioFine())
+				|| isBetween(fine, this.getOrarioInizio(), this.getOrarioFine()))
+				&& !this.getOrarioInizio().equals(fine) && !this.getOrarioFine().equals(inizio);
+	}
+
+	private static boolean isBetween(LocalDateTime t, LocalDateTime inizio, LocalDateTime fine) {
+		return t.compareTo(inizio) >= 0 && t.compareTo(fine) <= 0;
 	}
 
 	@Override
@@ -87,22 +92,31 @@ public class Attivita {
 		if (getClass() != obj.getClass())
 			return false;
 		Attivita other = (Attivita) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (orarioFine == null) {
+			if (other.orarioFine != null)
+				return false;
+		} else if (!orarioFine.equals(other.orarioFine))
+			return false;
+		if (orarioInizio == null) {
+			if (other.orarioInizio != null)
+				return false;
+		} else if (!orarioInizio.equals(other.orarioInizio))
 			return false;
 		return true;
 	}
 
-	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
-		return (isBetween(this.getOrarioInizio(), inizio, fine) || isBetween(this.getOrarioFine(), inizio, fine)
-				|| isBetween(inizio, this.getOrarioInizio(), this.getOrarioFine())
-				|| isBetween(fine, this.getOrarioInizio(), this.getOrarioFine()))
-				&& !this.getOrarioInizio().equals(fine) && !this.getOrarioFine().equals(inizio);
-	}
-
-	private static boolean isBetween(LocalDateTime t, LocalDateTime inizio, LocalDateTime fine) {
-		return t.compareTo(inizio) >= 0 && t.compareTo(fine) <= 0;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((orarioFine == null) ? 0 : orarioFine.hashCode());
+		result = prime * result + ((orarioInizio == null) ? 0 : orarioInizio.hashCode());
+		return result;
 	}
 }
