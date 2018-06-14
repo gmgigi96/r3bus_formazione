@@ -59,9 +59,12 @@ public class ResponsabileController {
 		model.addAttribute("isNew", session.getAttribute("isNew"));
 		session.removeAttribute("isNew");
 		session.removeAttribute("faxid");
+
 		Allievo allievo = new Allievo();
 		model.addAttribute("learner", allievo);
 		allievo.setCodiceFiscale(codiceFiscale);
+
+		model.addAttribute("managingLearner", rebus.allievoInGestione());
 		return "new_learner";
 	}
 
