@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form th:action="@{${activityActionUrl}}" method="post">
+		<form th:action="@{${activityActionUrl}}" method="post" th:unless="${#lists.isEmpty(activityList)}">
 			<table class="activity-list table">
 				<thead>
 					<tr>
@@ -43,7 +43,9 @@
 					th:if="${newActivity}"
 					th:text="#{activity.new}">New Activity</a>
 			</div>
+			<input type="hidden" name="selection" value="" />
 		</form>
+		<p class="alert alert-info" th:text="#{activity.nothing}" th:if="${#lists.isEmpty(activityList)}">No activities</p>
 	</div>
 </body>
 </html>

@@ -10,6 +10,7 @@
 <body>
 	<div layout:fragment="content">
 		<form th:action="@{''}" method="post" th:object="${learner}" class="user-form" th:novalidate="${param.novalidate}">
+			<p class="alert alert-warning" th:if="${isNew}" th:text="#{learner.is_new}">Is new</p>
 			<p class="alert alert-danger" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Other Error</p>
 			<div class="form-group" th:classappend="${#fields.hasErrors('codiceFiscale')}? 'has-error'">
 				<label class="control-label" for="codiceFiscale" th:text="#{learner.taxid}">Fiscal Code</label>
