@@ -55,9 +55,12 @@ public class ResponsabileController {
 	@GetMapping("/responsabile/allievo/inserisci")
 	public String nuovoAllievoForm(ModelMap model, HttpSession session) {
 		String codiceFiscale = (String) session.getAttribute("faxid");
+		model.addAttribute("isNew", session.getAttribute("isNew"));
+		session.removeAttribute("isNew");
+		session.removeAttribute("faxid");
 		Allievo allievo = new Allievo();
+		model.addAttribute("learner", allievo); 
 		allievo.setCodiceFiscale(codiceFiscale);
-		model.addAttribute("learner", allievo); // TOFIX
 		return "new_learner";
 	}
 
