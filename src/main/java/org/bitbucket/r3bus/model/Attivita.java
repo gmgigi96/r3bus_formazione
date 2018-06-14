@@ -35,7 +35,7 @@ public class Attivita {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime orarioFine;
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="attivitaPrenotate", fetch=FetchType.EAGER)
 	private final Set<Allievo> allieviPrenotati;
 
 	public Attivita() {

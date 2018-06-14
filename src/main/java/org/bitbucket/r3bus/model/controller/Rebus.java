@@ -57,7 +57,7 @@ public class Rebus {
 			Attivita attivita = this.centroGestito.getAttivita(id);
 			this.allievoCorrente.prenotaAttivita(attivita);
 		}
-		this.allievoService.save(this.allievoCorrente);
+		this.allievoCorrente = this.allievoService.save(this.allievoCorrente);
 	}
 
 	public void annullaPrenotazione(List<Long> codiciAttivita) {
@@ -65,7 +65,7 @@ public class Rebus {
 			Attivita attivita = centroGestito.getAttivita(id);
 			allievoCorrente.annullaPrenotazione(attivita);
 		}
-		this.allievoService.save(this.allievoCorrente);
+		this.allievoCorrente = this.allievoService.save(this.allievoCorrente);
 	}
 
 	public void eliminaAllievo() {

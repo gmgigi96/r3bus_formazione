@@ -47,7 +47,7 @@ public class Allievo {
 	@Pattern(regexp = "[a-zA-Z0-9]*")
 	private String    codiceFiscale;
 
-	@ManyToMany(mappedBy="allieviPrenotati", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	private final Set<Attivita> attivitaPrenotate;
 
 	public Allievo() {
@@ -84,10 +84,10 @@ public class Allievo {
 		if (getClass() != obj.getClass())
 			return false;
 		Allievo other = (Allievo) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (codiceFiscale == null) {
+			if (other.codiceFiscale != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!codiceFiscale.equals(other.codiceFiscale))
 			return false;
 		return true;
 	}
@@ -96,7 +96,9 @@ public class Allievo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((codiceFiscale == null) ? 0 : codiceFiscale.hashCode());
 		return result;
 	}
+
+	
 }
