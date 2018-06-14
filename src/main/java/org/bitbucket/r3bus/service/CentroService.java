@@ -1,5 +1,7 @@
 package org.bitbucket.r3bus.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.bitbucket.r3bus.model.Centro;
@@ -32,4 +34,13 @@ public class CentroService {
 		}
 		return null;
 	}
+	
+	public Map<Long, String> getId2Nome() {
+		Map<Long, String> res = new HashMap<>();
+		for (Centro c : centroRepository.findAll()) {
+			res.put(c.getId(), c.getNome());
+		}
+		return res;
+	}
+	
 }
