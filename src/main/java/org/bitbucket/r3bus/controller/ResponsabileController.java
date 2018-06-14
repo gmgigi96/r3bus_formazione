@@ -92,7 +92,7 @@ public class ResponsabileController {
 
 	// gestisci attivita allievo
 
-	@GetMapping("/responsabile/allievo/attivita")
+	@GetMapping("/responsabile/allievo/attivita/")
 	public String attivitaAllievo(ModelMap model) {
 		model.addAttribute("pageId", "booked_activities");
 		model.addAttribute("managingLearner", true);
