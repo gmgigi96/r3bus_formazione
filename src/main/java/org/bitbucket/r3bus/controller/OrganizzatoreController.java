@@ -69,7 +69,7 @@ public class OrganizzatoreController {
 		model.addAttribute("pageId", "new_activity");
 		if (bindingResult.hasErrors())
 			return "activity_form";
-		rebus.creaNuovaAttivita(centroID, activity.getNome(), activity.getOrarioInizio(), activity.getOrarioFine()); // TOFIX
+		rebus.creaNuovaAttivita(centroID, activity);
 		model.clear();
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
