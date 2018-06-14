@@ -51,6 +51,9 @@ public class OrganizzatoreController {
 		// model.addAttribute("multiSelect", true);
 		model.addAttribute("editActivity", true);
 		model.addAttribute("pageId", "managed_activities");
+		model.addAttribute("centerMap", centroService.getId2Nome());
+		model.addAttribute("centerActionUrl", "/organizzatore/");
+		model.addAttribute("currentCenter", centroID);
 		model.addAttribute("newActivity", true);
 		return "activity_list";
 	}
