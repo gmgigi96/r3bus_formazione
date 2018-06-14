@@ -34,6 +34,8 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/allievo/")
 	public String gestisciAllievoForm() {
+		if (rebus.allievoInGestione())
+			return "redirect:/responsabile/attivita/";
 		return "manage_learner";
 	}
 
@@ -41,10 +43,9 @@ public class ResponsabileController {
 
 	@PostMapping("/responsabile/allievo/")
 	public String gestisciAllievo(@Valid @ModelAttribute("taxid") String codiceFiscale, HttpSession session) {
-		// processa dati
 		if (rebus.gestisciAllievo(codiceFiscale))
 			return "redirect:/responsabile/attivita/";
-		
+
 		session.setAttribute("faxid", codiceFiscale);
 		session.setAttribute("isNew", true);
 		return "redirect:/responsabile/allievo/inserisci";
@@ -59,7 +60,7 @@ public class ResponsabileController {
 		session.removeAttribute("isNew");
 		session.removeAttribute("faxid");
 		Allievo allievo = new Allievo();
-		model.addAttribute("learner", allievo); 
+		model.addAttribute("learner", allievo);
 		allievo.setCodiceFiscale(codiceFiscale);
 		return "new_learner";
 	}
@@ -69,9 +70,9 @@ public class ResponsabileController {
 			ModelMap model) {
 		if (bindingResult.hasErrors())
 			return "new_learner";
-		// add to db / call grasp controller
+
 		rebus.aggiungiAllievo(learner);
-		model.clear();
+		rebus.gestisciAllievo(learner.getCodiceFiscale());
 		return "redirect:/responsabile/allievo/";
 	}
 
@@ -79,13 +80,15 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/allievo/elimina")
 	public String rimuoviAllievoForm(ModelMap model) {
+		if (!rebus.allievoInGestione())
+			return "redirect:/responsabile/allievo/";
+
 		model.addAttribute("managingLearner", true);
 		return "delete_learner";
 	}
 
 	@PostMapping("/responsabile/allievo/elimina")
 	public String rimuoviAllievo() {
-		// processa dati
 		rebus.eliminaAllievo();
 		return "redirect:/responsabile/allievo/?message=deleted";
 	}
@@ -94,6 +97,9 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/allievo/attivita/")
 	public String attivitaAllievo(ModelMap model) {
+		if (!rebus.allievoInGestione())
+			return "redirect:/responsabile/allievo/";
+
 		model.addAttribute("pageId", "booked_activities");
 		model.addAttribute("managingLearner", true);
 		Set<Attivita> ls = this.rebus.getAttivitaAllievo();
@@ -102,14 +108,11 @@ public class ResponsabileController {
 		model.addAttribute("multiSelect", true);
 		model.addAttribute("activityActionUrl", "/responsabile/allievo/attivita/annulla");
 		return "activity_list";
-	}	
-	
+	}
+
 	@PostMapping("/responsabile/allievo/attivita/annulla")
 	public String annullaAttivita(@RequestParam("selection") List<Long> codiciAttivita, ModelMap model) {
-		model.addAttribute("managingLearner", true);
-
 		rebus.annullaPrenotazione(codiciAttivita);
-
 		return "redirect:/responsabile/allievo/attivita/?message=success";
 	}
 
@@ -137,10 +140,7 @@ public class ResponsabileController {
 
 	@PostMapping("/responsabile/attivita/prenota")
 	public String prenotaAttivita(@RequestParam("selection") List<Long> codiciAttivita, ModelMap model) {
-		model.addAttribute("managingLearner", true);
-		System.out.println();
 		rebus.prenotaAttivita(codiciAttivita);
-
 		return "redirect:/responsabile/allievo/attivita/?message=success";
 	}
 
