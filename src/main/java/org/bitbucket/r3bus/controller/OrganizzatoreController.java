@@ -6,8 +6,10 @@ import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.controller.Rebus;
+import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,20 +22,23 @@ public class OrganizzatoreController {
 
 	@Autowired
 	private Rebus rebus;
+	
+	@Autowired
+	private CentroService centroService;
 
 	// selezione centro
 
 	@GetMapping("/organizzatore/")
 	public String selezioneCentroForm(ModelMap model) {
 		model.addAttribute("pageId", "select_center");
+		model.addAttribute("centerMap", centroService.getId2Nome());
 		return "message";
 	}
 
 	@PostMapping("/organizzatore/")
-	public String selezioneCentro() {
+	public String selezioneCentro(@ModelAttribute("centerId") Long centerId, Model model) {
 		// processa dati
-		long centroID = 1;
-		return "redirect:/organizzatore/" + centroID + "/attivita/";
+		return "redirect:/organizzatore/" + centerId + "/attivita/";
 	}
 
 	// lista attivita
