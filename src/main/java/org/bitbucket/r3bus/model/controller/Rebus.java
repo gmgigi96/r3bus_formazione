@@ -1,7 +1,6 @@
 package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +10,7 @@ import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
 import org.bitbucket.r3bus.service.AllievoService;
+import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -30,6 +30,8 @@ public class Rebus {
 
 	@Autowired
 	private AllievoService allievoService;
+	@Autowired
+	private CentroService centroService;
 
 	public Rebus() {
 		statisticheController = new StatisticheController();
@@ -73,27 +75,17 @@ public class Rebus {
 
 	// gestione attività
 
-	public void creaNuovaAttivita(Long codiceCentro, String nome, LocalDateTime inizio, LocalDateTime fine) {
-		Centro c = azienda.getCentro(codiceCentro);
-		c.addAttivita(nome, inizio, fine);
-	}
-
 	public void creaNuovaAttivita(Long codiceCentro, Attivita attivita) {
 		Centro c = azienda.getCentro(codiceCentro);
 		c.addAttivita(attivita);
+		centroService.save(c);
 	}
 
-	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, String nome, LocalDateTime inizio,
-			LocalDateTime fine) {
-		Centro c = azienda.getCentro(codiceCentro);
-		Attivita a = c.getAttivita(codiceAttivita);
-		a.aggiornaParametri(nome, inizio, fine);
-	}
-	
 	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, Attivita attivita) {
 		Centro c = azienda.getCentro(codiceCentro);
 		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(attivita.getNome(), attivita.getOrarioInizio(), attivita.getOrarioFine());
+		centroService.save(c);
 	}
 
 	public void setCentroGestito(Long codiceCentro) {
