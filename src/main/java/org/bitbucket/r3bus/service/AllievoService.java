@@ -19,8 +19,8 @@ public class AllievoService{
     }
 
     
-    public void save(final Allievo allievo) {
-        this.allievoRepository.save(allievo);
+    public Allievo save(final Allievo allievo) {
+        return this.allievoRepository.save(allievo);
     }
 
 	public Allievo findbyId(Long id) {

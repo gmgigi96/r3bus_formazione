@@ -20,8 +20,8 @@ public class AttivitaService {
     }
 
     
-    public void save(final Attivita attivita) {
-        this.attivitaRepository.save(attivita);
+    public Attivita save(final Attivita attivita) {
+       return this.attivitaRepository.save(attivita);
     }
 
 	public Attivita findbyId(Long id) {
