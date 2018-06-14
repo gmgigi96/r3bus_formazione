@@ -9,6 +9,7 @@
 </head>
 <body>
 	<div layout:fragment="content">
+		<p class="alert alert-info" th:if="${param.message} != null" th:text="#{|pages.manage_learner.message.${param.message}|}">
 		<form th:action="@{''}" method="post" class="user-form">
 			<div class="form-group">
 				<label for="taxid" th:text="#{learner.taxid}">Fiscal Code</label>
