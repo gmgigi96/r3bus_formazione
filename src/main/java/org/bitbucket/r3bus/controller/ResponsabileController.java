@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ResponsabileController {
@@ -96,7 +97,17 @@ public class ResponsabileController {
 
 		model.addAttribute("activityList", ls);
 		model.addAttribute("multiSelect", true);
+		model.addAttribute("activityActionUrl", "/responsabile/allievo/attivita/annulla");
 		return "activity_list";
+	}	
+	
+	@PostMapping("/responsabile/allievo/attivita/annulla")
+	public String annullaAttivita(@RequestParam("selection") List<Long> codiciAttivita, ModelMap model) {
+		model.addAttribute("managingLearner", true);
+
+		rebus.annullaPrenotazione(codiciAttivita);
+
+		return "redirect:/responsabile/allievo/attivita/?message=success";
 	}
 
 	// lista attivita prenotabili
