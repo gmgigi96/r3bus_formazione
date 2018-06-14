@@ -86,6 +86,12 @@ public class Rebus {
 		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(nome, inizio, fine);
 	}
+	
+	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, Attivita attivita) {
+		Centro c = azienda.getCentro(codiceCentro);
+		Attivita a = c.getAttivita(codiceAttivita);
+		a.aggiornaParametri(attivita.getNome(), attivita.getOrarioInizio(), attivita.getOrarioFine());
+	}
 
 	public void setCentroGestito(Long codiceCentro) {
 		Centro c = azienda.getCentro(codiceCentro);
