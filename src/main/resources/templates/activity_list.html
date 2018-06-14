@@ -43,7 +43,6 @@
 					th:if="${newActivity}"
 					th:text="#{activity.new}">New Activity</a>
 			</div>
-			<input type="hidden" name="selection" value="" />
 		</form>
 		<p class="alert alert-info" th:text="#{activity.nothing}" th:if="${#lists.isEmpty(activityList)}">No activities</p>
 	</div>
