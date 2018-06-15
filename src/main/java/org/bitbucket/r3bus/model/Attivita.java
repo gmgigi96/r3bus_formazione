@@ -36,10 +36,10 @@ public class Attivita {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime orarioFine;
 
-	@ManyToMany(mappedBy="attivitaPrenotate", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "attivitaPrenotate", fetch = FetchType.EAGER)
 	private final Set<Allievo> allieviPrenotati;
-	
-	private final List<PropertyListener> abbonati;
+
+	private transient final List<PropertyListener> abbonati;
 
 	public Attivita() {
 		allieviPrenotati = new HashSet<>();
@@ -69,11 +69,11 @@ public class Attivita {
 	public int getNumeroAllieviPrenotati() {
 		return this.allieviPrenotati.size();
 	}
-	
+
 	public void addPropertyListener(PropertyListener pl) {
 		this.abbonati.add(pl);
 	}
-	
+
 	private void informaAbbonati(String eventName, Object oldValue, Object newValue) {
 		for (PropertyListener pl : this.abbonati) {
 			pl.onPropertyEvent(this, eventName, oldValue, newValue);
@@ -83,7 +83,7 @@ public class Attivita {
 	@Override
 	public String toString() {
 		return this.nome;
-	}	
+	}
 
 	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
 		return (isBetween(this.getOrarioInizio(), inizio, fine) || isBetween(this.getOrarioFine(), inizio, fine)
