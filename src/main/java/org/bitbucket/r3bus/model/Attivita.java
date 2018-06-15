@@ -2,9 +2,10 @@ package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,9 +38,12 @@ public class Attivita {
 
 	@ManyToMany(mappedBy="attivitaPrenotate", fetch=FetchType.EAGER)
 	private final Set<Allievo> allieviPrenotati;
+	
+	private final List<PropertyListener> abbonati;
 
 	public Attivita() {
 		allieviPrenotati = new HashSet<>();
+		abbonati = new LinkedList<>();
 	}
 
 	public Attivita(String nome, LocalDateTime inizio, LocalDateTime fine) {
@@ -59,18 +63,27 @@ public class Attivita {
 		this.nome = nuovoNome;
 		this.orarioInizio = nuovoInizio;
 		this.orarioFine = nuovaFine;
+		informaAbbonati("attivita.aggiorna", null, this);
 	}
 
 	public int getNumeroAllieviPrenotati() {
 		return this.allieviPrenotati.size();
 	}
+	
+	public void addPropertyListener(PropertyListener pl) {
+		this.abbonati.add(pl);
+	}
+	
+	private void informaAbbonati(String eventName, Object oldValue, Object newValue) {
+		for (PropertyListener pl : this.abbonati) {
+			pl.onPropertyEvent(this, eventName, oldValue, newValue);
+		}
+	}
 
 	@Override
 	public String toString() {
 		return this.nome;
-	}
-
-	
+	}	
 
 	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
 		return (isBetween(this.getOrarioInizio(), inizio, fine) || isBetween(this.getOrarioFine(), inizio, fine)
