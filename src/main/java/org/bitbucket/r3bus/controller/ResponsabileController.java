@@ -148,7 +148,7 @@ public class ResponsabileController {
 		if (codiciAttivita == null)
 			return "redirect:/responsabile/attivita/?message=select&type=warning";
 		rebus.prenotaAttivita(codiciAttivita);
-		return "redirect:/responsabile/allievo/attivita/?message=success";
+		return "redirect:/responsabile/allievo/attivita/?message=booked";
 	}
 
 	// termina gestione
