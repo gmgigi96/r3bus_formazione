@@ -9,6 +9,8 @@
 </head>
 <body>
 	<div layout:fragment="content">
+		<p th:if="${param.message}" th:with="type = ${param.type} ?: 'info'"
+			th:class="|alert alert-${type}|" th:text="#{|pages.${pageId}.message.${param.message}|}">Some message</p>
 		<form th:action="@{${activityActionUrl}}" method="post" th:unless="${#lists.isEmpty(activityList)}">
 			<table class="activity-list table">
 				<thead>
