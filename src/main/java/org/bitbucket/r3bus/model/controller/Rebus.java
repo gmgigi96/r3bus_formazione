@@ -1,6 +1,7 @@
 package org.bitbucket.r3bus.model.controller;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -110,7 +111,16 @@ public class Rebus {
 	}
 
 	public Set<Attivita> getAttivitaAllievo() {
-		return this.allievoCorrente.getAttivitaPrenotate();
+		Set<Attivita> attivitaAllievoInCentro = new HashSet<>();
+		List<Attivita> attivitaCentro = this.centroGestito.getAttivita();
+		
+		this.allievoCorrente.getAttivitaPrenotate().forEach( (att) -> {
+			if(attivitaCentro.contains(att)) {
+				attivitaAllievoInCentro.add(att);
+			}
+		});
+		
+		return attivitaAllievoInCentro;
 	}
 
 	public boolean allievoInGestione() {
