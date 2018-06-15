@@ -18,6 +18,7 @@ public class Azienda {
 	@Autowired
 	private CentroService centri;
 
+	//gestione allievo
 	public Allievo getAllievo(String codiceFiscale) {
 		return allievi.findByCodiceFiscale(codiceFiscale);
 	}
@@ -26,17 +27,16 @@ public class Azienda {
 		this.allievi.deleteAllievoByCodiceFiscale(allievo.getCodiceFiscale());
 	}
 
+	public Allievo salvaAllievo(Allievo allievo) {
+		return this.allievi.save(allievo);
+	}
+	
+	//gestione centro
 	public Centro getCentro(Long codiceCentro) {
 		return this.centri.findbyId(codiceCentro);
-	}
-	
-	public void addAllievo(Allievo allievo) {
-		this.allievi.save(allievo);
-	}
-	
-	// per test
-	public void addCentro(Centro centro) {
-		this.centri.save(centro);
-	}
-	
+	}	
+
+	public Centro salvaCentro(Centro centro) {
+		return this.centri.save(centro);
+	}	
 }

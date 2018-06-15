@@ -9,8 +9,6 @@ import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
-import org.bitbucket.r3bus.service.AllievoService;
-import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -28,11 +26,6 @@ public class Rebus {
 	private Centro centroGestito;
 	private StatisticheController statisticheController;
 
-	@Autowired
-	private AllievoService allievoService;
-	@Autowired
-	private CentroService centroService;
-
 	public Rebus() {
 		statisticheController = new StatisticheController();
 	}
@@ -45,7 +38,7 @@ public class Rebus {
 	}
 
 	public void aggiungiAllievo(Allievo allievo) {
-		this.azienda.addAllievo(allievo);
+		this.azienda.salvaAllievo(allievo);
 	}
 
 	public void terminaGestioneAllievo() {
@@ -57,7 +50,7 @@ public class Rebus {
 			Attivita attivita = this.centroGestito.getAttivita(id);
 			this.allievoCorrente.prenotaAttivita(attivita);
 		}
-		this.allievoCorrente = this.allievoService.save(this.allievoCorrente);
+		this.allievoCorrente = this.azienda.salvaAllievo(this.allievoCorrente);
 	}
 
 	public void annullaPrenotazione(List<Long> codiciAttivita) {
@@ -65,7 +58,7 @@ public class Rebus {
 			Attivita attivita = centroGestito.getAttivita(id);
 			allievoCorrente.annullaPrenotazione(attivita);
 		}
-		this.allievoCorrente = this.allievoService.save(this.allievoCorrente);
+		this.allievoCorrente = this.azienda.salvaAllievo(this.allievoCorrente);
 	}
 
 	public void eliminaAllievo() {
@@ -78,14 +71,14 @@ public class Rebus {
 	public void creaNuovaAttivita(Long codiceCentro, Attivita attivita) {
 		Centro c = azienda.getCentro(codiceCentro);
 		c.addAttivita(attivita);
-		centroService.save(c);
+		this.azienda.salvaCentro(c);
 	}
 
 	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, Attivita attivita) {
 		Centro c = azienda.getCentro(codiceCentro);
 		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(attivita.getNome(), attivita.getOrarioInizio(), attivita.getOrarioFine());
-		centroService.save(c);
+		this.azienda.salvaCentro(c);
 	}
 
 	public void setCentroGestito(Long codiceCentro) {
