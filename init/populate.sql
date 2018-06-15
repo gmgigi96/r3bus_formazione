@@ -17,7 +17,8 @@ insert into allievo(id, codice_fiscale, nome, cognome, email, luogo_nascita, dat
 	values('9', 'MRAJMP81MARIO', 'Mario','Jumpman','super.mario@nintendo.com','Mario Land','1981-08-03','0101010101');
 insert into allievo(id, codice_fiscale, nome, cognome, email, luogo_nascita, data_nascita, telefono) 
 	values('10','LGUJMP81MARIO', 'Luigi','Jumpman','super.luigi@nintendo.com','Mario Land','1981-08-03','1101010101');
-
+insert into allievo(id, codice_fiscale, nome, cognome, email, luogo_nascita, data_nascita, telefono) 
+	values('11','GGGGGGGGGGGGG', 'Gianmaria','DM','g.macmount@gmail.com','Mario Land','1980-08-03','1101010101');
 
 insert into attivita_allievi_prenotati(allievi_prenotati_id, attivita_prenotate_id) values('9', '4');
 insert into attivita_allievi_prenotati(allievi_prenotati_id, attivita_prenotate_id) values('9', '8');
