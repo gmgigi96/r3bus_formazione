@@ -2,6 +2,7 @@ package org.bitbucket.r3bus.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -18,11 +19,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.bitbucket.r3bus.service.EmailService;
+
 import lombok.Data;
 
 @Data
 @Entity
-public class Centro {
+public class Centro implements PropertyListener {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,6 +60,7 @@ public class Centro {
 	public Attivita getAttivita(Long codiceAttivita) {
 		for (Attivita a : attivita) {
 			if (a.getId().equals(codiceAttivita)) {
+				a.addPropertyListener(this);
 				return a;
 			}
 		}
@@ -78,6 +82,7 @@ public class Centro {
 		if (!overlap(inizio, fine)) {
 			Attivita a = new Attivita(nome, inizio, fine);
 			attivita.add(a);
+			a.addPropertyListener(this);
 		}
 	}
 
@@ -174,6 +179,28 @@ public class Centro {
 
 	public void addAttivita(Attivita a) {
 		attivita.add(a);
+	}
+
+	@Override
+	public void onPropertyEvent(Object source, String name, Object oldValue, Object newValue) {
+		if (name.equals("attivita.aggiorna")) {
+			Attivita a = (Attivita) newValue;
+			inviaEmail(a);
+		}
+	}
+
+	private void inviaEmail(Attivita a) {
+		String EMAIL_TEXT = "Gentile {nome},\nLa informiamo che l'evento a cui si è iscritto è stato modificato dall'organizzatore.\n"
+				+ "Le nuove modifiche sono:\n - {nomeEvento}\n - {oraInizio}\n - {oraFine}\n\nCi scusiamo per il disagio\nR3bus Formazione";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+		for (Allievo allievo : a.getAllieviPrenotati()) {
+			EmailService.sendEmail(allievo.getEmail(), "R3bus Formazione",
+					EMAIL_TEXT.replace("{nome}", allievo.getNome() + " " + allievo.getCognome())
+							.replace("{nomeEvento}", a.getNome())
+							.replace("{oraInizio}", a.getOrarioInizio().format(formatter))
+							.replace("{oraFine}", a.getOrarioFine().format(formatter)));
+		}
 	}
 
 	// metodi ausiliari per test
