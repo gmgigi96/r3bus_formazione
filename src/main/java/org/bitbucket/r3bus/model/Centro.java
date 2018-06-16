@@ -2,6 +2,7 @@ package org.bitbucket.r3bus.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -184,10 +185,21 @@ public class Centro implements PropertyListener {
 	public void onPropertyEvent(Object source, String name, Object oldValue, Object newValue) {
 		if (name.equals("attivita.aggiorna")) {
 			Attivita a = (Attivita) newValue;
-			for (Allievo allievo : a.getAllieviPrenotati()) {
-				EmailService.sendEmail(allievo.getEmail(), "R3bus Formazione",
-						a.getNome() + "\n" + a.getOrarioInizio().toString() + "\n" + a.getOrarioFine().toString());
-			}
+			inviaEmail(a);
+		}
+	}
+
+	private void inviaEmail(Attivita a) {
+		String EMAIL_TEXT = "Gentile {nome},\nLa informiamo che l'evento a cui si è iscritto è stato modificato dall'organizzatore.\n"
+				+ "Le nuove modifiche sono:\n - {nomeEvento}\n - {oraInizio}\n - {oraFine}\n\nCi scusiamo per il disagio\nR3bus Formazione";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+		for (Allievo allievo : a.getAllieviPrenotati()) {
+			EmailService.sendEmail(allievo.getEmail(), "R3bus Formazione",
+					EMAIL_TEXT.replace("{nome}", allievo.getNome() + " " + allievo.getCognome())
+							.replace("{nomeEvento}", a.getNome())
+							.replace("{oraInizio}", a.getOrarioInizio().format(formatter))
+							.replace("{oraFine}", a.getOrarioFine().format(formatter)));
 		}
 	}
 
