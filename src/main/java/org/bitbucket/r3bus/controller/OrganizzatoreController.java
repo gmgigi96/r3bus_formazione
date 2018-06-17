@@ -22,7 +22,7 @@ public class OrganizzatoreController {
 
 	@Autowired
 	private Rebus rebus;
-	
+
 	@Autowired
 	private CentroService centroService;
 
@@ -89,9 +89,8 @@ public class OrganizzatoreController {
 			ModelMap model) {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./../");
-		// find activity and bind to model
 		model.addAttribute("pageId", "edit_activity");
-		model.addAttribute("activity", new Attivita()); // TODEL
+		model.addAttribute("activity", rebus.getAttivita(centroID, id));
 		return "activity_form";
 	}
 

@@ -18,7 +18,7 @@ public class Azienda {
 	@Autowired
 	private CentroService centri;
 
-	//gestione allievo
+	// gestione allievo
 	public Allievo getAllievo(String codiceFiscale) {
 		return allievi.findByCodiceFiscale(codiceFiscale);
 	}
@@ -30,13 +30,13 @@ public class Azienda {
 	public Allievo salvaAllievo(Allievo allievo) {
 		return this.allievi.save(allievo);
 	}
-	
-	//gestione centro
+
+	// gestione centro
 	public Centro getCentro(Long codiceCentro) {
 		return this.centri.findbyId(codiceCentro);
-	}	
+	}
 
 	public Centro salvaCentro(Centro centro) {
 		return this.centri.save(centro);
-	}	
+	}
 }

@@ -113,13 +113,13 @@ public class Rebus {
 	public Set<Attivita> getAttivitaAllievo() {
 		Set<Attivita> attivitaAllievoInCentro = new HashSet<>();
 		List<Attivita> attivitaCentro = this.centroGestito.getAttivita();
-		
-		this.allievoCorrente.getAttivitaPrenotate().forEach( (att) -> {
-			if(attivitaCentro.contains(att)) {
+
+		this.allievoCorrente.getAttivitaPrenotate().forEach((att) -> {
+			if (attivitaCentro.contains(att)) {
 				attivitaAllievoInCentro.add(att);
 			}
 		});
-		
+
 		return attivitaAllievoInCentro;
 	}
 
@@ -127,4 +127,7 @@ public class Rebus {
 		return this.allievoCorrente != null;
 	}
 
+	public Attivita getAttivita(Long centro, Long id) {
+		return this.azienda.getCentro(centro).getAttivita(id);
+	}
 }
