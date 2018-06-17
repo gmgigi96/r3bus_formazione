@@ -24,10 +24,6 @@ body {
 	flex-direction: column;
 }
 
-.table thead {
-	font-weight: bold;
-}
-
 /* clear fixes */
 
 .header_resize:after, .main_resize:after, .footer_resize:after, .clr:after {
