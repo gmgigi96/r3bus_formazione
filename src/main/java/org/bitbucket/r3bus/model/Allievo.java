@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -29,10 +29,10 @@ public class Allievo {
 	private Long	  id;
 
 	@Column(nullable=false)
-	@NotEmpty
+	@NotBlank
 	private String    nome;
 	@Column(nullable=false)
-	@NotEmpty
+	@NotBlank
 	private String    cognome;
 	@Email
 	private String    email;
