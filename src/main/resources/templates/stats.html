@@ -32,6 +32,11 @@
 							<td th:text="*{value}">23</td>
 						</tr>
 					</tbody>
+					<tfoot th:if="${#maps.isEmpty(activityMap)}">
+						<tr>
+							<td colspan="2" class="info" th:text="#{activity.nothing}" />
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		</div>
