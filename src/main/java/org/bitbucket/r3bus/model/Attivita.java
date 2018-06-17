@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,9 +32,11 @@ public class Attivita {
 	private String nome;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@NotNull
 	private LocalDateTime orarioInizio;
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@NotNull
 	private LocalDateTime orarioFine;
 
 	@ManyToMany(mappedBy = "attivitaPrenotate", fetch = FetchType.EAGER)
