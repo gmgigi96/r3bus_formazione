@@ -18,6 +18,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.bitbucket.r3bus.service.EmailService;
 
@@ -26,15 +30,30 @@ import lombok.Data;
 @Data
 @Entity
 public class Centro implements PropertyListener {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(nullable = false)
+	@NotBlank
 	private String nome;
 
 	@Column(nullable = false)
+	@NotBlank
+	private String indirizzo;
+
+	@Column(nullable = false)
+	@Email
+	@NotBlank
+	private String email;
+
+	@Column(nullable = false)
+	@NotBlank
+	@Pattern(regexp = "[+0-9 ]*")
+	private String telefono;
+
+	@Column(nullable = false)
+	@NotNull
 	private int capienza;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -45,14 +64,18 @@ public class Centro implements PropertyListener {
 		attivita = new ArrayList<>();
 	}
 
-	public Centro(String nome, int capienza) {
+	public Centro(String nome, String indirizzo, String email, String telefono, int capienza) {
 		this();
 		this.nome = nome;
+		this.indirizzo = indirizzo;
+		this.email = email;
+		this.telefono = telefono;
 		this.capienza = capienza;
 	}
 
 	/**
-	 * Restituisce l'attività corrispondente al codice attivita dato per paramentro
+	 * Restituisce l'attività corrispondente al codice attivita dato per
+	 * paramentro
 	 * 
 	 * @param codiceAttivita
 	 * @return Attivita corrispondente a codiceAttivita
@@ -69,10 +92,10 @@ public class Centro implements PropertyListener {
 	}
 
 	/**
-	 * Aggiunge un'attività al centro. L'attività viene aggiunta se non esiste già
-	 * nel centro un'attività i cui orari si intersecano con gli orari della nuova
-	 * attività che si vuole aggiungere. Sono invece possibili più attività con lo
-	 * stesso nome, purchè rispetti la regola di prima.
+	 * Aggiunge un'attività al centro. L'attività viene aggiunta se non esiste
+	 * già nel centro un'attività i cui orari si intersecano con gli orari della
+	 * nuova attività che si vuole aggiungere. Sono invece possibili più
+	 * attività con lo stesso nome, purchè rispetti la regola di prima.
 	 * 
 	 * @param nome
 	 * @param inizio
@@ -87,8 +110,8 @@ public class Centro implements PropertyListener {
 	}
 
 	/**
-	 * Verifica se esiste un'attivita nella lista delle attività che interseca i due
-	 * orari dati per parametro
+	 * Verifica se esiste un'attivita nella lista delle attività che interseca i
+	 * due orari dati per parametro
 	 * 
 	 * @param inizio
 	 * @param fine

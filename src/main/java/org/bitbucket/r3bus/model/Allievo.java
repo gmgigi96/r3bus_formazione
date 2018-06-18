@@ -25,36 +25,42 @@ import lombok.Data;
 @Entity
 public class Allievo {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long	  id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@NotBlank
-	private String    nome;
-	@Column(nullable=false)
+	private String nome;
+
+	@Column(nullable = false)
 	@NotBlank
-	private String    cognome;
+	private String cognome;
+
 	@Email
-	private String    email;
+	private String email;
+
 	@Pattern(regexp = "[+0-9 ]*")
-	private String    telefono;
+	private String telefono;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascita;
-	
-	private String    luogoNascita;
-	@Column(unique=true, nullable=false)
-	@Size(min=11, max=16)
-	@Pattern(regexp = "[a-zA-Z0-9]*")
-	private String    codiceFiscale;
 
-	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
+	private String luogoNascita;
+
+	@Column(unique = true, nullable = false)
+	@Size(min = 11, max = 16)
+	@Pattern(regexp = "[a-zA-Z0-9]*")
+	private String codiceFiscale;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private final Set<Attivita> attivitaPrenotate;
 
 	public Allievo() {
 		attivitaPrenotate = new HashSet<>();
 	}
 
-	public Allievo(String nome, String cognome, String email, String telefono, LocalDate dataNascita, String luogoNascita, String codiceFiscale) {
+	public Allievo(String nome, String cognome, String email, String telefono, LocalDate dataNascita,
+			String luogoNascita, String codiceFiscale) {
 		this();
 		this.nome = nome;
 		this.cognome = cognome;
@@ -100,5 +106,4 @@ public class Allievo {
 		return result;
 	}
 
-	
 }

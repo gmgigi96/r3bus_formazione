@@ -23,17 +23,19 @@ import lombok.Data;
 @Data
 @Entity
 public class Attivita {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+
 	@Column(nullable = false)
 	@NotBlank
 	private String nome;
+
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@NotNull
 	private LocalDateTime orarioInizio;
+
 	@Column(nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@NotNull
