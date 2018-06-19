@@ -43,26 +43,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 http
 		 .csrf().disable()
 		 .authorizeRequests()
-		 .antMatchers("/").permitAll()
-		 .antMatchers("/login").permitAll()
-		 .antMatchers("/favicon.ico", "/error", "/js/**", "/css/**", "/images/**", "/webjars/**").permitAll()
-		 .antMatchers("/responsabile/**").hasAuthority("RESPONSABILE")
-		 .antMatchers("/direttore/**").hasAuthority("DIRETTORE")
-		 .antMatchers("/organizzatore/**").hasAuthority("ORGANIZZATORE")
-		 .antMatchers("/**").authenticated()
-		 .anyRequest().permitAll()
-		 .anyRequest().authenticated()
+			 .antMatchers("/favicon.ico", "/error", "/js/**", "/css/**", "/images/**", "/webjars/**").permitAll()
+			 .antMatchers("/login").anonymous()
+			 .antMatchers("/", "/loginSuccess").authenticated()
+			 .antMatchers("/responsabile/**").hasAuthority("RESPONSABILE")
+			 .antMatchers("/direttore/**").hasAuthority("DIRETTORE")
+			 .antMatchers("/organizzatore/**").hasAuthority("ORGANIZZATORE")
+			 .antMatchers("/allievo/**").hasAuthority("ROLE_USER") // TODO: change to "ALLIEVO"
+			 .anyRequest().denyAll()
 		 .and()
-		 .formLogin()
-		 .loginPage("/login")
-		 .defaultSuccessUrl("/loginSuccess", true).permitAll()
-		 .failureUrl("/login?error")
+			 .formLogin()
+			 .loginPage("/login")
+			 .defaultSuccessUrl("/loginSuccess", true)
+			 .failureUrl("/login?error")
 		 .and()
-		 .oauth2Login()
-		 .loginPage("/login")
-		 .defaultSuccessUrl("/loginSuccess", true).permitAll()
-		 .failureUrl("/login?error");
-
+			 .oauth2Login()
+			 .loginPage("/login")
+			 .defaultSuccessUrl("/loginSuccess", true)
+			 .failureUrl("/login?error");
 	}
-
 }
