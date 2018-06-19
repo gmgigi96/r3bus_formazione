@@ -20,23 +20,23 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//	private final String userQuery = "SELECT username, pw, TRUE FROM utenti WHERE username = ?";
-//	private final String authQuery = "SELECT username, auth FROM utenti WHERE username = ?";
-//
-//	@Qualifier("dataSource")
-//	@Autowired
-//	private DataSource dataSource;
-//
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(getPasswordEncoder())
-//				.usersByUsernameQuery(userQuery).authoritiesByUsernameQuery(authQuery);
-//	}
-//
-//	@Bean
-//	public BCryptPasswordEncoder getPasswordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
+	private final String userQuery = "SELECT username, pw, TRUE FROM utenti WHERE username = ?";
+	private final String authQuery = "SELECT username, auth FROM utenti WHERE username = ?";
+
+	@Qualifier("dataSource")
+	@Autowired
+	private DataSource dataSource;
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(getPasswordEncoder())
+				.usersByUsernameQuery(userQuery).authoritiesByUsernameQuery(authQuery);
+	}
+
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -61,16 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 .oauth2Login()
 		 .loginPage("/login")
 		 .defaultSuccessUrl("/loginSuccess", true).permitAll()
-		 .failureUrl("/login?error")
-		 ;
-//		 http.authorizeRequests()
-//         .anyRequest().authenticated()
-//		 .antMatchers("/favicon.ico", "/error", "/js/**", "/css/**", "/images/**", "/webjars/**").permitAll()
-//         .and()
-//         .oauth2Login()
-//		 .loginPage("/login")
-//		 .defaultSuccessUrl("/loginSuccess", true).permitAll()
-//		 .failureUrl("/login?error");
+		 .failureUrl("/login?error");
+
 	}
 
 }
