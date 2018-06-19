@@ -1,5 +1,6 @@
 package org.bitbucket.r3bus.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -41,11 +42,6 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
-		if (role.equals("role_user")) {
-			// è un utente con il login di google
-			return "redirect:/allievo/";
-		}
-
 		return "redirect:/" + role + "/";
 	}
 
@@ -59,6 +55,15 @@ public class MainController {
 			String id = auth.getName().split("-")[1];
 			System.out.printf("Managing center with id: %s\n", id);
 			rebus.setCentroGestito(new Long(id));
+		}
+		
+		if(role.equals("role_user")) {
+			// è un utente con il login oauth
+			System.out.println("AUTH");
+			Principal user = (Principal) auth.getPrincipal();
+			System.out.println(user);
+			
+			return "redirect:/allievo/";
 		}
 
 		return "redirect:/";
