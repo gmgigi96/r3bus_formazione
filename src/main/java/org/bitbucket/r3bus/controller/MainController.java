@@ -59,9 +59,14 @@ public class MainController {
 			DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal(); 
 			// login con oauth
 			String email = principal.getEmail();
-			// TODO: do stuff with email
-
-			return "redirect:/allievo/"; // TODO: fix this, set authorities to contain "ALLIEVO"
+			Allievo a = this.allievoService.findByEmail(email);
+			if(a != null) {
+				
+				return "redirect:/allievo/"; // TODO: fix this, set authorities to contain "ALLIEVO"
+			}
+			
+			auth.setAuthenticated(false);
+			return "redirect:/login?error";
 		}
 
 		// collega centro corrente
