@@ -2,6 +2,8 @@ package org.bitbucket.r3bus.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
@@ -10,9 +12,13 @@ import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.AllievoService;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ResolvableType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,16 +32,22 @@ public class MainController {
 	@Autowired
 	private CentroService centroService;
 
+	private static String authorizationRequestBaseUri = "oauth2/authorization";
+	Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
+
+	@Autowired
+	private ClientRegistrationRepository clientRegistrationRepository;
+
 	@GetMapping("/")
 	public String indexPage() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
-		
-		if(role.equals("role_user")) {
-			//è un utente con il login di google
+
+		if (role.equals("role_user")) {
+			// è un utente con il login di google
 			return "redirect:/allievo/";
 		}
-		
+
 		return "redirect:/" + role + "/";
 	}
 
@@ -55,7 +67,17 @@ public class MainController {
 	}
 
 	@GetMapping("/login")
-	public String loginPage() {
+	public String loginPage(Model model) {
+		Iterable<ClientRegistration> clientRegistrations = null;
+		ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository).as(Iterable.class);
+		if (type != ResolvableType.NONE && ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
+			clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+		}
+
+		clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(),
+				authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+		model.addAttribute("urls", oauth2AuthenticationUrls);
+		System.out.println("LOGIN PAGE");
 		return "login";
 	}
 
