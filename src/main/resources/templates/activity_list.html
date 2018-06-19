@@ -15,7 +15,10 @@
 			<table class="activity-list table">
 				<thead>
 					<tr>
-						<th th:if="${multiSelect}"></th>
+						<th th:if="${multiSelect}">
+							<input type="checkbox"
+								onclick="that=this; $('.selection-box').each(function(){ this.checked=that.checked })"/>
+						</th>
 						<th th:text="#{activity.name}">Name</th>
 						<th th:text="#{activity.begin_time}">Begin</th>
 						<th th:text="#{activity.end_time}">End</th>
@@ -25,7 +28,7 @@
 				<tbody>
 					<tr th:each="activity : ${activityList}" th:object="${activity}">
 						<td th:if="${multiSelect}">
-							<input type="checkbox" name="selection" th:value="*{id}"/>
+							<input type="checkbox" class="selection-box" name="selection" th:value="*{id}"/>
 						</td>
 						<td th:text="*{nome}">Activity 1</td>
 						<td th:text="*{{orarioInizio}}">2018-06-06 12:00</td>
