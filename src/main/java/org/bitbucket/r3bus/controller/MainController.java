@@ -12,7 +12,6 @@ import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.AllievoService;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ResolvableType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -32,8 +31,7 @@ public class MainController {
 	@Autowired
 	private CentroService centroService;
 
-	private static String authorizationRequestBaseUri = "oauth2/authorization";
-	Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
+	private final static String authorizationRequestBaseUri = "/oauth2/authorization";
 
 	@Autowired
 	private ClientRegistrationRepository clientRegistrationRepository;
@@ -66,18 +64,19 @@ public class MainController {
 		return "redirect:/";
 	}
 
+	@SuppressWarnings("unchecked")
 	@GetMapping("/login")
 	public String loginPage(Model model) {
+		Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
 		Iterable<ClientRegistration> clientRegistrations = null;
-		ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository).as(Iterable.class);
-		if (type != ResolvableType.NONE && ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
+
+		if (clientRegistrationRepository instanceof Iterable) {
 			clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+			clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(),
+					authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
 		}
 
-		clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(),
-				authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
 		model.addAttribute("urls", oauth2AuthenticationUrls);
-		System.out.println("LOGIN PAGE");
 		return "login";
 	}
 
