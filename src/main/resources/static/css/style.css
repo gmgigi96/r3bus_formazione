@@ -188,6 +188,25 @@ body {
 	display: block;
 }
 
+.learner-data {
+	border: 1px dotted #ddd;
+	padding: 10px;
+	border-radius: 10px;
+	color: #666;
+	margin-bottom: 5px;
+}
+
+.learner-data h3 {
+	margin: 0;
+	margin-bottom: 5px;
+	font-size: 18px;
+	color: black;
+}
+
+.learner-data .fa {
+	margin-right: 8px;
+}
+
 
 /*************footer**********/
 .footer {

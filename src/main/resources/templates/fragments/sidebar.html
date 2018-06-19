@@ -11,9 +11,21 @@
 	</nav>
 
 	<nav class="menu" sec:authorize="hasAuthority('RESPONSABILE')" th:unless="${showBackButton}">
+		<div class="learner-data bg-info" th:if="${currentLearner} != null" th:object="${currentLearner}">
+			<h3 th:text="#{learner.current}">Current Learner</h3>
+			<div>
+				<span class="fa fa-barcode"></span>
+				<span th:text="*{codiceFiscale}"></span>
+			</div>
+			<div>
+				<span class="fa fa-user"></span>
+				<span th:text="|*{nome} *{cognome}|"></span> 
+			</div>
+		</div>
+
 		<ul>
 			<!--/* TODO: add .active dynamically to current page */-->
-			<th:block th:if="${managingLearner}">
+			<th:block th:if="${currentLearner} != null">
 				<li>
 					<a th:href="@{/responsabile/allievo/termina-gestione}"
 						th:text="#{actions.end_learner_management}">End Learner Management</a>
@@ -27,7 +39,7 @@
 						th:text="#{pages.booked_activities.title}">Booked Activities</a>
 				</li>
 			</th:block>
-			<th:block th:unless="${managingLearner}">
+			<th:block th:if="${currentLearner} == null">
 				<li>
 					<a th:href="@{/responsabile/allievo/}"
 						th:text="#{pages.manage_learner.title}">Manage Learner</a>

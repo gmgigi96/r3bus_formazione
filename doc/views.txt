@@ -3,7 +3,7 @@ sidebar:
 - showBackButton : boolean
 - backUrl : String
 	// responsabile
-- managingLearner : boolean (se un allievo è in gestione)
+- currentLearner : Allievo (l'allievo correntemente in gestione)
 	// organizzatore & direttore
 - centerActionUrl : String
 - currentCenter : Long (id del centro corrente)

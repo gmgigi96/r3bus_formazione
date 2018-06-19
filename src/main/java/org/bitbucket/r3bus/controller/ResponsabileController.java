@@ -64,15 +64,17 @@ public class ResponsabileController {
 		model.addAttribute("learner", allievo);
 		allievo.setCodiceFiscale(codiceFiscale);
 
-		model.addAttribute("managingLearner", rebus.allievoInGestione());
+		model.addAttribute("currentLearner", rebus.getAllievoCorrente());
 		return "new_learner";
 	}
 
 	@PostMapping("/responsabile/allievo/inserisci")
 	public String nuovoAllievo(@Valid @ModelAttribute("learner") Allievo learner, BindingResult bindingResult,
 			ModelMap model) {
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("currentLearner", rebus.getAllievoCorrente());
 			return "new_learner";
+		}
 
 		rebus.aggiungiAllievo(learner);
 		rebus.gestisciAllievo(learner.getCodiceFiscale());
@@ -86,7 +88,7 @@ public class ResponsabileController {
 		if (!rebus.allievoInGestione())
 			return "redirect:/responsabile/allievo/";
 
-		model.addAttribute("managingLearner", true);
+		model.addAttribute("currentLearner", rebus.getAllievoCorrente());
 		return "delete_learner";
 	}
 
@@ -104,7 +106,7 @@ public class ResponsabileController {
 			return "redirect:/responsabile/allievo/";
 
 		model.addAttribute("pageId", "booked_activities");
-		model.addAttribute("managingLearner", true);
+		model.addAttribute("currentLearner", rebus.getAllievoCorrente());
 		Set<Attivita> ls = this.rebus.getAttivitaAllievo();
 
 		model.addAttribute("activityList", ls);
@@ -127,7 +129,7 @@ public class ResponsabileController {
 	public String attivitaDisponibili(ModelMap model) {
 		Set<Attivita> gestiti = new HashSet<>();
 		if (rebus.allievoInGestione()) {
-			model.addAttribute("managingLearner", true);
+			model.addAttribute("currentLearner", rebus.getAllievoCorrente());
 			model.addAttribute("multiSelect", true);
 			gestiti = this.rebus.getAttivitaAllievo();
 		}
