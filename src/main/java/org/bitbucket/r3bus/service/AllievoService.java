@@ -42,4 +42,9 @@ public class AllievoService{
 	public void deleteAllievoByCodiceFiscale(String codiceFiscale) {
 		this.allievoRepository.deleteByCodiceFiscale(codiceFiscale);
 	}
+
+
+	public Allievo findByEmail(String email) {
+		return this.allievoRepository.findByEmail(email);
+	}
 }

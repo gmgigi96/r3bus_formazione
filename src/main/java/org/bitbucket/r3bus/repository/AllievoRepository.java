@@ -8,4 +8,6 @@ public interface AllievoRepository extends CrudRepository<Allievo, Long>{
 	public Allievo findByCodiceFiscale(String codiceFiscale);
 	
 	public void deleteByCodiceFiscale(String codiceFiscale);
+	
+	public Allievo findByEmail(String email);
 }
