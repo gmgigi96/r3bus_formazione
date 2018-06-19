@@ -1,5 +1,9 @@
-﻿insert into centro(id, nome, capienza) values('1', 'centro-1', '100');
-insert into centro(id, nome, capienza) values('2', 'centro-2', '10');
+﻿INSERT INTO public.centro(
+            id, capienza, email, indirizzo, nome, telefono)
+    VALUES ('1', '100', 'r3busformazione@gmail.com', 'via Vasca Navale 62', 'centro-1', '0111111111');
+INSERT INTO public.centro(
+            id, capienza, email, indirizzo, nome, telefono)
+    VALUES ('2', '50', 'r3busformazione@gmail.com', 'via Vasca Navale 62', 'centro-2', '0111111111');
 
 insert into attivita(id, nome, orario_inizio, orario_fine, centro_id) 
 		values('3','Come coccolare un fenicottero','2018-08-02 12:00:00','2018-08-02 14:00:00','2');

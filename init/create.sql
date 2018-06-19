@@ -17,11 +17,14 @@ WITH (
 ALTER TABLE public.allievo
   OWNER TO formazione;
 
-CREATE TABLE if not exists public.centro
+CREATE TABLE public.centro
 (
   id bigint NOT NULL,
   capienza integer NOT NULL,
+  email character varying(255) NOT NULL,
+  indirizzo character varying(255) NOT NULL,
   nome character varying(255) NOT NULL,
+  telefono character varying(255) NOT NULL,
   CONSTRAINT centro_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -29,6 +32,7 @@ WITH (
 );
 ALTER TABLE public.centro
   OWNER TO formazione;
+
 
 CREATE TABLE if not exists public.attivita
 (
