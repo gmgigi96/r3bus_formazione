@@ -1,6 +1,6 @@
 package org.bitbucket.r3bus.controller;
 
-import java.util.HashSet;
+import java.util.HashMap;
 
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.AllievoService;
@@ -18,15 +18,15 @@ public class AllievoController {
 	@Autowired
 	private AllievoService allievoService;
 	
-	@GetMapping("/allievo")
+	@GetMapping("/allievo/")
 	public String controllaAllievo(Model model) {
 		model.addAttribute("managingLearner", true);
 		model.addAttribute("pageId", "booked_activities");
 //		Allievo v = this.allievoService.findByEmail(email);
 //		Set<Attivita> prenotate = this.rebus.getAttivitaAllievo(v);
 		
-		model.addAttribute("activityList", new HashSet<>());
+		model.addAttribute("activities", new HashMap<>());
 
-		return "activity_list";
+		return "all_bookings";
 	}
 }
