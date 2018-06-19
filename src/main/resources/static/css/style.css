@@ -98,6 +98,8 @@ body {
 .main_left {
 	width: 223px;
 	float: left;
+	position: sticky;
+	top: 20px;
 }
 
 .main_right {
@@ -137,9 +139,14 @@ body {
 
 /*menu*/
 .menu {
-	width: 223px;
 	padding: 0;
 	margin: 0 auto;
+}
+
+.menu.scrollable {
+	padding-right: 2px;
+	max-height: calc(100vh - 40px);
+	overflow-y: auto;
 }
 
 .menu ul {

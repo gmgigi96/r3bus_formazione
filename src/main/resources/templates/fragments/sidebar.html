@@ -69,7 +69,7 @@
 	</div>
 
 	<!--/* TODO: find a way to replace the authority with 'ALLIEVO' */-->
-	<nav class="menu" sec:authorize="hasAuthority('ROLE_USER')" th:unless="${showBackButton}">
+	<nav class="menu scrollable" sec:authorize="hasAuthority('ROLE_USER')" th:unless="${showBackButton}">
 		<ul th:unless="${#maps.isEmpty(activities)}">
 			<li th:each="activityList : ${activities}" th:object="${activityList}">
 				<a th:href="|#*{key.replace(' ', '-')}|" th:text="*{key}">Center 1</a>

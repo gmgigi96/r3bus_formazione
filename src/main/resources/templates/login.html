@@ -22,9 +22,9 @@
 				<label class="control-label" for="password">Password</label>
 				<input name="password" id="password" class="form-control" type="password" required />
 			</div>
-			<button class="btn btn-primary" type="submit" th:text="#{actions.login}">Login</button>
+			<button class="btn btn-primary" type="submit" th:text="#{actions.login}" style="margin-right:10px">Login</button>
 			<th:block th:each="url : ${urls}" th:object="${url}">
-				<a class="btn btn-primary" th:href="@{*{value}}">
+				<a class="btn btn-default" th:href="@{*{value}}">
 					<span class="fab" th:classappend="|fa-*{key.toLowerCase()}|"></span>
 					<span th:text="#{actions.login_with(*{key})}">Login with Service</span>
 				</a>
