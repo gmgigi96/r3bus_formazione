@@ -44,6 +44,9 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
+		if (role.equals("role_user")) // TODO: find a way to change the authority
+			return "redirect:/allievo/";
+
 		return "redirect:/" + role + "/";
 	}
 
