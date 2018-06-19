@@ -15,8 +15,10 @@ import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,20 +52,20 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
+		if (auth instanceof OAuth2AuthenticationToken) {
+			DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal(); 
+			// login con oauth
+			String email = principal.getEmail();
+			// TODO: do stuff with email
+
+			return "redirect:/allievo/"; // TODO: fix this, set authorities to contain "ALLIEVO"
+		}
+
 		// collega centro corrente
 		if (role.equals("responsabile")) {
 			String id = auth.getName().split("-")[1];
 			System.out.printf("Managing center with id: %s\n", id);
 			rebus.setCentroGestito(new Long(id));
-		}
-		
-		if(role.equals("role_user")) {
-			// è un utente con il login oauth
-			System.out.println("AUTH");
-			Principal user = (Principal) auth.getPrincipal();
-			System.out.println(user);
-			
-			return "redirect:/allievo/";
 		}
 
 		return "redirect:/";
