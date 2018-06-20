@@ -62,7 +62,8 @@ public class MainController {
 			}
 
 			auth.setAuthenticated(false);
-			return "redirect:/login?oautherror";
+			session.setAttribute("oautherror", true);
+			return "redirect:/";
 		}
 
 		// collega centro corrente
@@ -77,7 +78,7 @@ public class MainController {
 
 	@SuppressWarnings("unchecked")
 	@GetMapping("/login")
-	public String loginPage(Model model) {
+	public String loginPage(Model model, HttpSession session) {
 		Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
 		Iterable<ClientRegistration> clientRegistrations = null;
 
@@ -85,6 +86,11 @@ public class MainController {
 			clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
 			clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(),
 					authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+		}
+
+		if (session.getAttribute("oautherror") != null) {
+			model.addAttribute("oautherror", true);
+			session.removeAttribute("oautherror");
 		}
 
 		model.addAttribute("urls", oauth2AuthenticationUrls);
