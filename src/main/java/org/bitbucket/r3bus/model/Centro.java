@@ -136,7 +136,7 @@ public class Centro implements PropertyListener {
 
 		LocalDateTime now = LocalDateTime.now();
 		attivita.forEach((attivita) -> {
-			if (attivita.getOrarioInizio().compareTo(now) > 0) {
+			if (attivita.getOrarioInizio().compareTo(now) > 0 && attivita.getNumeroAllieviPrenotati() < this.capienza) {
 				res.add(attivita);
 			}
 		});
