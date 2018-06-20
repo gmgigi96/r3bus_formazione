@@ -31,6 +31,6 @@ insert into allievo(id, codice_fiscale, nome, cognome, email, luogo_nascita, dat
 insert into allievo_attivita_prenotate(attivita_prenotate_id,allievi_prenotati_id) values('4','9');
 insert into allievo_attivita_prenotate(attivita_prenotate_id,allievi_prenotati_id) values('8','9');
 
-ALTER SEQUENCE public.hibernate_sequence START WITH 11;
+ALTER SEQUENCE public.hibernate_sequence START WITH 12;
 
 ALTER SEQUENCE public.hibernate_sequence RESTART;
