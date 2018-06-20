@@ -46,7 +46,7 @@ public class ResponsabileController {
 		if (rebus.gestisciAllievo(codiceFiscale))
 			return "redirect:/responsabile/attivita/";
 
-		session.setAttribute("faxid", codiceFiscale);
+		session.setAttribute("taxid", codiceFiscale);
 		session.setAttribute("isNew", true);
 		return "redirect:/responsabile/allievo/inserisci";
 	}
@@ -55,10 +55,10 @@ public class ResponsabileController {
 
 	@GetMapping("/responsabile/allievo/inserisci")
 	public String nuovoAllievoForm(ModelMap model, HttpSession session) {
-		String codiceFiscale = (String) session.getAttribute("faxid");
+		String codiceFiscale = (String) session.getAttribute("taxid");
 		model.addAttribute("isNew", session.getAttribute("isNew"));
 		session.removeAttribute("isNew");
-		session.removeAttribute("faxid");
+		session.removeAttribute("taxid");
 
 		Allievo allievo = new Allievo();
 		model.addAttribute("learner", allievo);
