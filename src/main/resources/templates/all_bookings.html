@@ -9,26 +9,28 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<p class="alert alert-info" th:if="${#maps.isEmpty(activities)}" th:text="#{activity.nothing}">Nothing relevant</p>
-		<th:block th:each="activityList : ${activities}" th:object="${activityList}">
-			<h3 class="center-name" th:text="*{key}" th:id="*{key.replace(' ', '-')}">Center 1</h3>
-			<table class="activity-list table">
-				<thead>
-					<tr>
-						<th th:text="#{activity.name}">Name</th>
-						<th th:text="#{activity.begin_time}">Begin</th>
-						<th th:text="#{activity.end_time}">End</th>
-					<tr>
-				</thead>
-				<tbody>
-					<tr th:each="activity : *{value}" th:object="${activity}">
-						<td th:text="*{nome}">Activity 1</td>
-						<td th:text="*{{orarioInizio}}">2018-06-06 12:00</td>
-						<td th:text="*{{orarioFine}}">2018-06-06 14:00</td>
-					</tr>
-				</tbody>
-			</table>
-		</th:block>
+		<div class="bookings-frame">
+			<p class="alert alert-info" th:if="${#maps.isEmpty(activities)}" th:text="#{activity.nothing}">Nothing relevant</p>
+			<th:block th:each="activityList : ${activities}" th:object="${activityList}">
+				<h3 class="center-name" th:text="*{key}" th:id="*{key.replace(' ', '-')}">Center 1</h3>
+				<table class="activity-list table">
+					<thead>
+						<tr>
+							<th th:text="#{activity.name}">Name</th>
+							<th th:text="#{activity.begin_time}">Begin</th>
+							<th th:text="#{activity.end_time}">End</th>
+						<tr>
+					</thead>
+					<tbody>
+						<tr th:each="activity : *{value}" th:object="${activity}">
+							<td th:text="*{nome}">Activity 1</td>
+							<td th:text="*{{orarioInizio}}">2018-06-06 12:00</td>
+							<td th:text="*{{orarioFine}}">2018-06-06 14:00</td>
+						</tr>
+					</tbody>
+				</table>
+			</th:block>
+		</div>
 	</div>
 </body>
 </html>

@@ -26,7 +26,10 @@ body {
 
 /* clear fixes */
 
-.header_resize:after, .main_resize:after, .footer_resize:after, .clr:after {
+.header_resize:after,
+.main_resize:after,
+.footer_resize:after,
+.clr:after {
 	content: " ";
 	height: 0;
 	width: 0;
@@ -135,6 +138,11 @@ body {
 
 .stats-frame .activity-bookings {
 	margin-top: 20px;
+}
+
+/*all bookings*/
+.bookings-frame .activity-list th:first-child {
+	width: 46%;
 }
 
 /*menu*/
