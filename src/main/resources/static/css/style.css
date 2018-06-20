@@ -141,6 +141,20 @@ body {
 	margin-top: 20px;
 }
 
+.stats-frame .daily-bookings {
+	position: relative;
+}
+
+.stats-frame .center-capacity {
+	text-align: right;
+	font-size: 12px;
+	position: absolute;
+	right: 15px;
+	top: 58px;
+	background: white;
+	padding: 2px 5px;
+}
+
 /*all bookings*/
 .bookings-frame .activity-list th:first-child {
 	width: 46%;

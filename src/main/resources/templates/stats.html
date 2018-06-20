@@ -16,6 +16,10 @@
 			</div>
 			<div class="daily-bookings">
 				<h3 th:text="#{stats.daily_bookings}"></h3>
+				<p class="center-capacity">
+					<b th:text="#{center.capacity}">Center capacity</b>:
+					<span th:text="${centerCapacity}">N</span>
+				</p>
 				<img th:src="@{prenotazioni_giornaliere.png}" th:alt-title="#{stats.daily_bookings}" />
 			</div>
 			<div class="activity-bookings">

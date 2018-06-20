@@ -59,6 +59,7 @@ public class DirettoreController {
 
 		model.addAttribute("currentMonth", month);
 		model.addAttribute("currentCenter", id);
+		model.addAttribute("centerCapacity", centroService.findbyId(id).getCapienza());
 		model.addAttribute("activityMap", rebus.getPrenotazioniPerAttivita(id, inizio, fine));
 
 		return "stats";
