@@ -95,37 +95,4 @@ public class MainController {
 		model.addAttribute("urls", oauth2AuthenticationUrls);
 		return "login";
 	}
-
-	/* ↓↓ mapping di prova (da eliminare) */
-
-	@GetMapping("/aggiungi")
-	public String aggiungiPage() {
-		// crezione allievo
-		Allievo allievo = new Allievo();
-		allievo.setCodiceFiscale("codiceFiscale");
-		allievo.setCognome("Elsayed");
-		allievo.setDataNascita(LocalDate.now());
-		allievo.setEmail("email@email.com");
-		allievo.setLuogoNascita("Anzio");
-		allievo.setNome("Omar");
-		allievo.setTelefono("000000");
-		// creazione attivita
-		Attivita attivita = new Attivita("prima attivita", LocalDateTime.now(), LocalDateTime.now().plusHours(10));
-		Attivita attivita2 = new Attivita("seconda attivita", LocalDateTime.now().plusHours(10),
-				LocalDateTime.now().plusHours(11));
-
-		// creazione centro
-		Centro centro = new Centro();
-		centro.setCapienza(100);
-		centro.setNome("primo Centro");
-
-		centro = centroService.save(centro);
-
-		allievoService.save(allievo);
-		allievo.prenotaAttivita(attivita);
-		centro.addAttivita(attivita);
-		centro.addAttivita(attivita2);
-
-		return "index";
-	}
 }
