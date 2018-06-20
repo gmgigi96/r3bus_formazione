@@ -9,7 +9,8 @@
 		<a th:href="@{/}" class="logo-name">R3busFormazione</a>
 	</div>
 	<div class="session-menu" th:if="${#authorization.expr('isAuthenticated()')}">
-		<span th:text="${#authentication.name}" class="role-name">username</span>
+		<span th:text="${username} ?: ${#authentication.name}"
+			class="role-name">username</span>
 		<form th:action="@{/logout}" method="post">
 			<button type="submit" th:text="#{actions.logout}">Logout</button>
 		</form>

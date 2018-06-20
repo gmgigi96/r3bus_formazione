@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 @Configuration
 @EnableWebSecurity
@@ -27,12 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource)
-			.passwordEncoder(getPasswordEncoder())
-			.usersByUsernameQuery(userQuery)
-			.authoritiesByUsernameQuery(authQuery);
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(getPasswordEncoder())
+				.usersByUsernameQuery(userQuery).authoritiesByUsernameQuery(authQuery);
 	}
-	
+
 	@Bean
 	public BCryptPasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -40,21 +40,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-			.authorizeRequests()
-			.antMatchers("/login").anonymous() // TODO: non sembra funzionare.
-			.antMatchers("/favicon.ico", "/error", "/js/**", "/css/**", "/images/**", "/webjars/**").permitAll()
-			.antMatchers("/responsabile/**").hasAuthority("RESPONSABILE")
-			.antMatchers("/direttore/**").hasAuthority("DIRETTORE")
-			.antMatchers("/organizzatore/**").hasAuthority("ORGANIZZATORE")
-			.antMatchers("/**").authenticated()
-			.anyRequest().permitAll()
-			.anyRequest().authenticated()
-			.and()
-			.formLogin()
-			.loginPage("/login")
-			.defaultSuccessUrl("/loginSuccess", true).permitAll()
-			.failureUrl("/login?error");
+		 http
+		 .csrf().disable()
+		 .authorizeRequests()
+			 .antMatchers("/favicon.ico", "/error", "/js/**", "/css/**", "/images/**", "/webjars/**").permitAll()
+			 .antMatchers("/login").anonymous()
+			 .antMatchers("/", "/loginSuccess").authenticated()
+			 .antMatchers("/responsabile/**").hasAuthority("RESPONSABILE")
+			 .antMatchers("/direttore/**").hasAuthority("DIRETTORE")
+			 .antMatchers("/organizzatore/**").hasAuthority("ORGANIZZATORE")
+			 .antMatchers("/allievo/**").hasAuthority("ROLE_USER") // TODO: change to "ALLIEVO"
+			 .anyRequest().denyAll()
+		 .and()
+			 .formLogin()
+			 .loginPage("/login")
+			 .defaultSuccessUrl("/loginSuccess", true)
+			 .failureUrl("/login?error")
+		 .and()
+			 .oauth2Login()
+			 .loginPage("/login")
+			 .defaultSuccessUrl("/loginSuccess", true)
+			 .failureUrl("/login?error");
 	}
-
 }

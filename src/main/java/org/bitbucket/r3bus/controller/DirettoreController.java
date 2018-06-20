@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DirettoreController {
-	
+
 	@Autowired
 	private CentroService centroService;
-	
+
 	@Autowired
 	private Rebus rebus;
 
@@ -40,8 +40,7 @@ public class DirettoreController {
 	// mostra statistiche
 
 	@GetMapping("/direttore/{id}/{mese}/statistiche/")
-	public String statistics(@PathVariable("id") Long id, @PathVariable("mese") String month, 
-			ModelMap model) { 
+	public String statistics(@PathVariable("id") Long id, @PathVariable("mese") String month, ModelMap model) {
 		LocalDate inizio = LocalDate.parse(month + "-01");
 		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
 

@@ -18,35 +18,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class GraficoController {
-	
+
 	@Autowired
 	Rebus rebus;
-	
+
 	@Autowired
 	ChartGenerator chartGenerator;
-	
+
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/attivita_giornaliere.png")
-	public void graficoAttivitaGiornaliere(@PathVariable("centro") Long codiceCentro, 
-											@PathVariable("mese") String mese,
-												HttpServletResponse response ) {
+	public void graficoAttivitaGiornaliere(@PathVariable("centro") Long codiceCentro, @PathVariable("mese") String mese,
+											HttpServletResponse response) {
 		LocalDate inizio = LocalDate.parse(mese + "-01");
 		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
-		
+
 		List<Number> lista = this.rebus.getNumeroAttivitaGiornaliere(codiceCentro, inizio, fine);
-		
+
 		JFreeChart chart = chartGenerator.creaGrafico(lista, inizio, fine, 0, 20);
 		creaImmagineGrafico(response, chart);
 	}
 
 	@RequestMapping("/direttore/{centro}/{mese}/statistiche/prenotazioni_giornaliere.png")
 	public void graficoPrenotazioniGiornaliere(@PathVariable("centro") Long codiceCentro,
-												@PathVariable("mese") String mese,
-													HttpServletResponse response ) {
+												@PathVariable("mese") String mese, HttpServletResponse response) {
 		LocalDate inizio = LocalDate.parse(mese + "-01");
 		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
-		
+
 		List<Number> lista = this.rebus.getMediaPrenotati(codiceCentro, inizio, fine);
-		
+
 		JFreeChart chart = chartGenerator.creaGrafico(lista, inizio, fine, 0, 1);
 		creaImmagineGrafico(response, chart);
 	}
@@ -60,7 +58,7 @@ public class GraficoController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		response.setContentType("image/png");
 	}
 }

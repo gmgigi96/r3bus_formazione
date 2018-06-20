@@ -67,6 +67,10 @@ public class Rebus {
 		this.allievoCorrente = null;
 	}
 
+	public Map<String, Set<Attivita>> getAttivitaPrenotateAllievo(Allievo allievo) {
+		return this.azienda.getAttivitaPrenotateAllievo(allievo);
+	}
+
 	// gestione attività
 
 	public void creaNuovaAttivita(Long codiceCentro, Attivita attivita) {

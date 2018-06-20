@@ -1,18 +1,22 @@
 package org.bitbucket.r3bus.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.bitbucket.r3bus.model.Allievo;
-import org.bitbucket.r3bus.model.Attivita;
-import org.bitbucket.r3bus.model.Centro;
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.AllievoService;
-import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,21 +27,44 @@ public class MainController {
 	private Rebus rebus;
 	@Autowired
 	private AllievoService allievoService;
+
+	private final static String authorizationRequestBaseUri = "/oauth2/authorization";
+
 	@Autowired
-	private CentroService centroService;
+	private ClientRegistrationRepository clientRegistrationRepository;
 
 	@GetMapping("/")
 	public String indexPage() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
+		if (role.equals("role_user")) // TODO: find a way to change the
+										// authority
+			role = "allievo";
+
 		return "redirect:/" + role + "/";
 	}
 
 	@RequestMapping("/loginSuccess")
-	public String init() {
+	public String init(HttpSession session) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
+
+		// login con oauth
+		if (auth instanceof OAuth2AuthenticationToken) {
+			DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
+			String email = principal.getEmail();
+			Allievo allievo = this.allievoService.findByEmail(email);
+			if (allievo != null) {
+				session.setAttribute("allievo", allievo);
+				return "redirect:/allievo/"; // TODO: fix this, set authorities
+												// to contain "ALLIEVO"
+			}
+
+			auth.setAuthenticated(false);
+			session.setAttribute("oautherror", true);
+			return "redirect:/";
+		}
 
 		// collega centro corrente
 		if (role.equals("responsabile")) {
@@ -49,41 +76,24 @@ public class MainController {
 		return "redirect:/";
 	}
 
+	@SuppressWarnings("unchecked")
 	@GetMapping("/login")
-	public String loginPage() {
+	public String loginPage(Model model, HttpSession session) {
+		Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
+		Iterable<ClientRegistration> clientRegistrations = null;
+
+		if (clientRegistrationRepository instanceof Iterable) {
+			clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
+			clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(),
+					authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+		}
+
+		if (session.getAttribute("oautherror") != null) {
+			model.addAttribute("oautherror", true);
+			session.removeAttribute("oautherror");
+		}
+
+		model.addAttribute("urls", oauth2AuthenticationUrls);
 		return "login";
-	}
-
-	/* ↓↓ mapping di prova (da eliminare) */
-
-	@GetMapping("/aggiungi")
-	public String aggiungiPage() {
-		// crezione allievo
-		Allievo allievo = new Allievo();
-		allievo.setCodiceFiscale("codiceFiscale");
-		allievo.setCognome("Elsayed");
-		allievo.setDataNascita(LocalDate.now());
-		allievo.setEmail("email@email.com");
-		allievo.setLuogoNascita("Anzio");
-		allievo.setNome("Omar");
-		allievo.setTelefono("000000");
-		// creazione attivita
-		Attivita attivita = new Attivita("prima attivita", LocalDateTime.now(), LocalDateTime.now().plusHours(10));
-		Attivita attivita2 = new Attivita("seconda attivita", LocalDateTime.now().plusHours(10),
-				LocalDateTime.now().plusHours(11));
-
-		// creazione centro
-		Centro centro = new Centro();
-		centro.setCapienza(100);
-		centro.setNome("primo Centro");
-
-		centro = centroService.save(centro);
-
-		allievoService.save(allievo);
-		allievo.prenotaAttivita(attivita);
-		centro.addAttivita(attivita);
-		centro.addAttivita(attivita2);
-
-		return "index";
 	}
 }
