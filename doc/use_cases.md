@@ -1,8 +1,8 @@
 Casi d'uso - R3busFormazione
-----------------------------
+============================
 
 UC1
-================================================
+------------------------------------------------
 ***Prenotazione partecipazione ad un'attività***
 
 Att. primario: Responsabile del centro  
@@ -25,7 +25,7 @@ Att. finale:   Allievo
 
 
 UC2
-==========================
+--------------------------
 ***Annulla prenotazione***
 
 Att. primario: Responsabile del centro  
@@ -41,7 +41,7 @@ Att. finale:   Allievo
 
 
 UC3
-=====================================
+-------------------------------------
 ***Eliminazione iscrizione allievo***
 
 Att. primario: Responsabile del centro  
@@ -56,7 +56,7 @@ Att. finale:   Allievo
 
 
 UC4
-========================================
+----------------------------------------
 ***Visualizzazione statistiche centro***
 
 Attore principale: Direttore dell'azienda
@@ -67,7 +67,7 @@ Attore principale: Direttore dell'azienda
 
 
 UC5
-==========================================
+------------------------------------------
 ***Inserimento nuova attività formativa***
 
 Attore principale: Organizzatore dell'attività
@@ -79,7 +79,7 @@ Attore principale: Organizzatore dell'attività
 
 
 UC6
-======================================
+--------------------------------------
 ***Modifica dati attività formativa***
 
 Attore principale: Organizzatore dell'attività
@@ -100,7 +100,7 @@ Attore principale: Organizzatore dell'attività
 
 
 UC7
-========================================
+----------------------------------------
 ***Visualizzazione attività prenotate***
 
 Attore principale: Allievo
