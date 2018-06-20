@@ -1,6 +1,7 @@
 package org.bitbucket.r3bus.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class Attivita {
 
 	@Override
 	public String toString() {
-		return this.nome;
+		return this.nome + " (" + this.orarioInizio.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm")) + ")";
 	}
 
 	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
