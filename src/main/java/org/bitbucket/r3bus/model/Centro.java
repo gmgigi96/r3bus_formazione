@@ -16,7 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -56,8 +55,7 @@ public class Centro implements PropertyListener {
 	@NotNull
 	private int capienza;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "centro_id")
+	@OneToMany(mappedBy = "centro", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private final List<Attivita> attivita;
 
 	public Centro() {
@@ -202,6 +200,7 @@ public class Centro implements PropertyListener {
 
 	public void addAttivita(Attivita a) {
 		attivita.add(a);
+		a.setCentro(this);
 	}
 
 	@Override
