@@ -1,6 +1,7 @@
 package org.bitbucket.r3bus.controller;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.CentroService;
@@ -21,14 +22,26 @@ public class DirettoreController {
 	@Autowired
 	private Rebus rebus;
 
+	@ModelAttribute("selectMonth")
+	public boolean selectMonth() {
+		return true;
+	}
+
+	@ModelAttribute("centerActionUrl")
+	public String centerActionUrl() {
+		return "/direttore/";
+	}
+
+	@ModelAttribute("centerMap")
+	public Map<Long, String> centerMap() {
+		return centroService.getId2Nome();
+	}
+
 	// selezione centro
 
 	@GetMapping("/direttore/")
 	public String selezioneCentroForm(ModelMap model) {
-		model.addAttribute("selectMonth", true);
 		model.addAttribute("pageId", "select_stats");
-		model.addAttribute("centerActionUrl", "/direttore/");
-		model.addAttribute("centerMap", centroService.getId2Nome());
 		return "message";
 	}
 
@@ -44,11 +57,8 @@ public class DirettoreController {
 		LocalDate inizio = LocalDate.parse(month + "-01");
 		LocalDate fine = inizio.withDayOfMonth(inizio.lengthOfMonth());
 
-		model.addAttribute("selectMonth", true);
 		model.addAttribute("currentMonth", month);
 		model.addAttribute("currentCenter", id);
-		model.addAttribute("centerActionUrl", "/direttore/");
-		model.addAttribute("centerMap", centroService.getId2Nome());
 		model.addAttribute("activityMap", rebus.getPrenotazioniPerAttivita(id, inizio, fine));
 
 		return "stats";

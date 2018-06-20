@@ -1,5 +1,6 @@
 package org.bitbucket.r3bus.controller;
 
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -26,12 +27,16 @@ public class OrganizzatoreController {
 	@Autowired
 	private CentroService centroService;
 
+	@ModelAttribute("centerMap")
+	public Map<Long, String> centerMap() {
+		return centroService.getId2Nome();
+	}
+
 	// selezione centro
 
 	@GetMapping("/organizzatore/")
 	public String selezioneCentroForm(ModelMap model) {
 		model.addAttribute("pageId", "select_center");
-		model.addAttribute("centerMap", centroService.getId2Nome());
 		return "message";
 	}
 
@@ -51,7 +56,6 @@ public class OrganizzatoreController {
 		// model.addAttribute("multiSelect", true);
 		model.addAttribute("editActivity", true);
 		model.addAttribute("pageId", "managed_activities");
-		model.addAttribute("centerMap", centroService.getId2Nome());
 		model.addAttribute("centerActionUrl", "/organizzatore/");
 		model.addAttribute("currentCenter", centroID);
 		model.addAttribute("newActivity", true);
