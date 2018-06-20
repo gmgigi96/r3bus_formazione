@@ -62,7 +62,7 @@ public class MainController {
 			}
 
 			auth.setAuthenticated(false);
-			return "redirect:/login?error";
+			return "redirect:/login?oautherror";
 		}
 
 		// collega centro corrente

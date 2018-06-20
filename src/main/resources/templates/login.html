@@ -12,6 +12,8 @@
 		<form th:action="@{/login}" method="post" class="user-form">
 			<div class="alert alert-danger"
 				th:if="${param.error}" th:text="#{pages.login.invalid_credentials}">Invalid credentials</div>
+			<div class="alert alert-danger"
+				th:if="${param.oautherror}" th:text="#{pages.login.oauth_error}">OAuth error</div>
 			<div class="alert alert-info"
 				th:if="${param.logout}" th:text="#{pages.login.logged_out}">Logged out</div>
 			<div class="form-group">
