@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -43,6 +44,9 @@ public class Attivita {
 
 	@ManyToMany(mappedBy = "attivitaPrenotate", fetch = FetchType.EAGER)
 	private final Set<Allievo> allieviPrenotati;
+	
+	@ManyToOne
+	private Centro centro;
 
 	private transient final List<PropertyListener> abbonati;
 

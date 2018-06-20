@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Centro;
@@ -43,15 +45,14 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
-		if (role.equals("role_user")) // TODO: find a way to change the
-										// authority
-			return "redirect:/allievo/";
+		if (role.equals("role_user")) // TODO: find a way to change the authority
+			role = "allievo";
 
 		return "redirect:/" + role + "/";
 	}
 
 	@RequestMapping("/loginSuccess")
-	public String init() {
+	public String init(HttpSession session) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
@@ -59,11 +60,12 @@ public class MainController {
 		if (auth instanceof OAuth2AuthenticationToken) {
 			DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
 			String email = principal.getEmail();
-			Allievo a = this.allievoService.findByEmail(email);
-
-			if (a != null)
+			Allievo allievo = this.allievoService.findByEmail(email);
+			if(allievo != null) {
+				session.setAttribute("allievo", allievo);
 				return "redirect:/allievo/"; // TODO: fix this, set authorities to contain "ALLIEVO"
-
+			}
+			
 			auth.setAuthenticated(false);
 			return "redirect:/login?error";
 		}

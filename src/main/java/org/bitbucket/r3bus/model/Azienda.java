@@ -1,5 +1,10 @@
 package org.bitbucket.r3bus.model;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.bitbucket.r3bus.service.AllievoService;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +43,23 @@ public class Azienda {
 
 	public Centro salvaCentro(Centro centro) {
 		return this.centri.save(centro);
+	}
+
+	public Map<String, Set<Attivita>> getAttivitaPrenotateAllievo(Allievo allievo) {
+		Map<String, Set<Attivita>> prenotate = new HashMap<>();
+
+		for (Attivita attivita : allievo.getAttivitaPrenotate()) {
+			Centro centro = attivita.getCentro();
+			Set<Attivita> temp;
+			if (prenotate.containsKey(centro.getNome())) {
+				temp = prenotate.get(centro.getNome());
+			} else {
+				temp = new HashSet<>();
+			}
+			temp.add(attivita);
+			prenotate.put(centro.getNome(), temp);
+		}
+
+		return prenotate;
 	}
 }
