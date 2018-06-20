@@ -1,5 +1,6 @@
 package org.bitbucket.r3bus.utils;
 
+import java.awt.Color;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class ChartGenerator {
 	public JFreeChart creaGrafico(List<Number> dati, LocalDate inizio, LocalDate fine, double min, double max) {
 		JFreeChart chart = ChartFactory.createLineChart("", "", "", this.creaDati(dati, inizio, fine));
 		chart.removeLegend();
+
 		CategoryPlot plot = chart.getCategoryPlot();
+		plot.setBackgroundAlpha(0);
 
 		// codice per ruotare i giorni
 		// CategoryAxis domainAxis = plot.getDomainAxis();
