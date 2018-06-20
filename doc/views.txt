@@ -1,30 +1,43 @@
+//== componenti di template che vengono inclusi in tutte le viste ==//
+
+header:
+	- username : String (sovrascrive l'username di default con questo)
+
 sidebar:
 	// dove risulta utile
-- showBackButton : boolean
-- backUrl : String
+	- showBackButton : boolean
+	- backUrl : String
+
 	// responsabile
-- currentLearner : Allievo (l'allievo correntemente in gestione)
+	- currentLearner : Allievo (l'allievo correntemente in gestione)
+
 	// organizzatore & direttore
-- centerActionUrl : String
-- currentCenter : Long (id del centro corrente)
-- currentMonth : String (yyyy-MM del mese corrente)
-- selectMonth : boolean (per direttore)
-- centerMap : Map<Long, String> (codice → nome)
+	- centerActionUrl : String (action della form che seleziona il centro)
+	- currentCenter : Long (id del centro corrente)
+	- currentMonth : String (yyyy-MM del mese corrente)
+	- selectMonth : boolean (mostra selezione mese, per direttore)
+	- centerMap : Map<Long, String> (codice → nome, per popolare la selezione del centro)
+
+
+//== viste specifiche ==//
 
 activity_form:
-- pageId : String of ["new_activity", "edit_activity"]
-- activity: Attivita
+	- pageId : String of ["new_activity", "edit_activity"]
+	- activity: Attivita
 
 activity_list:
-- pageId : String of [...] (vedi messages.properties)
-- activityActionUrl : String
-- multiSelect : boolean (mostra checkbox e bottone invia)
-- editActivity: boolean (mostra bottone di modifica su ogni riga)
-- newActivity: boolean (mostra link per aggiunta)
-- activityList : List<Attivita>
+	- pageId : String of [...] (vedi messages.properties)
+	- activityActionUrl : String (action della form di selezione delle attività)
+	- multiSelect : boolean (mostra checkbox e bottone invia)
+	- editActivity: boolean (mostra bottone di modifica su ogni riga)
+	- newActivity: boolean (mostra link per aggiunta)
+	- activityList : List<Attivita>
 
 new_learner:
-- learner : Allievo
+	- learner : Allievo
 
 stats:
-- activityMap : Map<String, Int> (nome → prenotazioni)
+	- activityMap : Map<String, Int> (nome → prenotazioni)
+
+all_bookings:
+	- activities : Map<String, List<Attivita>> (nome centro → lista attività di quel centro)
