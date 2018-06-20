@@ -1,10 +1,6 @@
 package org.bitbucket.r3bus.controller;
 
-import java.util.Map;
-import java.util.Set;
-
 import org.bitbucket.r3bus.model.Allievo;
-import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,18 +15,13 @@ public class AllievoController {
 
 	@Autowired
 	private Rebus rebus;
-		
+
 	@GetMapping("/allievo/")
 	public String controllaAllievo(@SessionAttribute("allievo") Allievo allievo, Model model) {
-		model.addAttribute("managingLearner", true);
-		model.addAttribute("pageId", "booked_activities");
-		
 		DefaultOidcUser principal = (DefaultOidcUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("username", principal.getFullName());
-		
-		Map<String, Set<Attivita>> prenotate = rebus.getAttivitaPrenotateAllievo(allievo);
 
-		model.addAttribute("activities", prenotate);
+		model.addAttribute("username", principal.getFullName());
+		model.addAttribute("activities", rebus.getAttivitaPrenotateAllievo(allievo));
 
 		return "all_bookings";
 	}

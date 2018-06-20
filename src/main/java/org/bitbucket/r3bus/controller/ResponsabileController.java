@@ -114,7 +114,8 @@ public class ResponsabileController {
 	}
 
 	@PostMapping("/responsabile/allievo/attivita/annulla")
-	public String annullaAttivita(@RequestParam(value="selection", required=false) List<Long> codiciAttivita, ModelMap model) {
+	public String annullaAttivita(@RequestParam(value = "selection", required = false) List<Long> codiciAttivita,
+			ModelMap model) {
 		if (codiciAttivita == null)
 			return "redirect:/responsabile/allievo/attivita/?message=select&type=warning";
 		rebus.annullaPrenotazione(codiciAttivita);
@@ -144,7 +145,8 @@ public class ResponsabileController {
 	// prenota attivita
 
 	@PostMapping("/responsabile/attivita/prenota")
-	public String prenotaAttivita(@RequestParam(value="selection", required=false) List<Long> codiciAttivita, ModelMap model) {
+	public String prenotaAttivita(@RequestParam(value = "selection", required = false) List<Long> codiciAttivita,
+			ModelMap model) {
 		if (codiciAttivita == null)
 			return "redirect:/responsabile/attivita/?message=select&type=warning";
 		rebus.prenotaAttivita(codiciAttivita);

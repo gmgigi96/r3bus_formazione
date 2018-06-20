@@ -11,25 +11,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 public class AttivitaService {
-	
+
 	@Autowired
 	AttivitaRepository attivitaRepository;
-	
-	public Iterable<Attivita> findAll() {
-        return this.attivitaRepository.findAll();
-    }
 
-    
-    public Attivita save(final Attivita attivita) {
-       return this.attivitaRepository.save(attivita);
-    }
+	public Iterable<Attivita> findAll() {
+		return this.attivitaRepository.findAll();
+	}
+
+	public Attivita save(final Attivita attivita) {
+		return this.attivitaRepository.save(attivita);
+	}
 
 	public Attivita findbyId(Long id) {
-		Optional<Attivita> attivita =  this.attivitaRepository.findById(id);
-		
-		if(attivita.isPresent()) {
+		Optional<Attivita> attivita = this.attivitaRepository.findById(id);
+
+		if (attivita.isPresent()) {
 			return attivita.get();
-			
+
 		}
 		return null;
 	}

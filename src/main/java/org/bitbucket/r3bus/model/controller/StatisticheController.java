@@ -20,8 +20,8 @@ import org.bitbucket.r3bus.utils.LocalDateRange;
 public class StatisticheController {
 
 	/**
-	 * Crea una classe capace di generare statistiche dei centri dell'azienda data
-	 * per parametro.
+	 * Crea una classe capace di generare statistiche dei centri dell'azienda
+	 * data per parametro.
 	 * 
 	 * @param azienda
 	 */
@@ -32,15 +32,17 @@ public class StatisticheController {
 	 * Restituisce il numero di attività giornaliere del centro specificato
 	 * ({@link #setCentro(long)}), nell'intervallo temporale scelto
 	 * ({@link #setIntervallo(LocalDate, LocalDate)}).
-	 * @param centro 
+	 * 
+	 * @param centro
 	 * 
 	 * @see #setCentro(long)
 	 * @see #setIntervallo(LocalDate, LocalDate)
 	 * 
-	 * @return Mappa del numero di attivita giornaliere nell'intervallo specificato
+	 * @return Mappa del numero di attivita giornaliere nell'intervallo
+	 *         specificato
 	 */
 	public List<Number> getNumeroAttivitaGiornaliere(Centro centro, LocalDate inizio, LocalDate fine) {
-		List<Number>  res = new ArrayList<>();
+		List<Number> res = new ArrayList<>();
 		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			res.add(centro.getNumeroAttivita(data));
 		}
@@ -48,9 +50,9 @@ public class StatisticheController {
 	}
 
 	/**
-	 * Restituisce una corrispondenza attivita/numero allievi prenotati, relative ad
-	 * un centro ({@link #setCentro(long)}), e ad un intervallo temporale
-	 * ({@link #setIntervallo(LocalDate, LocalDate)}).
+	 * Restituisce una corrispondenza attivita/numero allievi prenotati,
+	 * relative ad un centro ({@link #setCentro(long)}), e ad un intervallo
+	 * temporale ({@link #setIntervallo(LocalDate, LocalDate)}).
 	 * 
 	 * @see #setCentro(long)
 	 * @see #setIntervallo(LocalDate, LocalDate)
@@ -69,7 +71,8 @@ public class StatisticheController {
 	 * Restituisce una media giornaliera di allievi prenotati alle attivita del
 	 * centro scelto ({@link #setCentro(long)}, in un intervallo temporale
 	 * ({@link StatisticheController#setIntervallo(LocalDate, LocalDate)}).
-	 * @param centro 
+	 * 
+	 * @param centro
 	 * 
 	 * @see #setCentro(long)
 	 * @see #setIntervallo(LocalDate, LocalDate)

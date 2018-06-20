@@ -44,7 +44,7 @@ public class Attivita {
 
 	@ManyToMany(mappedBy = "attivitaPrenotate", fetch = FetchType.EAGER)
 	private final Set<Allievo> allieviPrenotati;
-	
+
 	@ManyToOne
 	private Centro centro;
 

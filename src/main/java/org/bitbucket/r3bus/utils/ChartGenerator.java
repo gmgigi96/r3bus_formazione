@@ -21,26 +21,26 @@ public class ChartGenerator {
 		JFreeChart chart = ChartFactory.createLineChart("", "", "", this.creaDati(dati, inizio, fine));
 		chart.removeLegend();
 		CategoryPlot plot = chart.getCategoryPlot();
-		
-		//codice per ruotare i giorni
-//		CategoryAxis domainAxis = plot.getDomainAxis();
-//		domainAxis.setCategoryLabelPositions(
-//		    CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 2.0));
-		
+
+		// codice per ruotare i giorni
+		// CategoryAxis domainAxis = plot.getDomainAxis();
+		// domainAxis.setCategoryLabelPositions(
+		// 	CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 2.0));
+
 		ValueAxis valueAxis = plot.getRangeAxis();
 		valueAxis.setRange(min, max);
-		
+
 		return chart;
 	}
 
 	private CategoryDataset creaDati(List<Number> dati, LocalDate inizio, LocalDate fine) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		int i = 0;
-		for(LocalDate data : LocalDateRange.with(inizio, fine)) {
+		for (LocalDate data : LocalDateRange.with(inizio, fine)) {
 			dataset.addValue(dati.get(i), "", data.getDayOfMonth());
 			i++;
 		}
-		
+
 		return dataset;
 	}
 

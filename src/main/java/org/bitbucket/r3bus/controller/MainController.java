@@ -1,18 +1,13 @@
 package org.bitbucket.r3bus.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.bitbucket.r3bus.model.Allievo;
-import org.bitbucket.r3bus.model.Attivita;
-import org.bitbucket.r3bus.model.Centro;
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.AllievoService;
-import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,8 +27,6 @@ public class MainController {
 	private Rebus rebus;
 	@Autowired
 	private AllievoService allievoService;
-	@Autowired
-	private CentroService centroService;
 
 	private final static String authorizationRequestBaseUri = "/oauth2/authorization";
 
@@ -45,7 +38,8 @@ public class MainController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String role = auth.getAuthorities().toArray()[0].toString().toLowerCase();
 
-		if (role.equals("role_user")) // TODO: find a way to change the authority
+		if (role.equals("role_user")) // TODO: find a way to change the
+										// authority
 			role = "allievo";
 
 		return "redirect:/" + role + "/";
@@ -61,11 +55,12 @@ public class MainController {
 			DefaultOidcUser principal = (DefaultOidcUser) auth.getPrincipal();
 			String email = principal.getEmail();
 			Allievo allievo = this.allievoService.findByEmail(email);
-			if(allievo != null) {
+			if (allievo != null) {
 				session.setAttribute("allievo", allievo);
-				return "redirect:/allievo/"; // TODO: fix this, set authorities to contain "ALLIEVO"
+				return "redirect:/allievo/"; // TODO: fix this, set authorities
+												// to contain "ALLIEVO"
 			}
-			
+
 			auth.setAuthenticated(false);
 			return "redirect:/login?error";
 		}
