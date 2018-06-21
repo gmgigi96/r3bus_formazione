@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Attivita;
+import org.bitbucket.r3bus.model.OverlapException;
 import org.bitbucket.r3bus.model.controller.Rebus;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,12 @@ public class OrganizzatoreController {
 		model.addAttribute("pageId", "new_activity");
 		if (bindingResult.hasErrors())
 			return "activity_form";
-		rebus.creaNuovaAttivita(centroID, activity);
+		try {
+			rebus.creaNuovaAttivita(centroID, activity);
+		} catch (OverlapException e) {
+			//TO FIX
+			return "activity_form";
+		}
 		model.clear();
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}

@@ -198,9 +198,15 @@ public class Centro implements PropertyListener {
 		return result;
 	}
 
-	public void addAttivita(Attivita a) {
-		attivita.add(a);
-		a.setCentro(this);
+	public void addAttivita(Attivita a) throws OverlapException {
+		if (!overlap(a.getOrarioInizio(), a.getOrarioFine())) {
+			attivita.add(a);
+			a.addPropertyListener(this);
+			a.setCentro(this);
+		} else {
+			throw new OverlapException();
+		}		
+		
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
 import org.bitbucket.r3bus.model.Azienda;
 import org.bitbucket.r3bus.model.Centro;
+import org.bitbucket.r3bus.model.OverlapException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -73,7 +74,7 @@ public class Rebus {
 
 	// gestione attività
 
-	public void creaNuovaAttivita(Long codiceCentro, Attivita attivita) {
+	public void creaNuovaAttivita(Long codiceCentro, Attivita attivita) throws OverlapException {
 		Centro c = azienda.getCentro(codiceCentro);
 		c.addAttivita(attivita);
 		this.azienda.salvaCentro(c);
