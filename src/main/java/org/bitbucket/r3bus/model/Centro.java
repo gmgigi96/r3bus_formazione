@@ -136,7 +136,7 @@ public class Centro implements PropertyListener {
 	 */
 	public boolean overlap(Long codiceAttivita, LocalDateTime inizio, LocalDateTime fine) {
 		for (Attivita a : this.attivita) {
-			if (a.getId() != codiceAttivita && a.overlap(inizio, fine)) {
+			if (!a.getId().equals(codiceAttivita) && a.overlap(inizio, fine)) {
 				return true;
 			}
 		}
