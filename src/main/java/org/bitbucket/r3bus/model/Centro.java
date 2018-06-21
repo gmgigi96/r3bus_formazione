@@ -126,6 +126,24 @@ public class Centro implements PropertyListener {
 	}
 
 	/**
+	 * Verifica se esiste un'attivita nella lista delle attività che interseca i
+	 * due orari dati per parametro, escludendo l'attività con codice dato.
+	 * 
+	 * @param codiceAttivita
+	 * @param inizio
+	 * @param fine
+	 * @return true se esiste, false altrimenti
+	 */
+	public boolean overlap(Long codiceAttivita, LocalDateTime inizio, LocalDateTime fine) {
+		for (Attivita a : this.attivita) {
+			if (a.getId() != codiceAttivita && a.overlap(inizio, fine)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Restituisce le attività che sono disponibili nel centro da ora in poi
 	 * 
 	 * @return Un insieme di attività da ora in poi
@@ -237,5 +255,4 @@ public class Centro implements PropertyListener {
 	int contaAttivita() {
 		return attivita.size();
 	}
-
 }
