@@ -22,6 +22,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.bitbucket.r3bus.model.exception.OverlapException;
 import org.bitbucket.r3bus.service.EmailService;
 
 import lombok.Data;

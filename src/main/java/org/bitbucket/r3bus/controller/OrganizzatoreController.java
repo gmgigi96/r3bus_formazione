@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.bitbucket.r3bus.model.Attivita;
-import org.bitbucket.r3bus.model.OverlapException;
 import org.bitbucket.r3bus.model.controller.Rebus;
+import org.bitbucket.r3bus.model.exception.OverlapException;
 import org.bitbucket.r3bus.service.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
