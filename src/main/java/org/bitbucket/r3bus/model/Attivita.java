@@ -24,7 +24,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Attivita {
+public class Attivita implements Comparable<Attivita> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -142,4 +142,10 @@ public class Attivita {
 		result = prime * result + ((orarioInizio == null) ? 0 : orarioInizio.hashCode());
 		return result;
 	}
+
+	@Override
+	public int compareTo(Attivita o) {
+		return this.orarioInizio.compareTo(o.getOrarioInizio());
+	}
+	
 }

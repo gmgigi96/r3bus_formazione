@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.bitbucket.r3bus.model.Allievo;
 import org.bitbucket.r3bus.model.Attivita;
@@ -114,7 +115,7 @@ public class Rebus {
 
 	// interrogazioni
 
-	public Set<Attivita> getAttivitaDisponibili() {
+	public SortedSet<Attivita> getAttivitaDisponibili() {
 		return this.centroGestito.getAttivitaDisponibili();
 	}
 

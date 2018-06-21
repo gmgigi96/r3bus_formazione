@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -130,8 +130,8 @@ public class Centro implements PropertyListener {
 	 * 
 	 * @return Un insieme di attività da ora in poi
 	 */
-	public Set<Attivita> getAttivitaDisponibili() {
-		Set<Attivita> res = new HashSet<>();
+	public SortedSet<Attivita> getAttivitaDisponibili() {
+		SortedSet<Attivita> res = new TreeSet<>();
 
 		LocalDateTime now = LocalDateTime.now();
 		attivita.forEach((attivita) -> {

@@ -1,7 +1,7 @@
 package org.bitbucket.r3bus.controller;
 
 import java.util.Map;
-import java.util.Set;
+import java.util.SortedSet;
 
 import javax.validation.Valid;
 
@@ -52,7 +52,7 @@ public class OrganizzatoreController {
 	@GetMapping("/organizzatore/{centroID}/attivita/")
 	public String listaAttivita(@PathVariable("centroID") Long centroID, ModelMap model) {
 		rebus.setCentroGestito(centroID);
-		Set<Attivita> attivita = rebus.getAttivitaDisponibili();
+		SortedSet<Attivita> attivita = rebus.getAttivitaDisponibili();
 		model.addAttribute("activityList", attivita);
 		// model.addAttribute("multiSelect", true);
 		model.addAttribute("editActivity", true);
