@@ -49,6 +49,16 @@ Il ruolo predefinito *ROLE_USER* è dedicato agli allievi per lo svolgimento del
 Per generare degli utenti registrati di esempio è possibile usare lo script `/init/users.sql`.
 
 
+Demo
+----
+
+La demo è disponibile su [https://r3bus-formazione.herokuapp.com/].
+
+I dati utilizzati sono quelli generati dallo script `/init/populate_big.sql`.
+
+In particolare sono disponibili gli utenti `centro-N` con password `centroN` (con N da 1 a 10), `organizzatore` con password omonima, `direttore` con password omonima, ognuna nei rispettivi ruoli.
+
+
 -----------------------------------------------------------
 © 2018 Matteo Bernardini, Gianmaria Del Monte, Omar Elsayed
 
