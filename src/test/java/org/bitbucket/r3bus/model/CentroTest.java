@@ -69,14 +69,14 @@ public class CentroTest {
 	}
 
 	@Test
-	public void getAttivitaDisponibili_none() {
+	public void getAttivitaDisponibili_none() throws Exception {
 		a.setOrarioInizio(now.minusDays(1));
 		centro.addAttivita(a);
 		assertEquals(0, centro.getAttivitaDisponibili().size());
 	}
 
 	@Test
-	public void getAttivitaDisponibili_singleton() {
+	public void getAttivitaDisponibili_singleton() throws Exception {
 		a.setOrarioInizio(now.plusDays(1));
 		centro.addAttivita(a);
 		assertEquals(1, centro.getAttivitaDisponibili().size());

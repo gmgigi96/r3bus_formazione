@@ -82,7 +82,7 @@ public class StatisticheControllerTest {
 	}
 
 	@Test
-	public void testGetElencoAttivita_centroConUnaAttivita_zeroPartecipanti() {
+	public void testGetElencoAttivita_centroConUnaAttivita_zeroPartecipanti() throws Exception {
 		LocalDate inizio = LocalDate.MIN;
 		LocalDate fine = LocalDate.MAX;
 
@@ -98,7 +98,7 @@ public class StatisticheControllerTest {
 	}
 
 	@Test
-	public void testGetElencoAttivita_centroConUnaAttivita_unPartecipante() {
+	public void testGetElencoAttivita_centroConUnaAttivita_unPartecipante() throws Exception {
 		LocalDate inizio = LocalDate.MIN;
 		LocalDate fine = LocalDate.MAX;
 
@@ -116,7 +116,7 @@ public class StatisticheControllerTest {
 	}
 
 	@Test
-	public void testGetElencoAttivita_centroConUnaAttivita_zeroPartecipanti_intervalloNonComprendenteAttivita() {
+	public void testGetElencoAttivita_centroConUnaAttivita_zeroPartecipanti_intervalloNonComprendenteAttivita() throws Exception {
 		LocalDateTime t = LocalDateTime.of(2018, 10, 10, 10, 0);
 
 		Centro centroConUnAttivita_zeroPartecipanti = new Centro("centroConUnAttivita_zeroPartecipanti", "indirizzo", "email@example.com", "0123456789", 100);
@@ -157,7 +157,7 @@ public class StatisticheControllerTest {
 	}
 
 	@Test
-	public void testGetMediaPrenotati_centroConUnaAttivita_unPartecipante() {
+	public void testGetMediaPrenotati_centroConUnaAttivita_unPartecipante() throws Exception {
 		LocalDateTime inizio = LocalDateTime.of(2018, 10, 10, 10, 0);
 		LocalDateTime fine = inizio.plusHours(3);
 
