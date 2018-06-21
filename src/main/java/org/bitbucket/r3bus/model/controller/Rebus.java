@@ -69,7 +69,7 @@ public class Rebus {
 		this.allievoCorrente = null;
 	}
 
-	public Map<String, Set<Attivita>> getAttivitaPrenotateAllievo(Allievo allievo) {
+	public Map<String, SortedSet<Attivita>> getAttivitaPrenotateAllievo(Allievo allievo) {
 		return this.azienda.getAttivitaPrenotateAllievo(allievo);
 	}
 

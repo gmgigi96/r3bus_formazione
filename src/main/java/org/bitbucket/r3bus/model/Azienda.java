@@ -1,9 +1,10 @@
 package org.bitbucket.r3bus.model;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.bitbucket.r3bus.service.AllievoService;
 import org.bitbucket.r3bus.service.CentroService;
@@ -45,16 +46,16 @@ public class Azienda {
 		return this.centri.save(centro);
 	}
 
-	public Map<String, Set<Attivita>> getAttivitaPrenotateAllievo(Allievo allievo) {
-		Map<String, Set<Attivita>> prenotate = new HashMap<>();
+	public Map<String, SortedSet<Attivita>> getAttivitaPrenotateAllievo(Allievo allievo) {
+		Map<String, SortedSet<Attivita>> prenotate = new HashMap<>();
 
 		for (Attivita attivita : allievo.getAttivitaPrenotate()) {
 			Centro centro = attivita.getCentro();
-			Set<Attivita> temp;
+			SortedSet<Attivita> temp;
 			if (prenotate.containsKey(centro.getNome())) {
 				temp = prenotate.get(centro.getNome());
 			} else {
-				temp = new HashSet<>();
+				temp = new TreeSet<>();
 			}
 			temp.add(attivita);
 			prenotate.put(centro.getNome(), temp);
