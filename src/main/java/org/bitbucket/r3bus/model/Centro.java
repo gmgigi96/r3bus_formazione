@@ -116,7 +116,7 @@ public class Centro implements PropertyListener {
 	 * @param fine
 	 * @return true se esiste, false altrimenti
 	 */
-	private boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
+	public boolean overlap(LocalDateTime inizio, LocalDateTime fine) {
 		for (Attivita a : this.attivita) {
 			if (a.overlap(inizio, fine)) {
 				return true;
