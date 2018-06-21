@@ -52,7 +52,7 @@ Per generare degli utenti registrati di esempio è possibile usare lo script `/i
 Demo
 ----
 
-La demo è disponibile su [https://r3bus-formazione.herokuapp.com/].
+La demo è disponibile su [Heroku][hk].
 
 I dati utilizzati sono quelli generati dallo script `/init/populate_big.sql`.
 
@@ -68,3 +68,4 @@ In particolare sono disponibili gli utenti `centro-N` con password `centroN` (co
 [usecases]: doc/use_cases.md
 [dcd]: doc/dcd.png
 [db]: doc/db_schema.png
+[hk]: https://r3bus-formazione.herokuapp.com/
