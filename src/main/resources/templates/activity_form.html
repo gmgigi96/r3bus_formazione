@@ -11,6 +11,7 @@
 	<div layout:fragment="content">
 		<form th:action="@{''}" method="post" th:object="${activity}" class="user-form" th:novalidate="${param.novalidate}">
 			<p class="alert alert-danger" th:each="err : ${#fields.globalErrors()}" th:text="${err}">Other Error</p>
+			<p class="alert alert-danger" th:if="${overlapping}" th:text="#{activity.overlapping}">Overlapping</p>
 			<div class="form-group" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
 				<label for="nome" class="control-label" th:text="#{activity.name}">Activity Name</label>
 				<input th:field="*{nome}" class="form-control" type="text" required />

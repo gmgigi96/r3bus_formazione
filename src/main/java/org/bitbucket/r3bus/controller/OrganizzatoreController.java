@@ -82,12 +82,14 @@ public class OrganizzatoreController {
 		model.addAttribute("pageId", "new_activity");
 		if (bindingResult.hasErrors())
 			return "activity_form";
+
 		try {
 			rebus.creaNuovaAttivita(centroID, activity);
 		} catch (OverlapException e) {
-			//TO FIX
+			model.addAttribute("overlapping", true);
 			return "activity_form";
 		}
+
 		model.clear();
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
