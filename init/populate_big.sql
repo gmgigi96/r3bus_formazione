@@ -1307,3 +1307,7 @@ insert into allievo_attivita_prenotate(attivita_prenotate_id,allievi_prenotati_i
 insert into allievo_attivita_prenotate(attivita_prenotate_id,allievi_prenotati_id) values('584','20');
 insert into allievo_attivita_prenotate(attivita_prenotate_id,allievi_prenotati_id) values('619','43');
 insert into allievo_attivita_prenotate(attivita_prenotate_id,allievi_prenotati_id) values('659','15');
+
+ALTER SEQUENCE public.hibernate_sequence START WITH 748;
+
+ALTER SEQUENCE public.hibernate_sequence RESTART;
