@@ -111,8 +111,15 @@ public class OrganizzatoreController {
 			@PathVariable("centroID") Long centroID, @PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./../");
+		model.addAttribute("pageId", "new_activity");
 		// processa dati
-		rebus.modificaAttivita(centroID, id, activity);
+		try {
+			rebus.modificaAttivita(centroID, id, activity);
+		} catch (OverlapException e) {
+			model.addAttribute("overlapping", true);
+			return "activity_form";
+		}
+		
 		return "redirect:/organizzatore/" + centroID + "/attivita/";
 	}
 }
