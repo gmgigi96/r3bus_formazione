@@ -80,8 +80,11 @@ public class Rebus {
 		this.azienda.salvaCentro(c);
 	}
 
-	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, Attivita attivita) {
+	public void modificaAttivita(Long codiceCentro, Long codiceAttivita, Attivita attivita) throws OverlapException {
 		Centro c = azienda.getCentro(codiceCentro);
+		if (c.overlap(attivita.getOrarioInizio(), attivita.getOrarioFine())) {
+			throw new OverlapException();
+		}
 		Attivita a = c.getAttivita(codiceAttivita);
 		a.aggiornaParametri(attivita.getNome(), attivita.getOrarioInizio(), attivita.getOrarioFine());
 		this.azienda.salvaCentro(c);
