@@ -111,7 +111,8 @@ public class OrganizzatoreController {
 			@PathVariable("centroID") Long centroID, @PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("showBackButton", true);
 		model.addAttribute("backUrl", "./../");
-		model.addAttribute("pageId", "new_activity");
+		model.addAttribute("pageId", "edit_activity");
+
 		// processa dati
 		try {
 			rebus.modificaAttivita(centroID, id, activity);
