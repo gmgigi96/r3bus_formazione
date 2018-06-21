@@ -14,7 +14,7 @@ Consegna
 - La consegna del progetto è disponibile su [`/doc/assignment.pdf`][assignment].
 - I casi d'uso sono disponibili su [`/doc/use_cases.md`][usecases]
 - Il diagramma UML delle classi di progetto dello strato del dominio è disponibile su [`/doc/dcd.png`][dcd]
-- Il diagramma UML dello schema del database è disponibile su [`/doc/db_schema.pdf`][db]
+- Il diagramma UML dello schema del database è disponibile su [`/doc/db_schema.png`][db]
 
 
 Esecuzione
@@ -57,4 +57,4 @@ Per generare degli utenti registrati di esempio è possibile usare lo script `/i
 [assignment]: doc/assignment.pdf
 [usecases]: doc/use_cases.md
 [dcd]: doc/dcd.png
-[db]: doc/db_schema.pdf
+[db]: doc/db_schema.png
